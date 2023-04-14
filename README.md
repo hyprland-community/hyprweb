@@ -7,3 +7,4 @@ goals
 - [ ] Implement animations
 - [ ] Choose appropriate fonts
 - [ ] Ensure accessibility for all users
+- [x] Find Hyprland base font
