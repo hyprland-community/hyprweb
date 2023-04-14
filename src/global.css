@@ -1,1 +1,105 @@
+/* fonts */ 
+@font-face {
+  font-family: 'Sofia Pro Medium';
+  src: url('fonts/Sofia\ Pro\ Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'LondonBetween';
+  src: url('fonts/LondonBetween.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
 
+
+/* init  */
+:root {
+	background: #1a1a2e;
+}
+/* nav */
+
+nav {
+  margin-top: 20px;
+  background-color: #1a1a2e;
+  height: 50px;
+  display: flex;
+  justify-content: right;
+  padding: 0 10px;
+  padding-right: 150px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+}
+
+li {
+  margin: 0 0px;
+  padding: 0 10px;
+
+
+}
+
+a {
+  font-size: 1.5rem;
+  font-family: 'Sofia Pro Medium', 'sans-serif';
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 0 10px;
+  line-height: 50px;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+#github {
+	background-color: aquamarine;
+	color: #1a1a2e;
+	transition: all 0.2s ease-in-out;
+	border: 2px solid aquamarine;
+}
+
+a:hover {
+	text-decoration: underline 2px aquamarine;
+	color: aquamarine;
+
+}
+
+#github:hover {
+  transform: scale(1.3);
+  border-color: aquamarine;
+  color: aquamarine;
+  background-color: #1a1a2e;
+}
+
+.logo-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  z-index: 9999;
+}
+
+.logo-container img {
+  margin-top: 15px;
+  height: 50px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 150px;
+}
+
+.logo-container .logo-text {
+  color: white;
+  font-family: 'LondonBetween', 'sans-serif';
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+  font-size: 2.0rem; /* adjust as needed */
+  font-weight: bold;
+  margin-top: 20px;
+}
