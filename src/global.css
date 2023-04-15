@@ -113,53 +113,37 @@ a:hover {
 }
 
 .content {
-	float: left;
-	margin-left: -15%;
+	margin-top: 50px;
+	margin-bottom: 50px;
 	display: flex;
 	justify-content: center;
-	flex-direction: column;
-	align-items: left;
-	text-align: left;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	flex-direction: row;
 }
 
 .content h1 {
 	color: #cfe8f6;
 	font-family: 'JosefinSans', 'sans-serif';
 	font-size: 4rem;
-	text-align: left;
 }
 .content h4 {
-	margin-top: -10px;
 	color: #cfe8f6;
 	font-family: 'JosefinSans', 'sans-serif';
 	font-size: 2rem;
-	text-align: left;
 }
 
-.button {
-	margin-left: 20%;
-	float: right;
+.buttons {
 	display: flex;
 	justify-content: center;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: left;
 	text-align: left;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-
 }
 
 .hyprwindow {
 	margin: 20px;
 	width: 500px;
 
-	border-radius: 30px;
+	border-radius: 25px;
 }
 
 .hyprwindow > div {
@@ -167,7 +151,7 @@ a:hover {
 
 	border-style: solid;
 	border-width: 2px;
-	border-radius: 30px;
+	border-radius: 25px;
 	border-color: transparent;
 	background-clip: padding-box;
 	box-shadow: 0 1px 6px black;
