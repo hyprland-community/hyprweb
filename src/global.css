@@ -39,6 +39,27 @@ a:hover {
 
 }
 
+/* animations */
+
+.vertical-fadein {
+	animation-name: vertical-fadein;
+	animation-iteration-count: 1;
+	animation-duration: 1s;
+	animation-timing-function: cubic-bezier(.22,.61,.36,1);
+	animation-fill-mode: forwards;
+}
+
+@keyframes vertical-fadein {
+		0% {
+				margin-top:-5%;
+				opacity: 0.5;
+		}
+		100% {
+				margin-top:0%;
+				opacity: 1;
+		}
+}
+
 /* specific elements */
 
 html, body, .main {
@@ -54,15 +75,15 @@ body {
 
 
 
-.bg-box {
-  border-radius: 50%;
+/*.bg-box {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 0.1px;
   height: 0.1px;
-  background-color: #fff;
+
+  border-radius: 50%;
   box-shadow: 0 0 2000px 500px rgba(45, 45, 94, 1.0);
   z-index: -1;
 	animation-name: opening;
@@ -75,7 +96,7 @@ body {
 @keyframes opening {
   0% { opacity: 0; }
   100% { opacity: 1; }
-}
+}*/
 
 .header {
 	flex: none;
