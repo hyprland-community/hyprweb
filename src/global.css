@@ -74,29 +74,27 @@ body {
 }
 
 
-
-/*.bg-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0.1px;
-  height: 0.1px;
-
-  border-radius: 50%;
-  box-shadow: 0 0 2000px 500px rgba(45, 45, 94, 1.0);
-  z-index: -1;
-	animation-name: opening;
-	animation-iteration-count: 1;
-	animation-duration: 1.5s;
-	animation-timing-function: cubic-bezier(.48,.43,.02,.52);
-	animation-fill-mode: forwards;
-  opacity: 0;
+.bg-box {
+    transition: all 0.5s ease-in-out;
+    transform: scale(0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.1px;
+    height: 0.1px;
+    border-radius: 50%;
+    box-shadow: 0 0 2000px 500px rgba(45, 45, 94, 1.0); /* Changed the shadow parameters */
+    z-index: -1;
+    backdrop-filter: blur(10px);
+    opacity: 0;
 }
-@keyframes opening {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}*/
+.bg-box.show {
+    opacity: 1; /* Change opacity to 1 to show the box */
+    transform: scale(1); /* Scale the box back to its original size */
+}
+
+
 
 .header {
 	flex: none;
