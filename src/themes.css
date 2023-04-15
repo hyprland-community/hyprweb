@@ -1,0 +1,111 @@
+/* fonts */ 
+@font-face {
+	font-family: 'Sofia Pro Medium';
+	src: url('fonts/Sofia\ Pro\ Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'LondonBetween';
+	src: url('fonts/LondonBetween.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'JosefinSans';
+	src: url('fonts/JosefinSans.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+/* bg */ 
+body {
+	background: #1a1a2e;
+}
+
+/* nav bar */
+
+a {
+	font-size: 1.5rem;
+	font-family: 'Sofia Pro Medium', 'sans-serif';
+	display: block;
+	color: #cfe8f6;
+	text-decoration: none;
+	padding: 0 10px;
+	line-height: 50px;
+	font-weight: bold;
+	border-radius: 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+	text-decoration: underline 2px aquamarine;
+	color: aquamarine;
+
+}
+
+.header {
+	flex: none;
+	display: flex;
+	flex-direction: row;
+	margin: 0 10%;
+}
+
+.header > nav {
+	margin-top: 20px;
+	flex-grow: 1;
+	height: 50px;
+	display: flex;
+	justify-content: end;
+}
+
+.header ul {
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+
+}
+
+.header li {
+	margin: 0 0px;
+	padding: 0 10px;
+}
+
+#github {
+	background-color: aquamarine;
+	color: #1a1a2e;
+	transition: all 0.2s ease-in-out;
+	border: 2px solid aquamarine;
+	text-decoration: none;
+}
+
+#github:hover {
+	transform: scale(1.3);
+	border-color: aquamarine;
+	color: aquamarine;
+	background-color: #1a1a2e;
+}
+
+.logo-container {
+	padding: 10px;
+}
+
+.logo-container img {
+	margin-top: 10px;
+	height: 50px;
+	width: auto;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.logo-container .logo-text {
+	color: #cfe8f6;
+	font-family: 'LondonBetween', 'sans-serif';
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
+	font-size: 2.0rem; /* adjust as needed */
+	font-weight: bold;
+	margin-top: 20px;
+}
+
