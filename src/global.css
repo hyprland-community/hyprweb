@@ -18,39 +18,7 @@
 	font-style: normal;
 }
 
-
-
-
-/* init  */
-:root {
-	background: #1a1a2e;
-}
-/* nav */
-
-nav {
-	margin-top: 20px;
-	background-color: #1a1a2e;
-	height: 50px;
-	display: flex;
-	justify-content: right;
-	padding: 0 10px;
-	padding-right: 150px;
-}
-
-ul {
-	list-style: none;
-	display: flex;
-	margin: 0;
-	padding: 0;
-
-}
-
-li {
-	margin: 0 0px;
-	padding: 0 10px;
-
-
-}
+/* elements */
 
 a {
 	font-size: 1.5rem;
@@ -64,17 +32,58 @@ a {
 	border-radius: 10px;
 	transition: all 0.3s ease-in-out;
 }
-#github {
-	background-color: aquamarine;
-	color: #1a1a2e;
-	transition: all 0.2s ease-in-out;
-	border: 2px solid aquamarine;
-}
 
 a:hover {
 	text-decoration: underline 2px aquamarine;
 	color: aquamarine;
 
+}
+
+/* specific elements */
+
+html, body, .main {
+	background: #1a1a2e;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+}
+
+.header {
+	flex: none;
+	display: flex;
+	flex-direction: row;
+	margin: 0 10%;
+}
+
+.header > nav {
+	margin-top: 20px;
+	background-color: #1a1a2e;
+	flex-grow: 1;
+	height: 50px;
+	display: flex;
+	justify-content: end;
+}
+
+.header ul {
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+
+}
+
+.header li {
+	margin: 0 0px;
+	padding: 0 10px;
+}
+
+#github {
+	background-color: aquamarine;
+	color: #1a1a2e;
+	transition: all 0.2s ease-in-out;
+	border: 2px solid aquamarine;
+	text-decoration: none;
 }
 
 #github:hover {
@@ -85,11 +94,7 @@ a:hover {
 }
 
 .logo-container {
-	position: fixed;
-	top: 0;
-	left: 0;
 	padding: 10px;
-	z-index: 9999;
 }
 
 .logo-container img {
@@ -98,7 +103,6 @@ a:hover {
 	width: auto;
 	display: inline-block;
 	vertical-align: middle;
-	padding-left: 150px;
 }
 
 .logo-container .logo-text {
@@ -113,11 +117,18 @@ a:hover {
 }
 
 .content {
-	margin-top: 50px;
+	flex: auto;
 	margin-bottom: 50px;
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
+}
+
+.content > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 100%;
 }
 
 .content h1 {
@@ -129,6 +140,10 @@ a:hover {
 	color: #cfe8f6;
 	font-family: 'JosefinSans', 'sans-serif';
 	font-size: 2rem;
+}
+
+.main-text {
+		margin-left: 20px;
 }
 
 .buttons {
