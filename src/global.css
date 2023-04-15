@@ -65,34 +65,17 @@ body {
   background-color: #fff;
   box-shadow: 0 0 2000px 500px rgba(45, 45, 94, 1.0);
   z-index: -1;
-  animation: opening 5s linear infinite, opening-p 5s linear;
+	animation-name: opening;
+	animation-iteration-count: 1;
+	animation-duration: 1.5s;
+	animation-timing-function: cubic-bezier(.48,.43,.02,.52);
+	animation-fill-mode: forwards;
   opacity: 0;
 }
 @keyframes opening {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
-
-@keyframes opening-p {
-  0% {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;    
-  }
-  100% {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-  }
-}
-
 
 .header {
 	flex: none;
