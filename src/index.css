@@ -1,0 +1,264 @@
+/* fonts */ 
+@font-face {
+	font-family: 'Sofia Pro Medium';
+	src: url('fonts/Sofia\ Pro\ Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'LondonBetween';
+	src: url('fonts/LondonBetween.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'JosefinSans';
+	src: url('fonts/JosefinSans.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+/* elements */
+
+a {
+	font-size: 1.5rem;
+	font-family: 'Sofia Pro Medium', 'sans-serif';
+	display: block;
+	color: #cfe8f6;
+	text-decoration: none;
+	padding: 0 10px;
+	line-height: 50px;
+	font-weight: bold;
+	border-radius: 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+	text-decoration: underline 2px aquamarine;
+	color: aquamarine;
+
+}
+
+/* animations */
+
+.vertical-fadein {
+	animation-name: vertical-fadein;
+	animation-iteration-count: 1;
+	animation-duration: 1s;
+	animation-timing-function: cubic-bezier(.22,.61,.36,1);
+	animation-fill-mode: forwards;
+}
+
+@keyframes vertical-fadein {
+		0% {
+				margin-top:-5%;
+				opacity: 0.0;
+		}
+		100% {
+				margin-top:0%;
+				opacity: 1;
+		}
+}
+
+/* specific elements */
+
+html, body, .main {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+}
+
+body {
+	background: #1a1a2e;
+}
+
+
+
+
+
+.header {
+	flex: none;
+	display: flex;
+	flex-direction: row;
+	margin: 0 10%;
+}
+
+.header > nav {
+	margin-top: 20px;
+	flex-grow: 1;
+	height: 50px;
+	display: flex;
+	justify-content: end;
+}
+
+.header ul {
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+
+}
+
+.header li {
+	margin: 0 0px;
+	padding: 0 10px;
+}
+
+#github {
+	background-color: aquamarine;
+	color: #1a1a2e;
+	transition: all 0.2s ease-in-out;
+	border: 2px solid aquamarine;
+	text-decoration: none;
+}
+
+#github:hover {
+	transform: scale(1.3);
+	border-color: aquamarine;
+	color: aquamarine;
+	background-color: #1a1a2e;
+}
+
+.logo-container {
+	padding: 10px;
+}
+
+.logo-container img {
+	margin-top: 10px;
+	height: 50px;
+	width: auto;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.logo-container .logo-text {
+	color: #cfe8f6;
+	font-family: 'LondonBetween', 'sans-serif';
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
+	font-size: 2.0rem; /* adjust as needed */
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+.content {
+	flex: auto;
+	margin-bottom: 50px;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	animation-name: fadein-main;
+	animation-iteration-count: 1;
+	animation-duration: 1s;
+	animation-timing-function: cubic-bezier(.22,.61,.36,1);
+	animation-fill-mode: forwards;
+	opacity: 0;
+
+}
+
+@keyframes fadein-main {
+		0% {
+				opacity: 0.0;
+		}
+		100% {
+				opacity: 1;
+		}
+}
+
+
+.content > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 100%;
+}
+
+.content h1 {
+	color: #cfe8f6;
+	font-family: 'JosefinSans', 'sans-serif';
+	font-size: 4rem;
+}
+.content h4 {
+	color: #cfe8f6;
+	font-family: 'JosefinSans', 'sans-serif';
+	font-size: 2rem;
+}
+
+.main-text {
+	color: #cfe8f6;
+	font-family: 'JosefinSans', 'sans-serif';
+	font-size: 2rem;
+	margin-left: 20px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: left;
+	text-align: left;
+	animation-name: fadein;
+	animation-iteration-count: 1;
+	animation-duration: 1s;
+	animation-timing-function: cubic-bezier(.22,.61,.36,1);
+	animation-fill-mode: forwards;
+	opacity: 0;
+
+}
+
+@keyframes fadein {
+		0% {
+				opacity: 0.0;
+		}
+		100% {
+				opacity: 1;
+		}
+}
+
+
+.hyprwindow {
+	margin: 20px;
+	width: 500px;
+
+	border-radius: 25px;
+}
+
+.hyprwindow h2 {
+	font-family: 'LondonBetween', 'sans-serif';
+}
+
+.hyprwindow p {
+	font-family: 'JosefinSans', 'sans-serif';
+	font-size: 17px;
+}
+
+.hyprwindow > div {
+	padding: 20px 40px;
+
+	border-style: solid;
+	border-width: 3px;
+	border-radius: 25px;
+	border-color: transparent;
+	background-clip: padding-box;
+	box-shadow: 0 1px 6px black;
+
+	color: #cfe8f6;
+}
+
+#hyprwindow-purple {
+	background-image: linear-gradient(160deg, #672bbf, #da1aea);
+}
+
+#hyprwindow-purple > div {
+	background-image: linear-gradient(160deg, #312648, #311c40);
+}
+
+#hyprwindow-yellow {
+	background-image: linear-gradient(160deg, #bf8703, #f82f00);
+}
+
+#hyprwindow-yellow > div {
+	background-image: linear-gradient(160deg, #53361e, #311c06);
+}
