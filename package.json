@@ -14,7 +14,6 @@
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/work-sans": "^5.0.16",
     "@fontsource/ibm-plex-mono": "^5.0.8",
-    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@iconify/json": "^2.2.140",
     "@tailwindcss/typography": "^0.5.10",
     "astro": "^4.2.1",
