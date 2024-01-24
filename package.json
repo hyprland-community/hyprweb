@@ -16,6 +16,7 @@
     "@fontsource/ibm-plex-mono": "^5.0.8",
     "@iconify/json": "^2.2.140",
     "@tailwindcss/typography": "^0.5.10",
+    "@typescript-eslint/parser": "^6.19.1",
     "astro": "^4.2.1",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",

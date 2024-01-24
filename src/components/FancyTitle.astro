@@ -20,7 +20,7 @@ const [top, middle, bottom] = colors
   class:list={["text-6xl relative md:text-7xl lg:text-8xl font-bold", classes]}
 >
   <!-- <h1 class="sr-only">{label}</h1> -->
-  <div class="shadow_" aria-hidden>
+  <div class="shadow_" aria-hidden="true">
     <div class="top">{label}</div>
     <div class="middle">
       {label}
@@ -31,7 +31,7 @@ const [top, middle, bottom] = colors
   </div>
 
   <!-- Have the label inside here, so that it is selectable -->
-  <div class="interaction-zone">{label}</div>
+  <div class="interaction-zone"><h1>{label}</h1></div>
 </div>
 
 <script>

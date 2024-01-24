@@ -3,9 +3,12 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:astro/recommended",
+    "plugin:svelte/recommended",
     "plugin:unicorn/recommended",
     "prettier",
   ],
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
   parserOptions: {
     sourceType: "module",
     ecmaVersion: "latest",
