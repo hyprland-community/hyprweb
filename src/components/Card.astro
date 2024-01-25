@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string
+  body: string
+  href: string
+}
+import ChevronRight from "~icons/pixelarticons/chevron-right"
+
+const { href, title, body } = Astro.props
+---
+
+<li>
+  <a {href} class="flex group flex-col gap-4">
+    <h2 class="text-4xl flex gap-4 font-bold">
+      {title}
+      <ChevronRight class="group-hover:translate-x-1 transition-transform" />
+    </h2>
+    <p class="text-lg text-slate-300 font-medium">
+      {body}
+    </p>
+  </a>
+</li>
+<style></style>

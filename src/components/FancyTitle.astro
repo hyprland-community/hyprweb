@@ -1,0 +1,126 @@
+---
+interface Props {
+  label: string
+  Element?: "h1" | "h2" | "h3" | "h4"
+  classes?: string
+  colors?: [top: string, middle: string, bottom: string]
+}
+
+const {
+  label,
+  colors = ["#0ee7f6", "#512eff", "DeepPink"],
+  classes = "text-center",
+} = Astro.props
+
+const [top, middle, bottom] = colors
+---
+
+<div
+  data-fancy-title
+  class:list={["text-6xl relative md:text-7xl lg:text-8xl font-bold", classes]}
+>
+  <!-- <h1 class="sr-only">{label}</h1> -->
+  <div class="shadow_" aria-hidden="true">
+    <div class="top">{label}</div>
+    <div class="middle">
+      {label}
+    </div>
+    <div class="bottom">
+      {label}
+    </div>
+  </div>
+
+  <!-- Have the label inside here, so that it is selectable -->
+  <div class="interaction-zone"><h1>{label}</h1></div>
+</div>
+
+<script>
+  const fancyTitles = [
+    ...document.querySelectorAll("[data-fancy-title] .interaction-zone"),
+  ] as HTMLElement[]
+
+  fancyTitles.forEach((element) => {
+    // @ts-expect-error
+    element.addEventListener("mousemove", move)
+    // @ts-expect-error
+    element.addEventListener("mouseleave", end)
+  })
+
+  function getElements({
+    currentTarget,
+  }: MouseEvent & { currentTarget: HTMLElement }) {
+    const parent = currentTarget.parentElement!
+
+    return {
+      top: parent.querySelector(".top") as HTMLElement,
+      middle: parent.querySelector(".middle") as HTMLElement,
+      bottom: parent.querySelector(".bottom") as HTMLElement,
+    }
+  }
+
+  function move(event: MouseEvent & { currentTarget: HTMLElement }) {
+    const offset = 17
+    const center = [
+      event.currentTarget.clientWidth / 2,
+      event.currentTarget.clientHeight / 2,
+    ] as const
+
+    // @ts-ignore
+    const x = event.layerX - center[0]
+    // @ts-ignore
+    const y = event.layerY - center[1]
+    const { top, middle, bottom } = getElements(event)
+
+    top.style.transform = `translate(${(Math.sin(x / 60) * offset) / 2}px, ${(Math.sin(y / 60) * offset) / 2}px)`
+    middle.style.transform = `translate(${Math.sin(x / 50) * offset}px, ${Math.sin(y / 50) * offset}px)`
+    bottom.style.transform = `translate(${Math.sin(x / 40) * offset}px, ${Math.sin(y / 40) * offset}px)`
+  }
+
+  function end(event: MouseEvent & { currentTarget: HTMLElement }) {
+    const { top, middle, bottom } = getElements(event)
+
+    top.style.transform = ""
+    middle.style.transform = ""
+    bottom.style.transform = ""
+  }
+</script>
+
+<style lang='postcss' define:vars={{ top, middle, bottom }}>
+  .top,
+  .middle,
+  .bottom {
+    transition: all 80ms ease-in-out;
+    pointer-events: none;
+  }
+
+  .top {
+    color: var(--top);
+  }
+  .middle {
+    color: var(--middle);
+    @apply absolute left-0 top-0 -z-10 -translate-x-2;
+  }
+  .bottom {
+    color: var(--bottom);
+    @apply absolute left-0 top-0 -z-20 -translate-x-3;
+  }
+
+  .interaction-zone {
+    width: 120%;
+    left: -10%;
+    height: 180%;
+    top: -40%;
+    position: absolute;
+    pointer-events: fill;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    padding: 0% 10%;
+  }
+
+  .shadow_ {
+    text-shadow: -2px 4px 20px var(--bottom);
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import Card from "../components/Card.astro"
+import FancyTitle from "../components/FancyTitle.astro"
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="Welcome to the Hyprland Community.">
+  <main
+    class="w-screen h-screen flex items-center p-8 justify-center gap-12 flex-col"
+  >
+    <FancyTitle label="Hyprland Community" />
+
+    <p class="text-lg lg:text-2xl text-center text-slate-300 font-medium">
+      A place where people work together to create awesome things for Hyprland
+    </p>
+
+    <ul class="flex gap-8 lg:gap-16 w-full justify-center flex-wrap">
+      <Card
+        href="/hyprtheme"
+        title="Hyprtheme"
+        body="Easily install themes for Hyprland"
+      />
+      <Card
+        href="#"
+        title="Community projects"
+        body="Browse through all community projects"
+      />
+    </ul>
+  </main>
+</Layout>
