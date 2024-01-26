@@ -1,0 +1,41 @@
+---
+import Layout from "@layouts/Layout.astro"
+// Might be nice to edit some generated colors for the title (ensure a min/max lightness)
+// import chroma from "chroma-js"
+
+import { getTitleColors } from "@lib/helper"
+import { GET, type ProcessedTheme } from "@api/themes.json"
+import FancyTitle from "@components/FancyTitle.astro"
+
+const themes: readonly ProcessedTheme[] = await GET(Astro).then((response) =>
+  response.json(),
+)
+---
+
+<Layout title="Hyprland Themes">
+  <ul class="flex flex-wrap gap-6">
+    {
+      themes.map(({ name, colors, images }) => (
+        <li class="p-4 border flex flex-col gap-2 border-slate-300">
+          <div class="flex flex-col">
+            <img class="w-40 md:w-52 lg:w-80" src={images[0]} />
+            <FancyTitle label={name} colors={getTitleColors(colors)} />
+          </div>
+
+          <div class="flex p-2 gap-2">
+            {Object.entries(colors).map(([colorName, { hex, population }]) => (
+              <div class="flex flex-col gap-1">
+                <p class="text-sm opacity-80">{colorName}</p>
+                <div
+                  class="w-20 h-20 rounded-sm"
+                  style={"background-color:" + hex}
+                />
+                <p class="text-xs opacity-80">{population}</p>
+              </div>
+            ))}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

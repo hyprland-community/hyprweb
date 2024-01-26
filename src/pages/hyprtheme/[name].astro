@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from "astro"
+import FancyTitle from "@components/FancyTitle.astro"
+import { getTitleColors } from "@lib/helper"
+import { GET, type ProcessedTheme } from "@api/themes.json"
+import Layout from "@layouts/Layout.astro"
+
+export const getStaticPaths = (async () => {
+  const themes: ProcessedTheme[] = await GET(Astro).then((response) =>
+    response.json(),
+  )
+
+  return themes.map((theme) => ({ params: { name: theme.name }, props: theme }))
+}) satisfies GetStaticPaths
+
+const { params, props } = Astro
+---
+
+<Layout title={params.name + " Theme"}>
+  <FancyTitle label={params.name} colors={getTitleColors(props.colors)} />
+</Layout>
