@@ -1,0 +1,19 @@
+---
+type Props = (
+  | {
+      type: "link"
+      href: string
+    }
+  | { type: "button" }
+) & { label: string; classes?: string }
+const { type, label, classes = "", ...props } = Astro.props
+const href = "href" in props && props.href
+---
+
+<a
+  href={href + ""}
+  class={"rounded-lg relative hover:scale-[1.02] active:scale-95 transition-all bg-black border px-6 py-4 text-center text-lg font-bold" +
+    classes}
+  >{label}
+  <slot /></a
+>

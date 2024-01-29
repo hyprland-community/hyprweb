@@ -1,21 +1,83 @@
 ---
 import type { GetStaticPaths } from "astro"
-import FancyTitle from "@components/FancyTitle.astro"
-import { getTitleColors } from "@lib/helper"
-import { GET, type ProcessedTheme } from "@api/themes.json"
-import Layout from "@layouts/Layout.astro"
+import FancyTitle from "#components/FancyTitle.astro"
+import { getTitleColors } from "#lib/helper"
+import { GET as getThemes, type ProcessedTheme } from "#api/themes.json"
+import { GET as getSimilarThemes } from "#api/similiar-themes.json"
+import Layout from "#layouts/Layout.astro"
+import FancyButton from "#components/FancyButton.astro"
+import ThemeCard from "#components/ThemeCard.astro"
 
 export const getStaticPaths = (async () => {
-  const themes: ProcessedTheme[] = await GET(Astro).then((response) =>
-    response.json(),
+  const themes: readonly ProcessedTheme[] = await getThemes(Astro).then(
+    (response) => response.json(),
   )
 
-  return themes.map((theme) => ({ params: { name: theme.name }, props: theme }))
+  return Promise.all(
+    themes.map(async (theme) => ({
+      params: { name: theme.name },
+      props: {
+        theme,
+        // similiarThemes: await getSimilarThemes(theme.name).then((response) =>
+        //   response.json(),
+        // ),
+      },
+    })),
+  )
 }) satisfies GetStaticPaths
 
-const { params, props } = Astro
+const {
+  params,
+  props: {
+    theme,
+    // similiarThemes
+  },
+} = Astro
 ---
 
 <Layout title={params.name + " Theme"}>
-  <FancyTitle label={params.name} colors={getTitleColors(props.colors)} />
+  <main class="flex flex-col gap-12 px-8 max-w-screen-2xl mx-auto">
+    <div class="grid grid-cols-12 gap-6">
+      <img
+        src={theme.images[0]}
+        alt={params.name + " image"}
+        class={"rounded-3xl col-span-6 w-full border-2  "}
+      />
+      <div class="flex flex-col text-left gap-4 col-span-6 justify-center">
+        <FancyTitle
+          label={params.name}
+          colors={getTitleColors(theme.colors)}
+          classes="text-left"
+        />
+        <p class="text-lg font-medium text-slate-300">{theme.desc}</p>
+
+        <FancyButton
+          label="Install"
+          href={"hyprtheme:install+" + params.name}
+          type="link"
+        />
+      </div>
+    </div>
+
+    <section
+      class="grid row-auto grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8"
+    >
+      {
+        theme.images.flatMap((image, index) =>
+          index === 0 ? [] : <img class="object-contain rounded" src={image} />,
+        )
+      }
+    </section>
+  </main>
+
+  <section class="flex items-center justify-center h-screen">
+    <h2>More themes</h2>
+    <ul class="flex gap-8">
+      <!-- {
+        similiarThemes.map((similiarTheme) => (
+          <ThemeCard theme={similiarTheme} />
+        ))
+      } -->
+    </ul>
+  </section>
 </Layout>

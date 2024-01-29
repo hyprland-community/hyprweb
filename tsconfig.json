@@ -4,10 +4,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@api/*": ["src/pages/api/*"],
-      "@lib/*": ["src/lib/*"],
+      "#components/*": ["src/components/*"],
+      "#layouts/*": ["src/layouts/*"],
+      "#api/*": ["src/pages/api/*"],
+      "#lib/*": ["src/lib/*"],
+      "#assets/*": ["src/assets/*"],
+      "#types/*": ["src/types/*"],
     },
 
     "noUncheckedIndexedAccess": true,
