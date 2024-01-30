@@ -3,6 +3,7 @@ import { G, D, pipe } from "@mobily/ts-belt"
 
 import type { APIContext } from "astro"
 import type { JsonResponse } from "src/types/Types"
+import { SharpImage } from "#lib/SharpImage"
 
 const themesFileUrl =
   "https://raw.githubusercontent.com/hyprland-community/theme-repo/main/themes.json"
@@ -54,6 +55,7 @@ async function getThemes(): Promise<readonly ProcessedTheme[]> {
           const palettesBase: Palette = (
             await new Vibrant(Buffer.from(heroBuffer), {
               maxDimension: 1600,
+              ImageClass: SharpImage,
             }).getPalettes()
           ).default as any
 
@@ -110,12 +112,12 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       {
         name: "GG Retro",
         images: [
-          "http://localhost:4321/dev-placeholders/r2.jpg",
-          "http://localhost:4321/dev-placeholders/r3.jpg",
-          "http://localhost:4321/dev-placeholders/r1.jpg",
-          "http://localhost:4321/dev-placeholders/c1.jpg",
-          "http://localhost:4321/dev-placeholders/p1.jpg",
-          "http://localhost:4321/dev-placeholders/r4.jpg",
+          "http://localhost:4321/dev-placeholders/r2.webp",
+          "http://localhost:4321/dev-placeholders/r3.webp",
+          "http://localhost:4321/dev-placeholders/r1.webp",
+          "http://localhost:4321/dev-placeholders/c1.webp",
+          "http://localhost:4321/dev-placeholders/p1.webp",
+          "http://localhost:4321/dev-placeholders/r1.webp",
         ],
         branch: "main",
         config: "xxx",
@@ -124,7 +126,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Pastel sunset",
-        images: ["http://localhost:4321/dev-placeholders/p1.jpg"],
+        images: ["http://localhost:4321/dev-placeholders/p1.webp"],
         branch: "main",
         config: "xxx",
         desc: "Smooth light theme. Inspired by Japan",
@@ -132,7 +134,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Gruvvy",
-        images: ["http://localhost:4321/dev-placeholders/r1.jpg"],
+        images: ["http://localhost:4321/dev-placeholders/r1.webp"],
         branch: "main",
         config: "xxx",
         desc: "Retro tech for your eyeholes",
@@ -140,7 +142,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Vibrant Vibes",
-        images: ["http://localhost:4321/dev-placeholders/c1.jpg"],
+        images: ["http://localhost:4321/dev-placeholders/c1.webp"],
         branch: "main",
         config: "xxx",
         desc: "Strong colors for your mood",
