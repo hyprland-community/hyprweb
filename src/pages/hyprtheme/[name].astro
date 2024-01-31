@@ -1,10 +1,10 @@
 ---
 import type { GetStaticPaths } from "astro"
 import FancyTitle from "#components/FancyTitle.astro"
-import { getTitleColors } from "#lib/helper"
+import { extractAuthorFromRepoUrl, getTitleColors } from "#lib/helper"
 import { GET as getThemes, type ProcessedTheme } from "#api/themes.json"
-import { GET as getSimilarThemes } from "#api/similiar-themes.json"
-import Layout from "#layouts/Layout.astro"
+import { GET as GETSimilarThemes } from "#api/similiar-themes.json"
+import Layout from "#layouts/Hyprtheme.astro"
 import FancyButton from "#components/FancyButton.astro"
 import ThemeCard from "#components/ThemeCard.astro"
 
@@ -13,55 +13,77 @@ export const getStaticPaths = (async () => {
     (response) => response.json(),
   )
 
-  return Promise.all(
+  // Explicit typing is nessecary bc otherwise TS throws a fit for some reason
+  const paths: {
+    params: { name: string }
+    props: { theme: ProcessedTheme; similiarThemes: readonly ProcessedTheme[] }
+  }[] = await Promise.all(
     themes.map(async (theme) => ({
       params: { name: theme.name },
       props: {
         theme,
-        // similiarThemes: await getSimilarThemes(theme.name).then((response) =>
-        //   response.json(),
-        // ),
+        similiarThemes: await GETSimilarThemes({
+          ...Astro,
+          params: { name: theme.name },
+        }).then((response) => response.json()),
       },
     })),
   )
+
+  return paths
 }) satisfies GetStaticPaths
 
 const {
   params,
-  props: {
-    theme,
-    // similiarThemes
-  },
+  props: { theme, similiarThemes },
 } = Astro
+
+const titleColors = getTitleColors(theme.colors)
+const author = extractAuthorFromRepoUrl(theme.repo)
 ---
 
 <Layout title={params.name + " Theme"}>
-  <main class="flex flex-col gap-12 px-8 max-w-screen-2xl mx-auto">
-    <div class="grid grid-cols-12 gap-6">
-      <img
-        src={theme.images[0]}
-        alt={params.name + " image"}
-        class={"rounded-3xl col-span-6 w-full border-2  "}
-      />
-      <div class="flex flex-col text-left gap-4 col-span-6 justify-center">
-        <FancyTitle
-          label={params.name}
-          colors={getTitleColors(theme.colors)}
-          classes="text-left"
+  <main class="max-w-screen-lg mx-auto flex flex-col gap-12 px-8">
+    <div
+      class="grid grid-cols-12 gap-8 min-h-max h-[85vh] max-h-[60rem] items-center"
+    >
+      <div
+        class="thumbnail lg:col-span-6 p-10 aspect-square rounded-3xl col-span-6 w-full flex items-center justify-center"
+      >
+        <img
+          src={theme.images[0]}
+          alt={params.name + " image"}
+          class="rounded-3xl hover:scale-[1.01] transition-transform outline outline-white/5 w-[25rem] object-contain"
         />
-        <p class="text-lg font-medium text-slate-300">{theme.desc}</p>
+      </div>
+
+      <div class="flex flex-col text-left gap-8 col-span-6 justify-center">
+        <div class="flex flex-col gap-4">
+          <FancyTitle
+            label={params.name}
+            colors={titleColors}
+            classes="text-left"
+            sizeClasses="text-3xl md:text-6xl lg:text-7xl"
+          />
+          <p class="text-lg font-mono font-medium text-slate-300">
+            {theme.desc}
+          </p>
+          <p class="font-medium font-mono text-slate-300 transition-colors">
+            By
+            <a class="hover:text-[var(--light)]" href={theme.repo}> {author}</a>
+          </p>
+        </div>
 
         <FancyButton
           label="Install"
-          href={"hyprtheme:install+" + params.name}
+          href={"hyprtheme:install+" + encodeURI(params.name)}
           type="link"
+          colors={{ light: titleColors[0], middle: titleColors[1] }}
         />
       </div>
     </div>
 
-    <section
-      class="grid row-auto grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8"
-    >
+    <section class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8">
       {
         theme.images.flatMap((image, index) =>
           index === 0 ? [] : <img class="object-contain rounded" src={image} />,
@@ -70,14 +92,31 @@ const {
     </section>
   </main>
 
-  <section class="flex items-center justify-center h-screen">
-    <h2>More themes</h2>
-    <ul class="flex gap-8">
-      <!-- {
+  <section class="flex flex-col items-center gap-16 justify-center">
+    <FancyTitle label="More themes" colors={titleColors} />
+    <ul class="gap-6 grid grid-cols-1 xl:grid-cols-2">
+      {
         similiarThemes.map((similiarTheme) => (
           <ThemeCard theme={similiarTheme} />
         ))
-      } -->
+      }
     </ul>
   </section>
 </Layout>
+
+<style
+lang='postcss'
+  define:vars={{
+    light: titleColors[0],
+    middle: titleColors[1],
+    dark: titleColors[2],
+  }}
+>
+  .thumbnail {
+    /* background: theme(colors.black / 50%); */
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow:
+      inset -40px -64px 80px color-mix(in srgb, var(--middle) 10%, transparent),
+      inset 32px 64px 80px color-mix(in srgb, var(--light) 25%, transparent);
+  }
+</style>

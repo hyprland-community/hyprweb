@@ -1,0 +1,16 @@
+---
+import Layout from "./Layout.astro"
+import Navbar from "#components/hyprtheme/Navbar.astro"
+
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<Layout {title}>
+  <Navbar />
+
+  <slot />
+</Layout>

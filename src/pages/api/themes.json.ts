@@ -2,19 +2,14 @@ import Vibrant from "node-vibrant"
 import { G, D, pipe } from "@mobily/ts-belt"
 
 import type { APIContext } from "astro"
-import type { JsonResponse } from "src/types/Types"
 import { SharpImage } from "#lib/SharpImage"
+import { JsonResponse } from "#lib/helper"
 
 const themesFileUrl =
   "https://raw.githubusercontent.com/hyprland-community/theme-repo/main/themes.json"
 
-export async function GET(
-  _context: APIContext,
-): Promise<JsonResponse<readonly ProcessedTheme[]>> {
-  const response = new Response(JSON.stringify(await getThemes()))
-
-  // @ts-expect-error
-  return response
+export async function GET(_context: APIContext) {
+  return new JsonResponse(await getThemes())
 }
 
 export type ProcessedTheme = Theme & {
@@ -26,13 +21,15 @@ export type ColorPalette = Record<
   { hex: string; population: number }
 >
 
-async function getThemes(): Promise<readonly ProcessedTheme[]> {
-  const response =
-    import.meta.env.DEV ?
-      getPlaceholderThemes()
-    : fetch(themesFileUrl).then(
-        (response) => response.json() as Promise<ThemesData>,
-      )
+export async function getThemes(): Promise<readonly ProcessedTheme[]> {
+  const response = fetch(themesFileUrl).then(
+    (response) => response.json() as Promise<ThemesData>,
+  )
+  // import.meta.env.DEV ?
+  //   getPlaceholderThemes()
+  // : fetch(themesFileUrl).then(
+  //     (response) => response.json() as Promise<ThemesData>,
+  //   )
 
   const themes = await Promise.all(
     await response
@@ -122,7 +119,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
         branch: "main",
         config: "xxx",
         desc: "Vibing old-school",
-        repo: "ay this should be updated once we use this",
+        repo: "https://github.com/flick0/dotfiles",
       },
       {
         name: "Pastel sunset",
@@ -130,7 +127,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
         branch: "main",
         config: "xxx",
         desc: "Smooth light theme. Inspired by Japan",
-        repo: "ay this should be updated once we use this",
+        repo: "https://github.com/flick0/dotfiles",
       },
       {
         name: "Gruvvy",
@@ -138,7 +135,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
         branch: "main",
         config: "xxx",
         desc: "Retro tech for your eyeholes",
-        repo: "ay this should be updated once we use this",
+        repo: "https://github.com/flick0/dotfiles",
       },
       {
         name: "Vibrant Vibes",
@@ -146,7 +143,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
         branch: "main",
         config: "xxx",
         desc: "Strong colors for your mood",
-        repo: "ay this should be updated once we use this",
+        repo: "https://github.com/flick0/dotfiles",
       },
     ],
   }

@@ -1,19 +1,120 @@
 ---
+import { hyprThemeColors } from "#lib/consts"
+import chroma from "chroma-js"
+
 type Props = (
   | {
       type: "link"
       href: string
     }
   | { type: "button" }
-) & { label: string; classes?: string }
-const { type, label, classes = "", ...props } = Astro.props
+) & {
+  label: string
+  classes?: string
+  colors?: { light: string; middle: string }
+}
+const {
+  type,
+  label,
+  classes = "",
+  colors = { light: hyprThemeColors[0], middle: hyprThemeColors[2] },
+  ...props
+} = Astro.props
+
 const href = "href" in props && props.href
+
+const [between1, between2, between3] = chroma
+  .scale([colors.middle, colors.light])
+  .mode("lab")
+  .correctLightness()
+  .colors(3) as [string, string, string]
+
+// const between1 = gradientColors()
 ---
 
 <a
   href={href + ""}
-  class={"rounded-lg relative hover:scale-[1.02] active:scale-95 transition-all bg-black border px-6 py-4 text-center text-lg font-bold" +
+  class={"relative text-white text-lg  items-center justify-center hover:scale-[1.01] active:scale-[0.99] transition-all py-5  px-10  text-center   font-bold flex flex-row gap-2  rounded-3xl" +
     classes}
   >{label}
-  <slot /></a
+  <slot />
+  <div class="gradient"></div>
+</a>
+
+<style
+  define:vars={{
+    ...colors,
+    between1,
+    between2,
+    between3,
+  }}
 >
+  a {
+    --roundness: 24px;
+    --border: 2px;
+  }
+
+  /* Gracefully stolen and adapted from https://velocity.builder.io */
+  .gradient {
+    position: absolute;
+    width: calc(100% + var(--border));
+    height: calc(100% + var(--border));
+    inset: 0;
+    z-index: -1;
+    border-radius: var(--roundness);
+    overflow: hidden;
+    background: var(--middle);
+    box-shadow: 0px 12px 60px color-mix(in srgb, var(--middle) 30%, transparent);
+
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      left: -50%;
+      top: -50%;
+      width: 200%;
+      height: 200%;
+      background-repeat: no-repeat;
+      background: linear-gradient(
+        transparent,
+        var(--between1),
+        var(--between2),
+        var(--between3),
+        var(--light),
+        var(--between3),
+        var(--between2),
+        var(--between1),
+        transparent
+      );
+      animation: rotate 4.6s linear infinite;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: var(--border);
+      top: var(--border);
+      width: calc(100% - var(--border) * 2);
+      height: calc(100% - var(--border) * 2);
+      background: theme(colors.black);
+      border-radius: calc(var(--roundness) - var(--border));
+    }
+  }
+
+  @keyframes opacityChange {
+    50% {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+</style>
