@@ -22,14 +22,15 @@ export type ColorPalette = Record<
 >
 
 export async function getThemes(): Promise<readonly ProcessedTheme[]> {
-  const response = fetch(themesFileUrl).then(
-    (response) => response.json() as Promise<ThemesData>,
-  )
-  // import.meta.env.DEV ?
-  //   getPlaceholderThemes()
-  // : fetch(themesFileUrl).then(
-  //     (response) => response.json() as Promise<ThemesData>,
-  //   )
+  // const response = fetch(themesFileUrl).then(
+  //   (response) => response.json() as Promise<ThemesData>,
+  // )
+  const response =
+    import.meta.env.DEV ?
+      getPlaceholderThemes()
+    : fetch(themesFileUrl).then(
+        (response) => response.json() as Promise<ThemesData>,
+      )
 
   const themes = await Promise.all(
     await response
@@ -123,7 +124,10 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Pastel sunset",
-        images: ["http://localhost:4321/dev-placeholders/p1.webp"],
+        images: [
+          "http://localhost:4321/dev-placeholders/p1.webp",
+          "http://localhost:4321/dev-placeholders/c1.webp",
+        ],
         branch: "main",
         config: "xxx",
         desc: "Smooth light theme. Inspired by Japan",
@@ -143,6 +147,22 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
         branch: "main",
         config: "xxx",
         desc: "Strong colors for your mood",
+        repo: "https://github.com/flick0/dotfiles",
+      },
+      {
+        name: "R37R0_4RCH",
+        images: ["http://localhost:4321/dev-placeholders/r3.webp"],
+        branch: "main",
+        config: "xxx",
+        desc: "1337 R37R0",
+        repo: "https://github.com/flick0/dotfiles",
+      },
+      {
+        name: "Sakura",
+        images: ["http://localhost:4321/dev-placeholders/p2.webp"],
+        branch: "main",
+        config: "xxx",
+        desc: "Memories from a trip Japan yet to be made",
         repo: "https://github.com/flick0/dotfiles",
       },
     ],
