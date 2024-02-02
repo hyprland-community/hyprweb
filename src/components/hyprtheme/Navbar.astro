@@ -1,1 +1,23 @@
-<div class="h-16 flex items-center px-8 w-full max-w-screen-lg">Navbar</div>
+---
+import ThemeLogo from "#assets/hyprtheme-logo.svg?raw"
+import IconGithub from "~icons/mingcute/github-line"
+---
+
+<nav
+  class="h-16 font-medium justify-between flex items-center mx-auto px-8 w-full max-w-screen-lg"
+>
+  <a href="/hyprtheme" class="flex gap-4"
+    ><Fragment set:html={ThemeLogo} />
+    <div class="font-bold">Hyprtheme</div>
+  </a>
+
+  <ul class="flex gap-4 items-center">
+    <li><a href="">Install</a></li>
+    <li><a href="">Docs</a></li>
+    <li>
+      <a href="https://github.com/hyprland-community/hyprtheme"
+        ><IconGithub class="h-6 w-6" /></a
+      >
+    </li>
+  </ul>
+</nav>
