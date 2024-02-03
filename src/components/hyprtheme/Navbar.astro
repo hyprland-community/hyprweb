@@ -4,15 +4,16 @@ import IconGithub from "~icons/mingcute/github-line"
 ---
 
 <nav
-  class="h-16 font-medium justify-between flex items-center mx-auto px-8 w-full max-w-screen-lg"
+  class="h-16 font-medium justify-between text-lg flex items-center mx-auto px-8 w-full max-w-screen-xl"
 >
   <a href="/hyprtheme" class="flex gap-4"
-    ><Fragment set:html={ThemeLogo} />
+    ><Fragment set:html={ThemeLogo} class="w-8 h-8" height="32" />
     <div class="font-bold">Hyprtheme</div>
   </a>
 
-  <ul class="flex gap-8 items-center">
+  <ul class="flex gap-8 font-bold items-center">
     <li><a href="">Install</a></li>
+    <li><a href="/hyprtheme/browse">Browse</a></li>
     <li><a href="">Docs</a></li>
     <li>
       <a href="https://github.com/hyprland-community/hyprtheme"

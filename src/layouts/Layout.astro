@@ -5,16 +5,21 @@ import "@fontsource-variable/work-sans"
 interface Props {
   title: string
   icon?: string
+  description?: string
 }
 
-const { title, icon } = Astro.props
+const {
+  title,
+  icon,
+  description = "A place where people work together to create awesome things for Hyprland",
+} = Astro.props
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href={icon ?? "/favicon.svg"} />
     <meta name="generator" content={Astro.generator} />

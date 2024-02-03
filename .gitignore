@@ -1,3 +1,6 @@
+# Other stuff
+**/.scratch.*
+
 # build output
 dist/
 

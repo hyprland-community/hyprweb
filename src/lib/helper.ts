@@ -9,7 +9,7 @@ import type { Jsonifiable } from "type-fest"
 export function getTitleColors(
   colors: ProcessedTheme["colors"],
 ): readonly [light: string, middle: string, dark: string] {
-  const vibrantWeight = 10
+  const vibrantWeight = 25
 
   const { LightVibrant, DarkMuted, DarkVibrant, LightMuted, Muted, Vibrant } =
     colors

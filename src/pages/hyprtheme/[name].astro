@@ -1,5 +1,4 @@
 ---
-import type { GetStaticPaths } from "astro"
 import FancyTitle from "#components/FancyTitle.astro"
 import { extractAuthorFromRepoUrl, getTitleColors } from "#lib/helper"
 import { GET as getThemes, type ProcessedTheme } from "#api/themes.json"
@@ -8,7 +7,7 @@ import Layout from "#layouts/Hyprtheme.astro"
 import FancyButton from "#components/FancyButton.astro"
 import ThemeCard from "#components/ThemeCard.astro"
 import chroma from "chroma-js"
-import { log } from "console"
+import type { GetStaticPaths } from "astro"
 
 export const getStaticPaths = (async () => {
   const themes: readonly ProcessedTheme[] = await getThemes(Astro).then(
@@ -52,7 +51,10 @@ const [between1, between2, between3] = chroma
   .colors(3) as [string, string, string]
 ---
 
-<Layout title={params.name + " Theme"}>
+<Layout
+  title={params.name + " Theme"}
+  description={`Install the ${params.name} Theme with one click`}
+>
   <main class="mx-auto flex z-10 flex-col items-center gap-12 px-8">
     <div
       class="grid max-w-screen-xl w-full grid-cols-12 gap-8 min-h-max h-[82vh] max-h-[60rem] items-center"
@@ -90,7 +92,7 @@ const [between1, between2, between3] = chroma
         </div>
 
         <FancyButton
-          label="Install"
+          label="Apply theme"
           href={"hyprtheme:install+" + encodeURI(params.name)}
           type="link"
           classes="max-w-[20rem] "
@@ -119,9 +121,11 @@ const [between1, between2, between3] = chroma
   </main>
 
   <!-- More themes -->
-  <section class="flex flex-col relative items-center gap-16 justify-center">
+  <section
+    class="flex flex-col max-w-screen-xl mx-auto w-full relative items-center gap-16 justify-center"
+  >
     <FancyTitle label="More themes" colors={titleColors} />
-    <ul class="gap-6 grid grid-cols-1 xl:grid-cols-2">
+    <ul class="gap-8 grid grid-cols-1 md:grid-cols-2 w-full">
       {
         similiarThemes.map((similiarTheme) => (
           <ThemeCard theme={similiarTheme} />

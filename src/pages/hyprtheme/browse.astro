@@ -1,9 +1,5 @@
 ---
 import Layout from "#layouts/Hyprtheme.astro"
-// Might be nice to edit some generated colors for the title (ensure a min/max lightness)
-// import chroma from "chroma-js"
-
-import { getTitleColors } from "#lib/helper"
 import { GET, type ProcessedTheme } from "#api/themes.json"
 import FancyTitle from "#components/FancyTitle.astro"
 import ThemeCard from "#components/ThemeCard.astro"
@@ -14,12 +10,16 @@ const themes: readonly ProcessedTheme[] = await GET(Astro).then((response) =>
 ---
 
 <Layout title="Hyprland Themes">
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-5 items-center my-24">
     <FancyTitle label="Browse Themes" />
-    <p>Handcrafted themes for your ricing endavours</p>
+    <p class="text-xl text-slate-300 font-medium">
+      Handcrafted themes for your ricing endavours
+    </p>
   </div>
 
-  <ul class="flex flex-wrap gap-6">
+  <ul
+    class="md:grid md:grid-cols-2 flex flex-col px-8 gap-6 max-w-screen-lg mx-auto"
+  >
     {themes.map((theme) => <ThemeCard {theme} />)}
   </ul>
 </Layout>

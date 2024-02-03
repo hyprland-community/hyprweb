@@ -1,0 +1,43 @@
+---
+import { GET } from "#api/projects.json"
+import FancyTitle from "#components/FancyTitle.astro"
+import Layout from "#layouts/Layout.astro"
+
+const projects = await GET().then((response) => response.json())
+---
+
+<Layout title="Hyprcommunity Projects">
+  <main
+    class="max-w-screen-lg gap-12 mx-auto flex flex-col items-center justify-center"
+  >
+    <FancyTitle label="Community Projects" />
+
+    <ul class="grid grid-cols-2 gap-8">
+      {
+        projects.map((project) => (
+          <li class="flex flex-col gap-2 px-6 py-3">
+            <h2 class="text-3xl font-bold">{project.name}</h2>
+            <p class="font-medium">{project.description}</p>
+
+            {project.maintainers.length > 0 && (
+              <div class="">
+                <p class="text-xs tracking-wider font-bold uppercase text-slate-400">
+                  Maintainers
+                </p>
+                <ul class="flex gap-4 flex-wrap">
+                  {project.maintainers.map((maintainer) => (
+                    <li>
+                      <a href={"https://github.com/" + maintainer}>
+                        {maintainer}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </main></Layout
+>

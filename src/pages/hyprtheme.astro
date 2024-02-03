@@ -2,20 +2,40 @@
 import FancyButton from "#components/FancyButton.astro"
 import FancyTitle from "#components/FancyTitle.astro"
 import Layout from "#layouts/Hyprtheme.astro"
+import ThemeCard from "#components/ThemeCard.astro"
+import { GET } from "#api/themes.json"
+
+const themes = await GET(Astro).then((response) => response.json())
+
+const maxThemesAmount = 24
 ---
 
 <Layout title="Welcome to the Hyprland Community.">
   <main
-    class="w-screen h-screen flex items-center p-8 justify-center gap-12 flex-col"
+    class="w-screen h-[calc(100vh-4rem)] flex items-center p-8 justify-center gap-12 flex-col"
   >
     <FancyTitle
       label="Load themes with ease"
       classes="text-center lg:text-9xl"
     />
-    <p class="text-xl lg:text-2xl text-center font-bold text-slate-400">
+    <p class="text-xl lg:text-2xl text-center font-bold text-slate-300">
       Easily install themes for Hyprland with a single command
     </p>
 
     <FancyButton label="Browse Themes" type="link" href="/hyprtheme/browse" />
   </main>
+
+  <ul class="grid grid-cols-2 gap-8 mx-auto max-w-screen-xl -translate-y-8">
+    {themes.slice(0, maxThemesAmount + 1).map((theme) => <ThemeCard {theme} />)}
+  </ul>
+
+  {
+    themes.length > maxThemesAmount && (
+      <FancyButton
+        label="Discover all themes"
+        type="link"
+        href="/hyprtheme/browse"
+      />
+    )
+  }
 </Layout>

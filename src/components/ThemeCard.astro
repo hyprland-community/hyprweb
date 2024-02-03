@@ -1,25 +1,52 @@
 ---
 import type { ProcessedTheme } from "#api/themes.json"
+import { extractAuthorFromRepoUrl } from "#lib/helper"
+import { D } from "@mobily/ts-belt"
 
 // Card element to display a Hyprtheme theme
 
 type Props = { theme: ProcessedTheme }
 
-const { name, colors, images, desc } = Astro.props.theme
+const { name, repo, colors, images, desc } = Astro.props.theme
+
+const author = extractAuthorFromRepoUrl(repo)
 ---
 
-<li class="p-4 border flex flex-col gap-2 border-slate-300">
-  <a href={"/hyprtheme/" + name} class="flex flex-col">
+<li class="">
+  <a href={"/hyprtheme/" + name} class="flex group flex-col gap-4">
     <div
-      class="group border-2 border-solid overflow-hidden rounded-3xl w-40 md:w-52 lg:w-80"
-      style={"border-color:" + colors.Vibrant.hex}
+      class="image-wrapper bg- border-2 border-solid overflow-hidden rounded-3xl"
     >
-      <img class="w-40 md:w-52 lg:w-80" src={images[0]} />
+      <img
+        class="w-full group-hover:scale-[1.01] transition-transform"
+        src={images[0]}
+      />
     </div>
-    <h2 class="text-2xl font-bold">{name}</h2>
+    <div class="flex flex-col gap-1 group-hover:text-[var(--LightVibrant)]">
+      <h2 class="text-xl font-bold transition-colors">
+        {name}
+      </h2>
+      <p class="font-medium opacity-80">By {author}</p>
+    </div>
   </a>
+</li>
 
-  <div class="flex p-2 gap-2">
+<style define:vars={D.map(colors, (value) => value.hex)}>
+  .image-wrapper {
+    transition: all 140ms;
+    box-shadow: 0px 8px 40px color-mix(in srgb, var(--Vibrant) 30%, transparent);
+
+    border-color: var(--Vibrant);
+
+    .group:hover & {
+      box-shadow: 0px 8px 40px
+        color-mix(in srgb, var(--LightVibrant) 30%, transparent);
+      border-color: var(--LightVibrant);
+    }
+  }
+</style>
+
+<!-- <div class="flex p-2 gap-2">
     {
       Object.entries(colors).map(([colorName, { hex, population }]) => (
         <div class="flex flex-col gap-1">
@@ -29,5 +56,4 @@ const { name, colors, images, desc } = Astro.props.theme
         </div>
       ))
     }
-  </div>
-</li>
+  </div> -->

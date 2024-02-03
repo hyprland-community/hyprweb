@@ -72,8 +72,9 @@ const [between1, between2, between3] = chroma
       theme(colors.black),
       var(--middle)
     ); */
+    transition: all cubic-bezier(0.4, 0, 0.2, 1) 540ms;
+    animation: shadow 2.3s linear infinite;
     box-shadow: 0px 12px 60px color-mix(in srgb, var(--middle) 30%, transparent);
-    transition: all cubic-bezier(0.4, 0, 0.2, 1) 140ms;
 
     .element:hover & {
       box-shadow: 0px 12px 60px
@@ -104,7 +105,7 @@ const [between1, between2, between3] = chroma
     }
 
     &::after {
-      --hoverOffset: 0.25rem;
+      --hoverOffset: 0.3rem;
       content: "";
       position: absolute;
       z-index: -1;
@@ -124,6 +125,22 @@ const [between1, between2, between3] = chroma
       }
     }
   }
+
+  /* @keyframes shadow {
+    0%,
+    80% {
+      box-shadow: 0px 12px 60px
+        color-mix(in srgb, var(--middle) 50%, transparent);
+    }
+    90% {
+      box-shadow: 0px 12px 60px
+        color-mix(in srgb, var(--light) 50%, transparent);
+    }
+    100% {
+      box-shadow: 0px 12px 60px
+        color-mix(in srgb, var(--middle) 50%, transparent);
+    }
+  } */
 
   @keyframes opacityChange {
     50% {
