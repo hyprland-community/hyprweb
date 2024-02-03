@@ -8,6 +8,7 @@ interface Props {
 }
 
 import { hyprThemeColors } from "#lib/consts"
+import { setMinimumReadableLightness } from "#lib/helper"
 
 const {
   label,
@@ -96,12 +97,13 @@ const [top, middle, bottom] = colors
   }
 </script>
 
-<style lang='postcss' define:vars={{ top, middle, bottom }}>
+<style lang='postcss' define:vars={{ top: setMinimumReadableLightness(top), middle, bottom }}>
   .top,
   .middle,
   .bottom {
     transition: all 80ms ease-in-out;
     pointer-events: none;
+    width: 100%;
   }
 
   .top {

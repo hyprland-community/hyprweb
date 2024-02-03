@@ -1,4 +1,5 @@
 import type { ProcessedTheme } from "#api/themes.json"
+import chroma from "chroma-js"
 import type { Jsonifiable } from "type-fest"
 
 /**
@@ -58,4 +59,11 @@ export function extractAuthorFromRepoUrl(url: string): string {
   if (!author) throw new Error(`Failed to get author from url: ${url}`)
 
   return author
+}
+
+/** Gets a HEX color and brightens it, if it's too dar */
+export function setMinimumReadableLightness(color: string): string {
+  const oklch = chroma.hex(color).oklch()
+
+  return oklch[0] < 0.6 ? chroma.oklch(0.7, oklch[1], oklch[2]).hex() : color
 }
