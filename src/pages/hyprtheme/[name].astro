@@ -3,11 +3,12 @@ import type { GetStaticPaths } from "astro"
 import FancyTitle from "#components/FancyTitle.astro"
 import { extractAuthorFromRepoUrl, getTitleColors } from "#lib/helper"
 import { GET as getThemes, type ProcessedTheme } from "#api/themes.json"
-import { GET as GETSimilarThemes } from "#api/similiar-themes.json"
+import { getSimiliarThemes } from "#lib/similiar-themes"
 import Layout from "#layouts/Hyprtheme.astro"
 import FancyButton from "#components/FancyButton.astro"
 import ThemeCard from "#components/ThemeCard.astro"
 import chroma from "chroma-js"
+import { log } from "console"
 
 export const getStaticPaths = (async () => {
   const themes: readonly ProcessedTheme[] = await getThemes(Astro).then(
@@ -23,10 +24,7 @@ export const getStaticPaths = (async () => {
       params: { name: theme.name },
       props: {
         theme,
-        similiarThemes: await GETSimilarThemes({
-          ...Astro,
-          params: { name: theme.name },
-        }).then((response) => response.json()),
+        similiarThemes: getSimiliarThemes(theme, themes),
       },
     })),
   )
@@ -46,8 +44,6 @@ const mainColors = [titleColors[1], titleColors[0]]
 const [gradient1, gradient2] = mainColors.map((color) =>
   chroma.hex(color).hsl()[1] < 0.4 ? `${color}80` : color,
 ) as [top: string, bottom: string]
-
-console.log([gradient1, gradient2].map(chroma.hex).map((c) => c.hsl()))
 
 const [between1, between2, between3] = chroma
   .scale(mainColors)

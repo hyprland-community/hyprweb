@@ -1,45 +1,21 @@
 import { pipe, A, N, flow, G } from "@mobily/ts-belt"
 import chroma from "chroma-js"
 
-import type { APIContext, APIRoute } from "astro"
 import {
-  getThemes,
   type ColorPalette,
   type ProcessedTheme,
-} from "./themes.json"
-import { JsonResponse } from "#lib/helper"
+} from "../pages/api/themes.json"
 
 /** Get themes sorted by their color of the parameter */
-export async function GET({
-  params,
-}: APIContext<Record<string, any>, { name: string; limit?: string }>): Promise<
-  JsonResponse<readonly ProcessedTheme[]>
-> {
-  const { name, limit = 6 } = params
-  const parsedLimit = Number(limit)
+export function getSimiliarThemes(
+  thisTheme: ProcessedTheme,
+  allThemes: readonly ProcessedTheme[],
+  limit = 6,
+): readonly ProcessedTheme[] {
+  const baseColors = paletteToOklch(thisTheme.colors)
 
-  if (Number.isNaN(parsedLimit)) {
-    throw new Error(`Invalid limit: "${limit}" provided.`)
-  }
-
-  if (!name) {
-    throw new Error(
-      `Requested similiar themes for ${name}, but ${name} could not be found in Params:\n ${params}`,
-    )
-  }
-
-  const themes = await getThemes()
-  const baseTheme = themes.find((theme) => theme.name === name)
-  if (!baseTheme) {
-    throw new Error(
-      `Requested similiar themes for name: "${name}", but no such theme could be found.`,
-    )
-  }
-
-  const baseColors = paletteToOklch(baseTheme.colors)
-
-  const sortedThemes = themes
-    .filter((theme) => theme.name !== name)
+  const sortedThemes = allThemes
+    .filter((theme) => theme.name !== thisTheme.name)
     .sort(({ colors: a }, { colors: b }) => {
       const [aDifference, bDifference] = pipe(
         [a, b] as const,
@@ -63,9 +39,9 @@ export async function GET({
 
       return aDifference - bDifference
     })
-    .slice(0, parsedLimit + 1)
+    .slice(0, limit + 1)
 
-  return new JsonResponse(sortedThemes)
+  return sortedThemes
 }
 
 function paletteToOklch(palette: ColorPalette): readonly Oklch[] {

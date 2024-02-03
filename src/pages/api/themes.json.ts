@@ -44,13 +44,12 @@ export async function getThemes(): Promise<readonly ProcessedTheme[]> {
             return
           }
 
-          console.log(heroUrl)
           const heroBuffer = await fetch(heroUrl).then((response) =>
             response.arrayBuffer(),
           )
 
           // Typings of this lib are a bit broken, as the returned object is actually {default: ...}
-          const palettesBase: Palette = (
+          const palettesBase = (
             await new Vibrant(Buffer.from(heroBuffer), {
               maxDimension: 1600,
               ImageClass: SharpImage,
@@ -63,7 +62,7 @@ export async function getThemes(): Promise<readonly ProcessedTheme[]> {
               hex: swatch!.hex,
               population: swatch!.population,
             })),
-          )
+          ) as ColorPalette
 
           return { ...theme, colors }
         }),
