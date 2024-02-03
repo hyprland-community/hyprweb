@@ -73,17 +73,19 @@ const [between1, between2, between3] = chroma
       </div>
 
       <div class="flex flex-col text-left gap-8 lg:col-span-6 justify-center">
-        <div class="flex flex-col gap-4 xl:gap-6">
+        <div
+          class="flex flex-col text-lg font-medium text-slate-300 gap-4 xl:gap-6"
+        >
           <FancyTitle
             label={params.name}
             colors={titleColors}
             classes="text-left"
             sizeClasses="text-3xl md:text-6xl lg:text-7xl xl:text-8xl"
           />
-          <p class="text-lg font-mono font-medium text-slate-300">
+          <p class="font-mono">
             {theme.desc}
           </p>
-          <p class="font-mono text-slate-300 transition-colors">
+          <p class="transition-colors font-mono">
             By
             <a class="hover:text-[var(--light)] font-bold" href={theme.repo}>
               {author}</a
@@ -95,7 +97,7 @@ const [between1, between2, between3] = chroma
           label="Install"
           href={"hyprtheme:install+" + encodeURI(params.name)}
           type="link"
-          classes="max-w-[20rem]"
+          classes="max-w-[20rem] "
           colors={{ light: titleColors[0], middle: titleColors[1] }}
         />
       </div>
