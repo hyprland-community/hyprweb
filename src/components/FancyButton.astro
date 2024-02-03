@@ -1,0 +1,163 @@
+---
+import { hyprThemeColors } from "#lib/consts"
+import chroma from "chroma-js"
+
+type Props = (
+  | {
+      type: "link"
+      href: string
+    }
+  | { type: "button" }
+) & {
+  label: string
+  classes?: string
+  colors?: { light: string; middle: string }
+}
+const {
+  type,
+  label,
+  classes = "",
+  colors = { light: hyprThemeColors[0], middle: hyprThemeColors[2] },
+  ...props
+} = Astro.props
+
+const href = "href" in props && props.href
+
+const [between1, between2, between3] = chroma
+  .scale([colors.middle, colors.light])
+  .mode("hsl")
+  .correctLightness()
+  .colors(3) as [string, string, string]
+
+// const between1 = gradientColors()
+---
+
+<a
+  href={href + ""}
+  class={"relative element  text-white text-lg  items-center justify-center  active:scale-[0.99] transition-all py-3  px-6  text-center   font-bold flex  flex-row gap-2  rounded-3xl " +
+    classes}
+  >{label}
+  <slot />
+  <div class="gradient"></div>
+</a>
+
+<style
+  define:vars={{
+    ...colors,
+    between1,
+    between2,
+    between3,
+  }}
+>
+  .element {
+    --roundness: 20px;
+    --border: 2px;
+    transition: all cubic-bezier(0.4, 0, 0.2, 1) 250ms;
+  }
+
+  /* Gracefully stolen and adapted from https://velocity.builder.io */
+  .gradient {
+    position: absolute;
+    width: calc(100% + var(--border));
+    height: calc(100% + var(--border));
+    inset: 0;
+    z-index: -1;
+    border-radius: var(--roundness);
+    overflow: hidden;
+    background: var(--middle);
+    /* linear-gradient(
+      to top right,
+      theme(colors.black),
+      var(--middle),
+      theme(colors.black),
+      var(--middle)
+    ); */
+    box-shadow: 0px 12px 60px color-mix(in srgb, var(--middle) 30%, transparent);
+    transition: all cubic-bezier(0.4, 0, 0.2, 1) 140ms;
+
+    .element:hover & {
+      box-shadow: 0px 12px 60px
+        color-mix(in srgb, var(--middle) 50%, transparent);
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      left: -50%;
+      top: -50%;
+      width: 200%;
+      height: 200%;
+      background-repeat: no-repeat;
+      background: linear-gradient(
+        transparent,
+        var(--between1),
+        var(--between2),
+        var(--between3),
+        var(--light),
+        var(--between3),
+        var(--between2),
+        var(--between1),
+        transparent
+      );
+      animation: rotate 4.6s linear infinite;
+    }
+
+    &::after {
+      --hoverOffset: 0.25rem;
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: var(--border);
+      top: var(--border);
+      width: calc(100% - var(--border) * 2);
+      height: calc(100% - var(--border) * 2);
+      background: theme(colors.black);
+      border-radius: calc(var(--roundness) - var(--border));
+      transition: all cubic-bezier(0.4, 0, 0.2, 1) 140ms;
+
+      .element:hover & {
+        width: calc(100% - var(--border) * 2 - var(--hoverOffset));
+        height: calc(100% - var(--border) * 2 - var(--hoverOffset));
+        left: calc(var(--border) + var(--hoverOffset) * 0.5);
+        top: calc(var(--border) + var(--hoverOffset) * 0.5);
+      }
+    }
+  }
+
+  @keyframes opacityChange {
+    50% {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  @keyframes borders {
+    0%,
+    100% {
+      border-width: calc(var(--font) * 0.2) calc(var(--font) * 0.1)
+        calc(var(--font) * 0.02) calc(var(--font) * 0.02);
+    }
+    25% {
+      border-width: calc(var(--font) * 0.1) calc(var(--font) * 0.02)
+        calc(var(--font) * 0.02) calc(var(--font) * 0.2);
+    }
+    50% {
+      border-width: calc(var(--font) * 0.02) calc(var(--font) * 0.02)
+        calc(var(--font) * 0.2) calc(var(--font) * 0.1);
+    }
+    75% {
+      border-width: calc(var(--font) * 0.02) calc(var(--font) * 0.2)
+        calc(var(--font) * 0.1) calc(var(--font) * 0.02);
+    }
+  }
+</style>

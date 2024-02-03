@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   extends: [
     "eslint:recommended",
+    "plugin:typescript/recommended",
     "plugin:astro/recommended",
     "plugin:svelte/recommended",
     "plugin:unicorn/recommended",
@@ -24,6 +25,7 @@ module.exports = {
     "unicorn/no-array-for-each": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/no-array-callback-reference": "off",
+    "no-shadow": ["error", { allow: ["error", "resolve", "reject"] }],
   },
   globals: { globalThis: true },
 

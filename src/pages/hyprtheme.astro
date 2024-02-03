@@ -1,6 +1,7 @@
 ---
-import FancyTitle from "@components/FancyTitle.astro"
-import Layout from "@layouts/Layout.astro"
+import FancyButton from "#components/FancyButton.astro"
+import FancyTitle from "#components/FancyTitle.astro"
+import Layout from "#layouts/Hyprtheme.astro"
 ---
 
 <Layout title="Welcome to the Hyprland Community.">
@@ -14,5 +15,7 @@ import Layout from "@layouts/Layout.astro"
     <p class="text-xl lg:text-2xl text-center font-bold text-slate-400">
       Easily install themes for Hyprland with a single command
     </p>
+
+    <FancyButton label="Browse Themes" type="link" href="/hyprtheme/browse" />
   </main>
 </Layout>

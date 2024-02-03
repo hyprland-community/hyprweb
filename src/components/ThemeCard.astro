@@ -1,0 +1,33 @@
+---
+import type { ProcessedTheme } from "#api/themes.json"
+
+// Card element to display a Hyprtheme theme
+
+type Props = { theme: ProcessedTheme }
+
+const { name, colors, images, desc } = Astro.props.theme
+---
+
+<li class="p-4 border flex flex-col gap-2 border-slate-300">
+  <a href={"/hyprtheme/" + name} class="flex flex-col">
+    <div
+      class="group border-2 border-solid overflow-hidden rounded-3xl w-40 md:w-52 lg:w-80"
+      style={"border-color:" + colors.Vibrant.hex}
+    >
+      <img class="w-40 md:w-52 lg:w-80" src={images[0]} />
+    </div>
+    <h2 class="text-2xl font-bold">{name}</h2>
+  </a>
+
+  <div class="flex p-2 gap-2">
+    {
+      Object.entries(colors).map(([colorName, { hex, population }]) => (
+        <div class="flex flex-col gap-1">
+          <p class="text-sm opacity-80">{colorName}</p>
+          <div class="w-20 h-20 rounded-sm" style={"background-color:" + hex} />
+          <p class="text-xs opacity-80">{population}</p>
+        </div>
+      ))
+    }
+  </div>
+</li>

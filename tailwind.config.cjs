@@ -6,7 +6,10 @@ export default {
   content: ["./src/**/**/*.{astro,html,js,svelte,ts}"],
   theme: {
     extend: {
-      colors: { black: "#0D0E0F", white: colors.slate[100] },
+      colors: { black: "#0D0E0F", white: colors.slate[100], 
+    
+    
+    },
       fontFamily: {
         ...fontFamily,
         sans: ["Work Sans Variable", ...fontFamily["sans"]],

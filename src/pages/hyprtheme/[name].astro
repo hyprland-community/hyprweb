@@ -1,0 +1,206 @@
+---
+import type { GetStaticPaths } from "astro"
+import FancyTitle from "#components/FancyTitle.astro"
+import { extractAuthorFromRepoUrl, getTitleColors } from "#lib/helper"
+import { GET as getThemes, type ProcessedTheme } from "#api/themes.json"
+import { GET as GETSimilarThemes } from "#api/similiar-themes.json"
+import Layout from "#layouts/Hyprtheme.astro"
+import FancyButton from "#components/FancyButton.astro"
+import ThemeCard from "#components/ThemeCard.astro"
+import chroma from "chroma-js"
+
+export const getStaticPaths = (async () => {
+  const themes: readonly ProcessedTheme[] = await getThemes(Astro).then(
+    (response) => response.json(),
+  )
+
+  // Explicit typing is nessecary bc otherwise TS throws a fit for some reason
+  const paths: {
+    params: { name: string }
+    props: { theme: ProcessedTheme; similiarThemes: readonly ProcessedTheme[] }
+  }[] = await Promise.all(
+    themes.map(async (theme) => ({
+      params: { name: theme.name },
+      props: {
+        theme,
+        similiarThemes: await GETSimilarThemes({
+          ...Astro,
+          params: { name: theme.name },
+        }).then((response) => response.json()),
+      },
+    })),
+  )
+
+  return paths
+}) satisfies GetStaticPaths
+
+const {
+  params,
+  props: { theme, similiarThemes },
+} = Astro
+
+const titleColors = getTitleColors(theme.colors)
+const author = extractAuthorFromRepoUrl(theme.repo)
+
+const mainColors = [titleColors[1], titleColors[0]]
+const [gradient1, gradient2] = mainColors.map((color) =>
+  chroma.hex(color).hsl()[1] < 0.4 ? `${color}80` : color,
+) as [top: string, bottom: string]
+
+console.log([gradient1, gradient2].map(chroma.hex).map((c) => c.hsl()))
+
+const [between1, between2, between3] = chroma
+  .scale(mainColors)
+  .mode("oklab")
+  .correctLightness()
+  .colors(3) as [string, string, string]
+---
+
+<Layout title={params.name + " Theme"}>
+  <main class="mx-auto flex z-10 flex-col items-center gap-12 px-8">
+    <div
+      class="grid max-w-screen-xl w-full grid-cols-12 gap-8 min-h-max h-[82vh] max-h-[60rem] items-center"
+    >
+      <div
+        class="lg:col-span-6 relative overflow-hidden p-3 aspect-square rounded-3xl col-span-6 w-full flex max-w-2xl items-center justify-center"
+      >
+        <img
+          src={theme.images[0]}
+          alt={params.name + " image"}
+          class="rounded-3xl hover:scale-[1.01] transition-transform outline outline-white/5 lg:w-[25rem] xl:w-[35rem] object-contain"
+        />
+        <div class="thumbnail-bg"></div>
+      </div>
+
+      <div class="flex flex-col text-left gap-8 lg:col-span-6 justify-center">
+        <div
+          class="flex flex-col text-lg font-medium text-slate-300 gap-4 xl:gap-6"
+        >
+          <FancyTitle
+            label={params.name}
+            colors={titleColors}
+            classes="text-left"
+            sizeClasses="text-3xl md:text-6xl lg:text-7xl xl:text-8xl"
+          />
+          <p class="font-mono">
+            {theme.desc}
+          </p>
+          <p class="transition-colors font-mono">
+            By
+            <a class="hover:text-[var(--light)] font-bold" href={theme.repo}>
+              {author}</a
+            >
+          </p>
+        </div>
+
+        <FancyButton
+          label="Install"
+          href={"hyprtheme:install+" + encodeURI(params.name)}
+          type="link"
+          classes="max-w-[20rem] "
+          colors={{ light: titleColors[0], middle: titleColors[1] }}
+        />
+      </div>
+
+      <div class="grainy-bg"></div>
+    </div>
+
+    <!-- Images -->
+    {
+      theme.images.length > 1 && (
+        <section class="flex flex-wrap mb-24 lg:mb-32 relative items-center justify-center gap-8 xl:gap-12 xl:px-12">
+          {theme.images.flatMap((image, index) =>
+            index === 0 ?
+              []
+            : <img
+                class="object-contain more-image  rounded w-[42rem] "
+                src={image}
+              />,
+          )}
+        </section>
+      )
+    }
+  </main>
+
+  <!-- More themes -->
+  <section class="flex flex-col relative items-center gap-16 justify-center">
+    <FancyTitle label="More themes" colors={titleColors} />
+    <ul class="gap-6 grid grid-cols-1 xl:grid-cols-2">
+      {
+        similiarThemes.map((similiarTheme) => (
+          <ThemeCard theme={similiarTheme} />
+        ))
+      }
+    </ul>
+  </section>
+</Layout>
+
+<style
+  define:vars={{
+    light: titleColors[0],
+    middle: titleColors[1],
+    dark: titleColors[2],
+    between1,
+    between2,
+    between3,
+    gradient1,
+    gradient2,
+  }}
+>
+  .thumbnail-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    border-radius: theme(borderRadius.3xl);
+    /* background: rgba(0, 0, 0, 0.6); */
+    background: radial-gradient(
+      circle at 0% 0%,
+      var(--light),
+      black,
+      var(--dark)
+    );
+    z-index: -1;
+    border: 4px solid var(--light);
+    opacity: 0.5;
+    /* box-shadow:
+      inset -40px -64px 80px color-mix(in srgb, var(--middle) 10%, transparent),
+      inset 32px 64px 80px color-mix(in srgb, var(--light) 25%, transparent); */
+    mix-blend-mode: color-dodge;
+  }
+
+  .grainy-bg {
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    width: 200%;
+    max-width: 2100px;
+    translate: -50% -0px;
+    height: 100%;
+    z-index: -5;
+
+    background: url("/grain.webp"),
+      radial-gradient(
+        circle,
+        var(--gradient2),
+        var(--gradient1) /* */
+          /* var(--light),
+                     var(--between3),
+                     var(--between2),
+                     var(--between1),
+                     var(--middle) */
+      );
+    background-blend-mode: hard-light;
+    mask-image: linear-gradient(to top, black 25%, white),
+      radial-gradient(ellipse, white 40%, black 70%);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-composite: intersect;
+    mask-mode: luminance;
+  }
+
+  .more-image {
+    box-shadow: 24px 24px 0px theme(colors.black / 50%);
+    border: 2px solid rgba(0, 0, 0, 0.4);
+  }
+</style>

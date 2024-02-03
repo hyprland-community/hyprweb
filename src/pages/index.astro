@@ -1,14 +1,17 @@
 ---
 import Card from "../components/Card.astro"
 import FancyTitle from "../components/FancyTitle.astro"
-import Layout from "../layouts/Layout.astro"
+import Layout from "#layouts/Hyprtheme.astro"
 ---
 
 <Layout title="Welcome to the Hyprland Community.">
   <main
     class="w-screen h-screen flex items-center p-8 justify-center gap-12 flex-col"
   >
-    <FancyTitle label="Hyprland Community" />
+    <FancyTitle
+      label="Hyprland Community"
+      colors={["#0ee7f6", "#003dd6", "#6bffba"]}
+    />
 
     <p class="text-lg lg:text-2xl text-center text-slate-300 font-medium">
       A place where people work together to create awesome things for Hyprland
