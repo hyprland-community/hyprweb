@@ -5,7 +5,6 @@ import { GET as getThemes, type ProcessedTheme } from "#api/themes.json"
 import { getSimiliarThemes } from "#lib/similiar-themes"
 import Layout from "#layouts/Hyprtheme.astro"
 import FancyButton from "#components/FancyButton.astro"
-import ThemeCard from "#components/ThemeCard.astro"
 import chroma from "chroma-js"
 import type { GetStaticPaths } from "astro"
 import ThemesList from "#components/hyprtheme/ThemesList.astro"
@@ -55,6 +54,7 @@ const [between1, between2, between3] = chroma
 <Layout
   title={params.name + " Theme"}
   description={`Install the ${params.name} Theme with one click`}
+  logoColors={{ top: mainColors[1]!, bottom: mainColors[0]! }}
 >
   <main class="mx-auto flex z-10 flex-col items-center gap-12 px-8">
     <div
@@ -66,13 +66,13 @@ const [between1, between2, between3] = chroma
         <img
           src={theme.images[0]}
           alt={params.name + " image"}
-          class="rounded-3xl aspect-video object-cover shadow-2xl hover:scale-[1.01] transition-transform outline outline-white/5 lg:w-[25rem] xl:w-[35rem]"
+          class="rounded-3xl object-cover shadow-2xl hover:scale-[1.01] max-h-[35rem] transition-transform outline outline-white/5 lg:w-[25rem] xl:w-[35rem]"
         />
         <div class="max-md:hidden thumbnail-bg"></div>
       </div>
 
       <div
-        class="flex flex-col text-center max-sm:items-center md:text-left gap-8 lg:col-span-6 justify-center"
+        class="flex flex-col text-center max-sm:items-center md:text-left gap-8 col-span-6 justify-center"
       >
         <div
           class="flex flex-col text-lg font-medium text-slate-300 gap-4 xl:gap-6"
@@ -109,12 +109,12 @@ const [between1, between2, between3] = chroma
     <!-- Images -->
     {
       theme.images.length > 1 && (
-        <section class="flex flex-wrap mb-24 lg:mb-32 relative items-center justify-center gap-8 xl:gap-12 xl:px-12">
+        <section class="flex flex-col max-w-screen-3xl  mb-24 lg:mb-32 relative items-center justify-center  gap-14 xl:gap-12 xl:px-12 lg:grid grid-cols-2  w-full 3xl:grid-cols-3">
           {theme.images.flatMap((image, index) =>
             index === 0 ?
               []
             : <img
-                class="object-contain more-image  rounded w-[42rem] "
+                class="object-contain more-image  rounded w-full  "
                 src={image}
               />,
           )}

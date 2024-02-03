@@ -1,3 +1,54 @@
-<div class="w-full min-h-56 flex flex-col items-center justify-center">
-  Footer
-</div>
+---
+// import IconDiscord from '~icons/mingcute'
+---
+
+<footer class="w-full py-10 font-medium flex mt-32 items-center justify-center">
+  <div class="justify-between text-lg px-8 w-full flex max-w-screen-xl">
+    <div class="flex flex-col gap-6 items-center">
+      <a href="/">
+        <div class="community-logo"></div>
+      </a>
+      <a
+        href="/"
+        class="text-xl font-bold from-blue-500 to-teal-200 bg-gradient-to-tr bg-clip-text text-transparent"
+      >
+        Hyprland community
+      </a>
+    </div>
+
+    <!-- Links -->
+    <div class="flex gap-12 md:gap-16">
+      <ul class="">
+        <p>Community</p>
+        <li><a href="/">Homepage</a></li>
+        <li><a href="/projects">All projects</a></li>
+        <li><a href="#">Discord</a></li>
+        <li><a href="#">Github</a></li>
+      </ul>
+      <ul class="">
+        <p>Hyprtheme</p>
+        <li><a href="#">Discord</a></li>
+        <li><a href="#">Hyprtheme Github</a></li>
+        <li><a href="#">Theme Repo</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .community-logo {
+    @apply h-40 w-28 rounded-full bg-cyan-500;
+  }
+
+  ul {
+    @apply flex flex-col;
+  }
+
+  ul p {
+    @apply mb-2 ml-4 text-sm font-bold uppercase tracking-widest text-slate-300;
+  }
+
+  ul a {
+    @apply block rounded-full px-4  py-2 outline-1 transition-all hover:-translate-y-1 hover:outline;
+  }
+</style>

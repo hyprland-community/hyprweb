@@ -1,4 +1,6 @@
-const { fontFamily } = require("tailwindcss/defaultTheme")
+const { fontFamily, ...rest } = require("tailwindcss/defaultTheme")
+
+console.log({ rest })
 const colors = require("tailwindcss/colors")
 
 /** @type {import('tailwindcss').Config} */
@@ -6,10 +8,8 @@ export default {
   content: ["./src/**/**/*.{astro,html,js,svelte,ts}"],
   theme: {
     extend: {
-      colors: { black: "#0D0E0F", white: colors.slate[100], 
-    
-    
-    },
+      colors: { black: "#0D0E0F", white: colors.slate[100] },
+      screens: { "3xl": "2560px" },
       fontFamily: {
         ...fontFamily,
         sans: ["Work Sans Variable", ...fontFamily["sans"]],

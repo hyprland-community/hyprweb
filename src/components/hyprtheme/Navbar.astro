@@ -1,13 +1,17 @@
 ---
-import ThemeLogo from "#assets/hyprtheme-logo.svg?raw"
+import Logo, { type LogoColors } from "#components/hyprtheme/Logo.astro"
 import IconGithub from "~icons/mingcute/github-line"
+
+type Props = { logoColors?: LogoColors }
+
+const { logoColors } = Astro.props
 ---
 
 <nav
   class="h-16 font-medium justify-between text-lg flex items-center mx-auto px-8 w-full max-w-screen-xl"
 >
   <a href="/hyprtheme" class="flex gap-4"
-    ><Fragment set:html={ThemeLogo} class="w-8 h-8" height="32" />
+    ><Logo colors={logoColors} class:list={["text-red-500 bg-red-500"]} />
     <div class="font-bold">Hyprtheme</div>
   </a>
 
@@ -22,3 +26,9 @@ import IconGithub from "~icons/mingcute/github-line"
     </li>
   </ul>
 </nav>
+
+<style>
+  ul li a {
+    @apply transition-colors hover:text-slate-300;
+  }
+</style>
