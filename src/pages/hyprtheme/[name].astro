@@ -8,6 +8,7 @@ import FancyButton from "#components/FancyButton.astro"
 import ThemeCard from "#components/ThemeCard.astro"
 import chroma from "chroma-js"
 import type { GetStaticPaths } from "astro"
+import ThemesList from "#components/hyprtheme/ThemesList.astro"
 
 export const getStaticPaths = (async () => {
   const themes: readonly ProcessedTheme[] = await getThemes(Astro).then(
@@ -122,16 +123,10 @@ const [between1, between2, between3] = chroma
 
   <!-- More themes -->
   <section
-    class="flex flex-col max-w-screen-xl mx-auto w-full relative items-center gap-16 justify-center"
+    class="flex mt-6 md:mt-10 flex-col max-w-screen-xl mx-auto w-full relative items-center gap-16 justify-center"
   >
     <FancyTitle label="More themes" colors={titleColors} />
-    <ul class="gap-8 grid grid-cols-1 md:grid-cols-2 w-full">
-      {
-        similiarThemes.map((similiarTheme) => (
-          <ThemeCard theme={similiarTheme} />
-        ))
-      }
-    </ul>
+    <ThemesList themes={similiarThemes} />
   </section>
 </Layout>
 

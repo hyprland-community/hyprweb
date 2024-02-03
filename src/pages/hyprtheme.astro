@@ -4,6 +4,7 @@ import FancyTitle from "#components/FancyTitle.astro"
 import Layout from "#layouts/Hyprtheme.astro"
 import ThemeCard from "#components/ThemeCard.astro"
 import { GET } from "#api/themes.json"
+import ThemesList from "#components/hyprtheme/ThemesList.astro"
 
 const themes = await GET(Astro).then((response) => response.json())
 
@@ -25,17 +26,17 @@ const maxThemesAmount = 24
     <FancyButton label="Browse Themes" type="link" href="/hyprtheme/browse" />
   </main>
 
-  <ul class="grid grid-cols-2 gap-8 mx-auto max-w-screen-xl -translate-y-8">
-    {themes.slice(0, maxThemesAmount + 1).map((theme) => <ThemeCard {theme} />)}
-  </ul>
+  <section class="flex -translate-y-8 flex-col items-center">
+    <ThemesList themes={themes.slice(0, maxThemesAmount)} />
 
-  {
-    themes.length > maxThemesAmount && (
-      <FancyButton
-        label="Discover all themes"
-        type="link"
-        href="/hyprtheme/browse"
-      />
-    )
-  }
+    {
+      themes.length > maxThemesAmount && (
+        <FancyButton
+          label="Discover all themes"
+          type="link"
+          href="/hyprtheme/browse"
+        />
+      )
+    }
+  </section>
 </Layout>

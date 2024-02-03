@@ -3,6 +3,7 @@ import Layout from "#layouts/Hyprtheme.astro"
 import { GET, type ProcessedTheme } from "#api/themes.json"
 import FancyTitle from "#components/FancyTitle.astro"
 import ThemeCard from "#components/ThemeCard.astro"
+import ThemesList from "#components/hyprtheme/ThemesList.astro"
 
 const themes: readonly ProcessedTheme[] = await GET(Astro).then((response) =>
   response.json(),
@@ -17,9 +18,5 @@ const themes: readonly ProcessedTheme[] = await GET(Astro).then((response) =>
     </p>
   </div>
 
-  <ul
-    class="md:grid md:grid-cols-2 flex flex-col px-8 gap-6 max-w-screen-lg mx-auto"
-  >
-    {themes.map((theme) => <ThemeCard {theme} />)}
-  </ul>
+  <ThemesList {themes} />
 </Layout>
