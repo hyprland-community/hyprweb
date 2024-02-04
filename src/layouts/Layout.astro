@@ -18,7 +18,7 @@ const {
 <script>
   // Make external links open in a new page by default
   Array.from(document.querySelectorAll("a"))
-    .filter((link) => !link.href.startsWith("/"))
+    .filter((link) => link.hostname !== location.hostname)
     .forEach((externalLink) => (externalLink.target = "_blank"))
 </script>
 
