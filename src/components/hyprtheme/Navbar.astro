@@ -1,6 +1,7 @@
 ---
 import Logo, { type LogoColors } from "#components/hyprtheme/Logo.astro"
-import IconGithub from "~icons/mingcute/github-line"
+import IconGithub from "~icons/mdi/github"
+import { githubUrl } from "#lib/consts"
 
 type Props = { logoColors?: LogoColors }
 
@@ -8,21 +9,25 @@ const { logoColors } = Astro.props
 ---
 
 <nav
-  class="h-16 font-medium justify-between text-lg flex items-center mx-auto px-8 w-full max-w-screen-xl"
+  class="h-16 font-medium justify-between py-2 text-lg flex items-center mx-auto px-8 w-full max-w-screen-xl"
 >
   <a href="/hyprtheme" class="flex gap-4"
-    ><Logo colors={logoColors} class:list={["text-red-500 bg-red-500"]} />
+    ><Logo colors={logoColors} class="size-8" />
     <div class="font-bold">Hyprtheme</div>
   </a>
 
   <ul class="flex gap-8 font-bold items-center">
-    <li><a href="">Install</a></li>
-    <li><a href="/hyprtheme/browse">Browse</a></li>
-    <li><a href="https://github.com/hyprland-community/hyprtheme">Docs</a></li>
     <li>
-      <a href="https://github.com/hyprland-community/hyprtheme"
-        ><IconGithub class="h-6 w-6" /></a
+      <a href="https://github.com/hyprland-community/hyprtheme#install"
+        >Install</a
       >
+    </li>
+    <li><a href="/hyprtheme/browse">Browse</a></li>
+    <li>
+      <a href="https://github.com/hyprland-community/hyprtheme">Docs</a>
+    </li>
+    <li>
+      <a href={githubUrl}><IconGithub class="h-6 w-6" /></a>
     </li>
   </ul>
 </nav>

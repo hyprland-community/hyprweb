@@ -2,6 +2,7 @@
 import { GET } from "#api/projects.json"
 import FancyTitle from "#components/FancyTitle.astro"
 import Layout from "#layouts/Layout.astro"
+import IconStar from "~icons/mingcute/star-line"
 
 const projects = await GET().then((response) => response.json())
 ---
@@ -12,29 +13,42 @@ const projects = await GET().then((response) => response.json())
   >
     <FancyTitle label="Community Projects" />
 
-    <ul class="grid grid-cols-2 gap-8">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {
         projects.map((project) => (
           <li class="flex flex-col gap-2 px-6 py-3">
-            <h2 class="text-3xl font-bold">{project.name}</h2>
-            <p class="font-medium">{project.description}</p>
+            <h2 class="text-xl font-bold">
+              <a href={project.url}>{project.name}</a>
+            </h2>
+            <p class="font-medium text-slate-400">{project.description}</p>
 
-            {project.maintainers.length > 0 && (
-              <div class="">
-                <p class="text-xs tracking-wider font-bold uppercase text-slate-400">
-                  Maintainers
-                </p>
-                <ul class="flex gap-4 flex-wrap">
-                  {project.maintainers.map((maintainer) => (
-                    <li>
-                      <a href={"https://github.com/" + maintainer}>
-                        {maintainer}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+            <div class="">
+              <div class="flex gap-4 text-slate-400 justify-between">
+                {project.maintainers.length > 0 && (
+                  <div class="gap-1 flex flex-col">
+                    <p class="text-sm  font-medium ">Maintainers</p>
+                    <ul class="flex gap-4 font-medium text-sm flex-wrap">
+                      {project.maintainers.map((maintainer) => (
+                        <li class="hover:text-slate-200">
+                          <a href={"https://github.com/" + maintainer}>
+                            {maintainer}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {project.stars > 0 && (
+                  <a
+                    href={project.stargazerUrl}
+                    class="flex gap-1 font-bold items-center"
+                  >
+                    <IconStar />
+                    {project.stars}
+                  </a>
+                )}
               </div>
-            )}
+            </div>
           </li>
         ))
       }

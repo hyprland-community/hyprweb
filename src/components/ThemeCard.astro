@@ -12,7 +12,7 @@ const { name, repo, colors, images, desc } = Astro.props.theme
 const author = extractAuthorFromRepoUrl(repo)
 ---
 
-<li class="">
+<li class="hover:-translate-y-1 transition-transform">
   <a href={"/hyprtheme/" + name} class="flex group flex-col gap-4">
     <div
       class="image-wrapper bg- border-2 border-solid overflow-hidden rounded-3xl"

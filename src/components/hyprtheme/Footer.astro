@@ -1,5 +1,7 @@
 ---
-// import IconDiscord from '~icons/mingcute'
+import IconDiscord from "~icons/ic/baseline-discord"
+import IconGithub from "~icons/mdi/github"
+import { discordUrl, githubUrl } from "#lib/consts"
 ---
 
 <footer class="w-full py-10 font-medium flex mt-32 items-center justify-center">
@@ -17,19 +19,32 @@
     </div>
 
     <!-- Links -->
-    <div class="flex gap-12 md:gap-16">
-      <ul class="">
-        <p>Community</p>
-        <li><a href="/">Homepage</a></li>
-        <li><a href="/projects">All projects</a></li>
-        <li><a href="#">Discord</a></li>
-        <li><a href="#">Github</a></li>
-      </ul>
-      <ul class="">
-        <p>Hyprtheme</p>
-        <li><a href="#">Discord</a></li>
-        <li><a href="#">Hyprtheme Github</a></li>
-        <li><a href="#">Theme Repo</a></li>
+    <div class="flex flex-col gap-12 md:gap-16">
+      <div class="flex gap-8">
+        <ul class="flex flex-col">
+          <p>Hyprtheme</p>
+          <li class="item">
+            <a href="https://github.com/hyprland-community/theme-repo"
+              >Theme Repo</a
+            >
+          </li>
+          <li class="item">
+            <a href="/hyprtheme/browse">Browse</a>
+          </li>
+        </ul>
+        <ul class="flex flex-col">
+          <p>Community</p>
+          <li class="item"><a href="/">Homepage</a></li>
+          <li class="item"><a href="/projects">All projects</a></li>
+        </ul>
+      </div>
+      <ul class="flex grow gap-4 justify-end">
+        <li class="hover:-translate-y-1 transition-all">
+          <a href={discordUrl}><IconDiscord class="size-10" /></a>
+        </li>
+        <li class="hover:-translate-y-1 transition-all">
+          <a href={githubUrl}><IconGithub class="size-10" /></a>
+        </li>
       </ul>
     </div>
   </div>
@@ -40,15 +55,11 @@
     @apply h-40 w-28 rounded-full bg-cyan-500;
   }
 
-  ul {
-    @apply flex flex-col;
-  }
-
   ul p {
     @apply mb-2 ml-4 text-sm font-bold uppercase tracking-widest text-slate-300;
   }
 
-  ul a {
+  .item {
     @apply block rounded-full px-4  py-2 outline-1 transition-all hover:-translate-y-1 hover:outline;
   }
 </style>

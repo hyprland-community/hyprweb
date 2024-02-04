@@ -2,10 +2,10 @@
 export type LogoColors = { top: string; bottom: string }
 type Props = {
   colors?: LogoColors
-  classes?: string
+  class?: string
 }
 
-const { classes, colors = { top: "#00FFE7", bottom: "#00A2F8" } } = Astro.props
+const {  colors = { top: "#00FFE7", bottom: "#00A2F8" } } = Astro.props
 const { top, bottom } = colors
 ---
 
@@ -15,7 +15,7 @@ const { top, bottom } = colors
   viewBox="0 0 24 24"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
-  class={classes}
+  class={Astro.props.class}
 >
   <rect
     opacity="0.5"
