@@ -24,7 +24,9 @@ import { discordUrl, githubUrl } from "#lib/consts"
         <ul class="flex flex-col">
           <p>Hyprtheme</p>
           <li class="item">
-            <a href="https://github.com/hyprland-community/theme-repo"
+            <a
+              target="_blank"
+              href="https://github.com/hyprland-community/theme-repo"
               >Theme Repo</a
             >
           </li>
@@ -40,10 +42,12 @@ import { discordUrl, githubUrl } from "#lib/consts"
       </div>
       <ul class="flex grow gap-4 justify-end">
         <li class="hover:-translate-y-1 transition-all">
-          <a href={discordUrl}><IconDiscord class="size-10" /></a>
+          <a target="_blank" href={discordUrl}
+            ><IconDiscord class="size-10" /></a
+          >
         </li>
         <li class="hover:-translate-y-1 transition-all">
-          <a href={githubUrl}><IconGithub class="size-10" /></a>
+          <a target="_blank" href={githubUrl}><IconGithub class="size-10" /></a>
         </li>
       </ul>
     </div>

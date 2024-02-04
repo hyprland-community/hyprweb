@@ -18,16 +18,20 @@ const { logoColors } = Astro.props
 
   <ul class="flex gap-8 font-bold items-center">
     <li>
-      <a href="https://github.com/hyprland-community/hyprtheme#install"
+      <a
+        target="_blank"
+        href="https://github.com/hyprland-community/hyprtheme#install"
         >Install</a
       >
     </li>
     <li><a href="/hyprtheme/browse">Browse</a></li>
     <li>
-      <a href="https://github.com/hyprland-community/hyprtheme">Docs</a>
+      <a target="_blank" href="https://github.com/hyprland-community/hyprtheme"
+        >Docs</a
+      >
     </li>
     <li>
-      <a href={githubUrl}><IconGithub class="h-6 w-6" /></a>
+      <a target="_blank" href={githubUrl}><IconGithub class="h-6 w-6" /></a>
     </li>
   </ul>
 </nav>

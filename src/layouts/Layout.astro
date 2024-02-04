@@ -15,13 +15,6 @@ const {
 } = Astro.props
 ---
 
-<script>
-  // Make external links open in a new page by default
-  Array.from(document.querySelectorAll("a"))
-    .filter((link) => link.hostname !== location.hostname)
-    .forEach((externalLink) => (externalLink.target = "_blank"))
-</script>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
