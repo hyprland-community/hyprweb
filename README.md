@@ -1,6 +1,7 @@
 # hyprland Comumity website -- Hyprland.org clone
-goals
----
+
+## goals
+
 - [ ] Use minimal JavaScript
 - [ ] Write clean HTML and CSS
 - [ ] Create a clean UI design

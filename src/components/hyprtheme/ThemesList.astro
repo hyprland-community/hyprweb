@@ -9,7 +9,7 @@ const { themes } = Astro.props
 
 <!-- More themes -->
 <ul
-  class="gap-8 md:grid md:grid-cols-2 flex flex-col px-8 max-w-screen-xl mx-auto w-full"
+  class="mx-auto flex w-full max-w-screen-xl flex-col gap-8 sm:px-4 md:grid md:grid-cols-2 md:px-8"
 >
   {themes.map((theme) => <ThemeCard theme={theme} />)}
 </ul>

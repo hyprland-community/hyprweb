@@ -1,6 +1,5 @@
 const { fontFamily, ...rest } = require("tailwindcss/defaultTheme")
 
-console.log({ rest })
 const colors = require("tailwindcss/colors")
 
 /** @type {import('tailwindcss').Config} */

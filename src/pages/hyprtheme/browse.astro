@@ -11,12 +11,17 @@ const themes: readonly ProcessedTheme[] = await GET(Astro).then((response) =>
 ---
 
 <Layout title="Hyprland Themes">
-  <div class="flex flex-col gap-5 items-center my-24">
-    <FancyTitle label="Browse Themes" />
-    <p class="text-xl text-slate-300 font-medium">
-      Handcrafted themes for your ricing endavours
-    </p>
-  </div>
+  <div class="mx-auto w-screen">
+    <header class="my-24 flex flex-col items-center gap-5">
+      <FancyTitle label="Browse Themes" />
 
-  <ThemesList {themes} />
+      <p class="text-center text-xl font-medium text-slate-300">
+        Handcrafted themes for your ricing endavours
+      </p>
+    </header>
+
+    <main class="w-full">
+      <ThemesList {themes} />
+    </main>
+  </div>
 </Layout>

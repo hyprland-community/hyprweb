@@ -5,10 +5,10 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [main]
-    
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+
 permissions:
   contents: read
   pages: write
@@ -57,15 +57,15 @@ jobs:
 
       #- name: Add CNAME
       #  run: cp .github/CNAME dist/CNAME
-      
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: './dist'
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
         id: deployment

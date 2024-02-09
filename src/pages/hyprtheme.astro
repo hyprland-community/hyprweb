@@ -13,20 +13,20 @@ const maxThemesAmount = 24
 
 <Layout title="Welcome to the Hyprland Community.">
   <main
-    class="w-screen h-[calc(100vh-4rem)] flex items-center p-8 justify-center gap-12 flex-col"
+    class="flex min-h-[95vh] w-full flex-col items-center justify-center gap-12 p-5 md:min-h-[calc(100vh-4rem)] md:p-8"
   >
     <FancyTitle
       label="Load themes with ease"
       classes="text-center lg:text-9xl"
     />
-    <p class="text-xl lg:text-2xl text-center font-bold text-slate-300">
+    <p class="text-center text-xl font-bold text-slate-300 lg:text-2xl">
       Easily install themes for Hyprland with a single command
     </p>
 
     <FancyButton label="Browse Themes" type="link" href="/hyprtheme/browse" />
   </main>
 
-  <section class="flex -translate-y-8 flex-col items-center">
+  <section class="flex w-full -translate-y-8 flex-col items-center">
     <ThemesList themes={themes.slice(0, maxThemesAmount)} />
 
     {

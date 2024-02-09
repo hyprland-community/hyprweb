@@ -1,13 +1,14 @@
 ---
+import chroma from "chroma-js"
 import FancyTitle from "#components/FancyTitle.astro"
 import { extractAuthorFromRepoUrl, getTitleColors } from "#lib/helper"
 import { GET as getThemes, type ProcessedTheme } from "#api/themes.json"
 import { getSimiliarThemes } from "#lib/similiar-themes"
 import Layout from "#layouts/Hyprtheme.astro"
 import FancyButton from "#components/FancyButton.astro"
-import chroma from "chroma-js"
-import type { GetStaticPaths } from "astro"
 import ThemesList from "#components/hyprtheme/ThemesList.astro"
+
+import type { GetStaticPaths } from "astro"
 
 export const getStaticPaths = (async () => {
   const themes: readonly ProcessedTheme[] = await getThemes(Astro).then(
@@ -56,40 +57,42 @@ const [between1, between2, between3] = chroma
   description={`Install the ${params.name} Theme with one click`}
   logoColors={{ top: mainColors[1]!, bottom: mainColors[0]! }}
 >
-  <main class="mx-auto flex z-10 flex-col items-center gap-12 px-8">
+  <main
+    class="relative z-10 mx-auto flex w-screen max-w-[100vw] flex-col items-center gap-12 overflow-hidden px-0 md:px-8"
+  >
     <div
-      class="md:grid max-w-screen-xl w-full flex flex-col grid-cols-12 gap-8 min-h-max max-sm:my-16 md:h-[82vh] max-h-[60rem] items-center"
+      class="flex max-h-[60rem] min-h-max w-full max-w-screen-xl grid-cols-12 flex-col items-center gap-8 max-sm:my-16 md:grid md:h-[82vh]"
     >
       <div
-        class="lg:col-span-6 relative p-3 md:aspect-square md:rounded-3xl col-span-6 w-full flex max-w-2xl items-center justify-center"
+        class="relative col-span-6 flex w-full max-w-2xl items-center justify-center p-3 md:aspect-square md:rounded-3xl lg:col-span-6"
       >
         <img
           src={theme.images[0]}
           alt={params.name + " image"}
-          class="rounded-3xl object-cover shadow-2xl hover:scale-[1.01] max-h-[35rem] transition-transform outline outline-white/5 lg:w-[25rem] xl:w-[35rem]"
+          class="max-h-[35rem] rounded-3xl object-cover shadow-2xl outline outline-white/5 transition-transform hover:scale-[1.01] lg:w-[25rem] xl:w-[35rem]"
         />
-        <div class="max-md:hidden thumbnail-bg"></div>
+        <div class="thumbnail-bg max-md:hidden"></div>
       </div>
 
       <div
-        class="flex flex-col text-center max-sm:items-center md:text-left gap-8 col-span-6 justify-center"
+        class="col-span-6 flex flex-col justify-center gap-8 text-center max-sm:items-center md:text-left"
       >
         <div
-          class="flex flex-col text-lg font-medium text-slate-300 gap-4 xl:gap-6"
+          class="flex flex-col gap-4 text-lg font-medium text-slate-300 xl:gap-6"
         >
           <FancyTitle
             label={params.name}
             colors={titleColors}
-            classes="text-center md:text-left"
+            classes="text-center md:text-left  [overflow-wrap:anywhere]"
             sizeClasses="text-6xl md:text-7xl  xl:text-8xl"
           />
           <p class="font-mono">
             {theme.desc}
           </p>
-          <p class="transition-colors font-mono">
+          <p class="font-mono transition-colors">
             By
             <a
-              class="hover:text-[var(--light)] font-bold"
+              class="font-bold hover:text-[var(--light)]"
               href={theme.repo}
               target="_blank"
             >
@@ -110,15 +113,17 @@ const [between1, between2, between3] = chroma
       <div class="grainy-bg"></div>
     </div>
 
-    <!-- Images -->
+    {
+      //  Images
+    }
     {
       theme.images.length > 1 && (
-        <section class="flex flex-col max-w-screen-3xl  mb-24 lg:mb-32 relative items-center justify-center  gap-14 xl:gap-12 xl:px-12 lg:grid grid-cols-2  w-full 3xl:grid-cols-3">
+        <section class="relative mb-24 flex  w-full max-w-screen-3xl grid-cols-2 flex-col items-center  justify-center gap-14 lg:mb-32 lg:grid xl:gap-12  xl:px-12 3xl:grid-cols-3">
           {theme.images.flatMap((image, index) =>
             index === 0 ?
               []
             : <img
-                class="object-contain more-image  rounded w-full  "
+                class="more-image w-full  rounded object-contain  "
                 src={image}
               />,
           )}
@@ -129,7 +134,7 @@ const [between1, between2, between3] = chroma
 
   <!-- More themes -->
   <section
-    class="flex mt-6 md:mt-10 flex-col max-w-screen-xl mx-auto w-full relative items-center gap-16 justify-center"
+    class="relative mx-auto mt-6 flex w-full max-w-screen-xl flex-col items-center justify-center gap-16 md:mt-10"
   >
     <FancyTitle label="More themes" colors={titleColors} />
     <ThemesList themes={similiarThemes} />
@@ -179,6 +184,7 @@ const [between1, between2, between3] = chroma
     translate: -50% -0px;
     height: 100%;
     z-index: -5;
+    contain: strict;
 
     background: url("/grain.webp"),
       radial-gradient(

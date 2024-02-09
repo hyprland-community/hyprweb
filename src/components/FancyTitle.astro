@@ -24,9 +24,9 @@ const [top, middle, bottom] = colors
   data-fancy-title
   class="relative"
   class:list={[
-    "relative  font-bold",
+    "relative font-bold",
     classes,
-    sizeClasses ?? "text-6xl md:text-7xl lg:text-8xl",
+    sizeClasses ?? "text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
   ]}
 >
   <!-- <h1 class="sr-only">{label}</h1> -->
@@ -119,7 +119,7 @@ const [top, middle, bottom] = colors
   }
 
   .interaction-zone {
-    width: 120%;
+    width: 100%;
     left: -10%;
     height: 180%;
     top: -40%;
@@ -131,6 +131,10 @@ const [top, middle, bottom] = colors
     justify-content: center;
     color: transparent;
     padding: 0% 10%;
+    
+     @media screen(md)  {
+      width: 120%;
+    }
   }
 
   .shadow_ {
