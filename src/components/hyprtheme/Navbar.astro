@@ -11,8 +11,8 @@ const { logoColors } = Astro.props
 ---
 
 <script>
-  const navDropdown = document.querySelector("#nav-dropdown")
-  const toggleButton = document.querySelector("#navToggle")
+  const navDropdown = document.querySelector("#nav-dropdown")!
+  const toggleButton = document.querySelector("#navToggle")!
 
   const hideClass = "hidden"
 
@@ -21,28 +21,27 @@ const { logoColors } = Astro.props
   function toggleDropdown() {
     const classes = navDropdown.classList
     const isHidden = classes.contains(hideClass)
-    console.log(isHidden)
 
     isHidden ? classes.remove(hideClass) : classes.add(hideClass)
   }
 </script>
 
 <header
-  class="fixed z-50 mx-auto flex h-16 w-full max-w-screen-xl items-center justify-between px-4 py-2 text-lg font-medium md:relative md:px-8"
+  class="mx-auto flex w-full max-w-screen-xl flex-wrap items-center justify-between px-4 py-4 text-lg font-medium md:px-8"
 >
   <a href="/hyprtheme" class="flex items-center gap-4"
     ><Logo colors={logoColors} class="size-8" />
     <div class="font-bold">Hyprtheme</div>
   </a>
 
-  <button class="md:hidden" id="navToggle"><IconMenu /></button>
+  <button class="md:hidden" id="navToggle">
+    <span class="sr-only">Open main menu</span>
+    <IconMenu class="open-menu" />
+  </button>
 
-  <nav
-    id="nav-dropdown"
-    class="absolute inset-0 h-screen w-screen bg-black/50 md:hidden"
-  >
+  <nav class="hidden w-full md:flex md:w-auto" id="nav-dropdown">
     <ul
-      class="flex flex-col items-center gap-8 font-bold md:relative md:flex-row"
+      class="flex h-[calc(100vh-2rem)] w-full flex-col items-center gap-10 py-8 font-bold md:relative md:flex md:h-auto md:flex-row md:gap-8 md:py-0"
     >
       <li>
         <a
@@ -51,29 +50,36 @@ const { logoColors } = Astro.props
           >Install</a
         >
       </li>
+
       <li><a href="/hyprtheme/browse">Browse</a></li>
+
       <li>
         <a
           target="_blank"
           href="https://github.com/hyprland-community/hyprtheme">Docs</a
         >
       </li>
-      <ul class="flex gap-3">
-        <li>
-          <a target="_blank" href={githubUrl}><IconGithub class="h-6 w-6" /></a>
-        </li>
-        <li>
-          <a target="_blank" href={discordUrl}
-            ><IconDiscord class="h-6 w-6" /></a
-          >
-        </li>
-      </ul>
+
+      <li>
+        <ul class="flex h-full flex-col gap-8 md:flex-row md:gap-3">
+          <li>
+            <a target="_blank" href={githubUrl}
+              ><IconGithub class="size-8 md:size-6" /></a
+            >
+          </li>
+          <li>
+            <a target="_blank" href={discordUrl}
+              ><IconDiscord class="size-8 md:size-6" /></a
+            >
+          </li>
+        </ul>
+      </li>
     </ul>
   </nav>
 </header>
 
 <style>
   ul li a {
-    @apply transition-colors hover:text-slate-300;
+    @apply h-full   transition-colors hover:text-slate-300;
   }
 </style>

@@ -20,7 +20,10 @@ const {
 <Layout {title} {description} icon="/hyprtheme.svg">
   <Navbar {logoColors} />
 
-  <slot />
+  <!-- Adjust for the navbar -->
+  <div class="-mt-8">
+    <slot />
+  </div>
 
   <Footer />
 </Layout>
