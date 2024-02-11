@@ -22,7 +22,7 @@ import { discordUrl, githubUrl } from "#lib/consts"
 
     {/* Links */}
     <div
-      class="flex max-w-[30rem] flex-wrap justify-end gap-x-12 gap-y-4 px-4 md:gap-16"
+      class="flex max-w-[30rem] flex-wrap justify-between gap-x-12 gap-y-4 px-4 sm:justify-end md:gap-16"
     >
       <ul class="flex flex-col">
         <p>Hyprtheme</p>
@@ -44,7 +44,7 @@ import { discordUrl, githubUrl } from "#lib/consts"
         <li class="item"><a href="/projects">All projects</a></li>
       </ul>
 
-      <ul class="flex gap-4 md:justify-end">
+      <ul class="flex w-full justify-center gap-4 sm:w-auto md:justify-end">
         <li class="transition-all hover:-translate-y-1">
           <a target="_blank" href={discordUrl}
             ><IconDiscord class="size-10" /></a
