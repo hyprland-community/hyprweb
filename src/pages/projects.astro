@@ -38,7 +38,7 @@ const projects = await GET().then((response) => response.json())
           projects.map((project) => (
             <li
               data-project
-              class="relative flex  flex-col gap-5 rounded-2xl bg-black p-12  px-8 outline outline-1 outline-slate-700 transition-all duration-500 hover:outline-cyan-500"
+              class="relative flex  flex-col gap-5 rounded-2xl border border-slate-700  bg-black  p-12 px-8 transition-all  hover:border-cyan-500"
             >
               <div class="flex  flex-col gap-3">
                 <a
