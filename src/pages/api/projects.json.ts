@@ -53,7 +53,7 @@ export async function getCommunityRepos(): Promise<readonly CommunityRepo[]> {
       updatedAt: repo.updated_at,
       createdAt: repo.created_at,
       isNew:
-        new Date(repo.created_at).getTime() > subDays(new Date(), 90).getTime(),
+        new Date(repo.created_at).getTime() > subDays(new Date(), 24).getTime(),
     }))
     .sort((a, b) =>
       b.isNew ? 1
