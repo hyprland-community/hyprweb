@@ -7,7 +7,15 @@ export default {
   content: ["./src/**/**/*.{astro,html,js,svelte,ts}"],
   theme: {
     extend: {
-      colors: { black: "#0D0E0F", white: colors.slate[100] },
+      colors: {
+        black: "#0D0E0F",
+        white: colors.slate[100],
+
+        // The 3 "brand" colors
+        deepCyan: "#0ee7f6",
+        deepPurple: "#512eff",
+        deepPink: "#FF1493",
+      },
       screens: { "3xl": "2560px" },
       fontFamily: {
         ...fontFamily,

@@ -6,19 +6,23 @@ import Layout from "#layouts/Layout.astro"
 import { githubUrl } from "#lib/consts"
 import IconStar from "~icons/mingcute/star-line"
 import IconChevronLeft from "~icons/mingcute/left-line"
+import IconBannerStar from "~icons/custom/banner_star"
+import IconOutlink from "~icons/mingcute/external-link-line"
 
 const projects = await GET().then((response) => response.json())
 ---
 
 <Layout title="Hyprcommunity Projects">
   <main
-    class="mx-auto mb-20 flex min-h-screen max-w-screen-lg flex-col items-center justify-center gap-12"
+    class="mx-auto flex min-h-screen flex-col items-center justify-center gap-12"
   >
-    <a
-      href="/"
-      class="flex items-center gap-1 self-start p-4 text-sm text-slate-300"
-      ><IconChevronLeft />Back to home</a
-    >
+    <nav class="mx-auto flex w-screen max-w-screen-xl px-8">
+      <a
+        href="/"
+        class="flex max-w-max items-center gap-1 self-start p-4 text-sm text-slate-300 hover:text-slate-200"
+        ><IconChevronLeft />Back to home</a
+      >
+    </nav>
     <header
       class="flex h-[50vh] max-h-[30rem] min-h-max flex-col items-center justify-center gap-20"
     >
@@ -26,51 +30,103 @@ const projects = await GET().then((response) => response.json())
       <FancyButton label="Find all on Github" href={githubUrl} type="link" />
     </header>
 
-    <ul class="grid grid-cols-1 gap-8 md:grid-cols-2">
-      {
-        projects.map((project) => (
-          <li class="flex flex-col gap-2 px-6 py-3">
-            <h2 class="text-2xl font-bold">
-              <a target="_blank" href={project.url}>
-                {project.name}
-              </a>
-            </h2>
-            <p class="font-medium text-slate-400">{project.description}</p>
-
-            <div class="">
-              <div class="flex justify-between gap-4 text-slate-400">
-                {project.maintainers.length > 0 && (
-                  <div class="flex flex-col gap-1">
-                    <p class="text-sm  font-medium ">Maintainers</p>
-                    <ul class="flex flex-wrap gap-4 text-sm font-medium">
-                      {project.maintainers.map((maintainer) => (
-                        <li class="hover:text-slate-200">
-                          <a
-                            target="_blank"
-                            href={"https://github.com/" + maintainer}
-                          >
-                            {maintainer}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {project.stars > 0 && (
-                  <a
-                    href={project.stargazerUrl}
-                    target="_blank"
-                    class="flex items-center gap-1 font-bold"
+    <div class="flex w-full flex-col items-center py-12">
+      <ul
+        class="grid w-full max-w-screen-xl grid-cols-1 gap-6 px-6 lg:grid-cols-2"
+      >
+        {
+          projects.map((project) => (
+            <li
+              data-project
+              class="relative flex  flex-col gap-5 rounded-2xl bg-black p-12  px-8 outline outline-1 outline-slate-700 transition-all duration-500 hover:outline-cyan-500"
+            >
+              <div class="flex  flex-col gap-3">
+                <a
+                  target="_blank"
+                  href={project.url}
+                  class="group flex items-center gap-4 transition-colors"
+                >
+                  <h2
+                    class="   from-deepCyan from-10% to-deepPurple to-70%  bg-clip-text text-2xl font-bold transition-all 
+              group-hover:bg-gradient-to-r group-hover:text-transparent"
                   >
-                    <IconStar />
-                    {project.stars}
-                  </a>
-                )}
+                    {project.name}
+                  </h2>
+                  <IconOutlink class="size-6 text-slate-500 transition-colors group-hover:text-deepPurple" />
+                </a>
+
+                <p class="max-w-[60ch] text-pretty font-medium text-slate-400">
+                  {project.description}
+                </p>
               </div>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
+
+              {project.isNew && (
+                <div class="absolute -top-4 right-0 z-10 size-24 rotate-12   lg:-right-8">
+                  <div class="bg-blue absolute z-10 flex h-full  w-full  items-center justify-center text-center    text-lg font-bold uppercase text-white ">
+                    New
+                  </div>
+                  <IconBannerStar class="absolute left-0 top-0 z-0 h-full w-full    animate-spin text-red-500 ![animation-duration:4s]   " />
+                </div>
+              )}
+
+              <div class="flex grow items-end">
+                <div class=" flex flex-wrap  gap-6 text-slate-400">
+                  {project.maintainers.length > 0 && (
+                    <div class="flex flex-col gap-1">
+                      <p class="text-xs font-medium  uppercase ">Maintainers</p>
+                      <ul class="flex flex-wrap gap-4 text-sm font-medium">
+                        {project.maintainers.map((maintainer) => (
+                          <li class="hover:text-slate-200">
+                            <a
+                              target="_blank"
+                              href={"https://github.com/" + maintainer}
+                            >
+                              {maintainer}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  <div class="flex flex-col gap-1">
+                    <p class="text-xs font-medium  uppercase ">Last change</p>
+                    <div
+                      data-project-date
+                      class="flex flex-wrap gap-4 text-sm font-medium"
+                    >
+                      {new Date(project.updatedAt).toISOString()}
+                    </div>
+                  </div>
+                  {project.stars > 0 && (
+                    <a
+                      href={project.stargazerUrl}
+                      target="_blank"
+                      class="flex items-center gap-1 font-bold"
+                    >
+                      <IconStar />
+                      {project.stars}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </main></Layout
 >
+
+<script>
+  import { formatRelative } from "date-fns"
+
+  const today = new Date()
+
+  document.querySelectorAll("[data-project-date]").forEach((element) => {
+    const date = new Date(element.textContent!.trim())
+
+    if (Number.isNaN(date.getHours())) return
+
+    element.textContent = formatRelative(date, today)
+  })
+</script>

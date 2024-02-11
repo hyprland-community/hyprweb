@@ -22,6 +22,7 @@
     "@vibrant/image": "3.2.1-alpha.1",
     "astro": "^4.3.2",
     "chroma-js": "^2.4.2",
+    "date-fns": "^3.3.1",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-astro": "^0.31.3",
