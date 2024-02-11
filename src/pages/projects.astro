@@ -5,6 +5,7 @@ import FancyTitle from "#components/FancyTitle.astro"
 import Layout from "#layouts/Layout.astro"
 import { githubUrl } from "#lib/consts"
 import IconStar from "~icons/mingcute/star-line"
+import IconChevronLeft from "~icons/mingcute/left-line"
 
 const projects = await GET().then((response) => response.json())
 ---
@@ -13,6 +14,11 @@ const projects = await GET().then((response) => response.json())
   <main
     class="mx-auto mb-20 flex min-h-screen max-w-screen-lg flex-col items-center justify-center gap-12"
   >
+    <a
+      href="/"
+      class="flex items-center gap-1 self-start p-4 text-sm text-slate-300"
+      ><IconChevronLeft />Back to home</a
+    >
     <header
       class="flex h-[50vh] max-h-[30rem] min-h-max flex-col items-center justify-center gap-20"
     >
