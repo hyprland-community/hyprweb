@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets"
+import themeBanner from "#assets/images/hyprtheme_banner.webp"
+import bg from "#assets/images/bg.webp"
+import FancyButton from "#components/FancyButton.astro"
+import ThemeLogo from "#components/hyprtheme/Logo.astro"
+
+type Props = {
+  url: string
+  title: string
+  description: string
+}
+const { url, title, description } = Astro.props
+---
+
+<div class="flex w-full flex-col gap-6 p-8">
+  <a
+    href={url}
+    class="group relative overflow-hidden rounded-3xl transition-all hover:-translate-y-1"
+  >
+    <div
+      class="ease-elastic-out absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform delay-75 duration-700 group-hover:scale-[1.12]"
+    >
+      <div
+        class="ease-bounce-out size-40 transition-transform duration-500 hover:scale-[1.08]"
+      >
+        <slot name="logo" />
+      </div>
+    </div>
+    <div
+      class='class="transition-transform aspect-video overflow-hidden group-hover:scale-[1.01]'
+    >
+      <slot name="banner" />
+    </div>
+  </a>
+  <div class="flex flex-col gap-4">
+    <a href={url} class="max-w-max">
+      <h2
+        class="text-4xl font-bold transition-colors hover:text-cyan-300 lg:text-5xl xl:text-6xl 2xl:text-7xl"
+      >
+        {title}
+      </h2>
+    </a>
+    <p class="text-lg font-medium">{description}</p>
+  </div>
+</div>

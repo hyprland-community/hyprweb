@@ -1,36 +1,71 @@
 ---
-import Card from "../components/Card.astro"
+import Card from "../components/homepage/Card.astro"
+import Navbar from "#components/homepage/Navbar.astro"
+import { Image } from "astro:assets"
+import { discordUrl, hyprthemeUrl, projectsUrl } from "#lib/consts"
 import FancyTitle from "../components/FancyTitle.astro"
 import Layout from "#layouts/Layout.astro"
 import Logo from "#assets/logo.svg"
+import themeBanner from "#assets/images/hyprtheme_banner.webp"
+import bg from "#assets/images/bg.webp"
+import FancyButton from "#components/FancyButton.astro"
+import ThemeLogo from "#components/hyprtheme/Logo.astro"
 ---
 
 <Layout title="Welcome to the Hyprland Community.">
   <main
-    class="flex min-h-screen w-full min-w-0 flex-col items-center justify-center gap-8 p-4 md:gap-12 md:p-8"
+    class="flex h-[calc(100vh-8rem)] min-h-max w-full min-w-0 flex-col items-center justify-center gap-8 p-4 md:gap-12 md:p-8"
   >
     <img src={Logo.src} alt="Hyprland Community Logo" class="size-80" />
 
     <FancyTitle
       label="Hyprland Community"
-      colors={["#0ee7f6", "#003dd6", "#00A2F8"]}
+      colors={["#0ee7f6", "#00237a", "#00A2F8"]}
     />
 
-    <p class="mb-6 text-center text-lg font-medium text-slate-300 lg:text-xl">
+    <p
+      class="mb-6 text-center text-lg font-bold text-slate-300 lg:text-xl xl:text-2xl"
+    >
       A place where people work together to create awesome things for Hyprland
     </p>
 
-    <ul class="flex w-full flex-wrap justify-center gap-8 lg:gap-16">
-      <Card
-        href="/hyprtheme"
-        title="Hyprtheme"
-        body="Easily install themes for Hyprland"
-      />
-      <Card
-        href="/projects"
-        title="Community projects"
-        body="Browse through all community projects"
-      />
-    </ul>
+    <FancyButton
+      class="z-10"
+      label="Join our Discord"
+      href={discordUrl}
+      type="link"
+      newTab={true}
+    />
+
+    <div
+      class="pointer-events-none absolute inset-0 -z-10 opacity-90 mix-blend-screen"
+      aria-hidden="true"
+    >
+      <Image src={bg} alt="" class="h-full w-full" />
+    </div>
   </main>
+
+  <ul
+    class="z-20 mx-auto grid w-full max-w-screen-3xl grid-cols-1 justify-center gap-4 lg:gap-8 xl:grid-cols-2"
+  >
+    <li>
+      <Card
+        title="Hyprtheme"
+        description="Easily install themes"
+        url={hyprthemeUrl}
+      >
+        <ThemeLogo class="size-40" slot="logo" />
+        <Image src={themeBanner} alt="Hyprtheme banner" slot="banner" />
+      </Card>
+    </li><li>
+      <Card
+        title="All projects"
+        description="Browse through all our projects"
+        url={projectsUrl}
+      >
+        <ThemeLogo class="size-40" slot="logo" />
+        <Image src={themeBanner} alt="Hyprtheme banner" slot="banner" />
+      </Card>
+    </li>
+  </ul>
 </Layout>

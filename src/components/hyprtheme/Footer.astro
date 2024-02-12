@@ -2,7 +2,7 @@
 import IconDiscord from "~icons/ic/baseline-discord"
 import Logo from "#assets/logo.svg"
 import IconGithub from "~icons/mdi/github"
-import { discordUrl, githubUrl } from "#lib/consts"
+import { discordUrl, githubUrl, hyprthemeUrl } from "#lib/consts"
 ---
 
 <footer class="mt-32 flex w-full items-center justify-center py-10 font-medium">
@@ -35,7 +35,7 @@ import { discordUrl, githubUrl } from "#lib/consts"
           >
         </li>
         <li class="item">
-          <a href="/hyprtheme/browse">Browse</a>
+          <a href={hyprthemeUrl + "/browse"}>Browse</a>
         </li>
       </ul>
 

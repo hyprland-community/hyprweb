@@ -2,6 +2,7 @@
 import type { ProcessedTheme } from "#api/themes.json"
 import { extractAuthorFromRepoUrl } from "#lib/helper"
 import { D } from "@mobily/ts-belt"
+import { hyprthemeUrl } from "#lib/consts"
 
 // Card element to display a Hyprtheme theme
 
@@ -13,7 +14,7 @@ const author = extractAuthorFromRepoUrl(repo)
 ---
 
 <li class="transition-transform hover:-translate-y-1">
-  <a href={"/hyprtheme/" + name} class="group flex flex-col gap-4">
+  <a href={hyprthemeUrl + "/" + name} class="group flex flex-col gap-4">
     <div
       class="image-wrapper overflow-hidden border-solid sm:rounded-3xl sm:border-2"
     >

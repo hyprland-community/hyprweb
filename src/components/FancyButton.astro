@@ -6,17 +6,17 @@ type Props = (
   | {
       type: "link"
       href: string
+      newTab?: boolean
     }
   | { type: "button" }
 ) & {
   label: string
-  classes?: string
+  class?: string
   colors?: { light: string; middle: string }
 }
 const {
   type,
   label,
-  classes = "",
   colors = { light: hyprThemeColors[0], middle: hyprThemeColors[2] },
   ...props
 } = Astro.props
@@ -35,7 +35,8 @@ const [between1, between2, between3] = chroma
 <a
   href={href + ""}
   class={"relative element  text-white text-lg  items-center justify-center  active:scale-[0.99] transition-all py-3  px-6  text-center   font-bold flex  flex-row gap-2  rounded-3xl " +
-    classes}
+    Astro.props.class ?? ""}
+  target={"newTab" in Astro.props && Astro.props.newTab ? "_blank" : ""}
   >{label}
   <slot />
   <div class="gradient"></div>
