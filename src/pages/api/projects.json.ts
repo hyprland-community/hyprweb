@@ -21,7 +21,7 @@ type CommunityRepo = {
   isNew: boolean
 }
 
-const unwantedRepos = [".github", "hyprweb-old"]
+const unwantedRepos = [".github", "hyprweb-old", "community", "submissions"]
 
 export async function getCommunityRepos(): Promise<readonly CommunityRepo[]> {
   // dont ask me why Prettier wants this new line down there
