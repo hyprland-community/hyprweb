@@ -39,7 +39,7 @@ import ThemeLogo from "#components/hyprtheme/Logo.astro"
     />
 
     <div
-      class="pointer-events-none absolute inset-0 -z-10 opacity-90 mix-blend-screen"
+      class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px] min-h-screen opacity-90 mix-blend-screen"
       aria-hidden="true"
     >
       <Image src={bg} alt="" class="h-full w-full" />
@@ -47,13 +47,14 @@ import ThemeLogo from "#components/hyprtheme/Logo.astro"
   </main>
 
   <ul
-    class="z-20 mx-auto grid w-full max-w-screen-3xl grid-cols-1 justify-center gap-4 lg:gap-8 xl:grid-cols-2"
+    class="z-20 mx-auto mb-24 grid w-full max-w-screen-3xl grid-cols-1 justify-center gap-4 px-8 lg:gap-5 lg:px-12 xl:grid-cols-2 xl:gap-8"
   >
     <li>
       <Card
         title="Hyprtheme"
-        description="Easily install themes"
+        description="Install themes easily"
         url={hyprthemeUrl}
+        buttonLabel="Spice rice"
       >
         <ThemeLogo class="size-40" slot="logo" />
         <Image src={themeBanner} alt="Hyprtheme banner" slot="banner" />
@@ -63,10 +64,33 @@ import ThemeLogo from "#components/hyprtheme/Logo.astro"
         title="All projects"
         description="Browse through all our projects"
         url={projectsUrl}
+        buttonLabel="Explore all"
       >
         <!-- <ThemeLogo class="size-40" slot="logo" /> -->
         <Image src={projectsBanner} alt="Hyprtheme banner" slot="banner" />
       </Card>
     </li>
   </ul>
+
+  <section
+    class="flex h-[50vh] max-h-[45rem] min-h-96 w-full flex-col items-center justify-center gap-8"
+  >
+    <div class="flex flex-col gap-6">
+      <h2 class="text-center text-5xl font-bold">
+        Website is still under construction
+      </h2>
+      <p class="text-center font-medium">
+        Stay up to date and join us! Maybe you have ideas of what we can put
+        here
+      </p>
+    </div>
+
+    <FancyButton
+      class="z-10"
+      label="Join our Discord"
+      href={discordUrl}
+      type="link"
+      newTab={true}
+    />
+  </section>
 </Layout>

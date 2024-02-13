@@ -34,12 +34,13 @@ const [between1, between2, between3] = chroma
 
 <a
   href={href + ""}
-  class={"relative element  text-white text-lg  items-center justify-center  active:scale-[0.99] transition-all py-3  px-6  text-center   font-bold flex  flex-row gap-2  rounded-3xl " +
-    Astro.props.class ?? ""}
+  class="element relative inline-flex flex-row items-center justify-center gap-2 rounded-3xl px-6 py-3 text-center text-lg font-bold text-white transition-all hover:-translate-y-1 active:translate-y-1 active:duration-75"
+  class:list={Astro.props.class?.split("")}
   target={"newTab" in Astro.props && Astro.props.newTab ? "_blank" : ""}
   >{label}
   <slot />
   <div class="gradient"></div>
+  <div class="gradient3d"></div>
 </a>
 
 <style
@@ -53,7 +54,6 @@ const [between1, between2, between3] = chroma
   .element {
     --roundness: 20px;
     --border: 2px;
-    transition: all cubic-bezier(0.4, 0, 0.2, 1) 250ms;
   }
 
   /* Gracefully stolen and adapted from https://velocity.builder.io */
@@ -83,7 +83,7 @@ const [between1, between2, between3] = chroma
     }
 
     &:before {
-      content: "";
+      content: " ";
       position: absolute;
       z-index: -2;
       left: -50%;
@@ -106,7 +106,7 @@ const [between1, between2, between3] = chroma
     }
 
     &::after {
-      --hoverOffset: 0.3rem;
+      --hoverOffset: 0.2rem;
       content: "";
       position: absolute;
       z-index: -1;
@@ -116,7 +116,7 @@ const [between1, between2, between3] = chroma
       height: calc(100% - var(--border) * 2);
       background: theme(colors.black);
       border-radius: calc(var(--roundness) - var(--border));
-      transition: all cubic-bezier(0.4, 0, 0.2, 1) 140ms;
+      transition: all cubic-bezier(0.1, 0, 0.2, 1) 350ms;
 
       .element:hover & {
         width: calc(100% - var(--border) * 2 - var(--hoverOffset));
@@ -126,6 +126,70 @@ const [between1, between2, between3] = chroma
       }
     }
   }
+
+  .gradient3d {
+    position: absolute;
+    width: calc(100% + var(--border));
+    height: calc(100% + var(--border));
+    inset: 0;
+    translate: 0px 6px;
+    z-index: -4;
+    border-radius: var(--roundness);
+    overflow: hidden;
+    background: var(--middle);
+    @apply transition-all duration-75;
+
+    &:before {
+      content: " ";
+      position: absolute;
+      z-index: -2;
+      left: -150%;
+      top: -100%;
+      width: 400%;
+      height: 400%;
+      background-repeat: no-repeat;
+      background: linear-gradient(
+        transparent,
+        var(--between1),
+        var(--between2),
+        var(--between3) 48%,
+        var(--light),
+        var(--between3) 52%,
+        var(--between2),
+        var(--between1),
+        transparent
+      );
+      animation: rotate3d 4.6s linear infinite;
+    }
+    .element:hover & {
+      translate: 0px 8px;
+    }
+    .element:active & {
+      translate: 0px 4px;
+    }
+  }
+
+  /* .3d {
+    position: absolute;
+    z-index: -2;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    background-repeat: no-repeat;
+    background: linear-gradient(
+      transparent,
+      var(--between1),
+      var(--between2),
+      var(--between3),
+      var(--light),
+      var(--between3),
+      var(--between2),
+      var(--between1),
+      transparent
+    );
+    animation: rotate 4.6s linear infinite;
+  } */
 
   /* @keyframes shadow {
     0%,
@@ -154,6 +218,11 @@ const [between1, between2, between3] = chroma
   }
 
   @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  @keyframes rotate3d {
     to {
       transform: rotate(1turn);
     }

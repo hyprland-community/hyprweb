@@ -47,9 +47,9 @@ const [top, middle, bottom] = colors
 </div>
 
 <script>
-  const fancyTitles = [
-    ...document.querySelectorAll("[data-fancy-title] .interaction-zone"),
-  ] as HTMLElement[]
+  const fancyTitles = Array.from(
+    document.querySelectorAll("[data-fancy-title] .interaction-zone"),
+  ) as HTMLElement[]
 
   fancyTitles.forEach((element) => {
     // @ts-expect-error

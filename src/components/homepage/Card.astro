@@ -4,23 +4,25 @@ import themeBanner from "#assets/images/hyprtheme_banner.webp"
 import bg from "#assets/images/bg.webp"
 import FancyButton from "#components/FancyButton.astro"
 import ThemeLogo from "#components/hyprtheme/Logo.astro"
+import { hyprthemeUrl } from "#lib/consts"
 
 type Props = {
   url: string
   title: string
   description: string
+  buttonLabel?: string
 }
-const { url, title, description } = Astro.props
+const { url, title, description, buttonLabel } = Astro.props
 ---
 
-<div class="flex w-full flex-col gap-6 p-8">
+<div class="flex w-full flex-col gap-6">
   <a
     href={url}
-    class="group relative overflow-hidden rounded-3xl transition-all hover:-translate-y-1"
+    class="group relative overflow-hidden rounded-3xl transition-all duration-200 hover:-translate-y-1"
   >
     {
       Astro.slots.logo && (
-        <div class="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform delay-75 duration-700 ease-elastic-out group-hover:scale-[1.12]">
+        <div class="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform delay-75 duration-500 ease-in-out group-hover:scale-[1.12]">
           <div class="size-40 transition-transform duration-500 ease-bounce-out hover:scale-[1.08]">
             <slot name="logo" />
           </div>
@@ -28,7 +30,7 @@ const { url, title, description } = Astro.props
       )
     }
     <div
-      class='class="transition-transform aspect-video overflow-hidden group-hover:scale-[1.01]'
+      class='class="transition-transform aspect-video overflow-hidden duration-500 group-hover:scale-[1.01]'
     >
       <slot name="banner" />
     </div>
@@ -43,4 +45,34 @@ const { url, title, description } = Astro.props
     </a>
     <p class="text-lg font-medium">{description}</p>
   </div>
+
+  <a
+    href={url}
+    target="_blank"
+    class="button max-w-max rounded-xl bg-deepCyan px-5 py-2.5 text-base font-bold text-black shadow transition-all hover:scale-[1.02]"
+    >{buttonLabel ?? "See more"}</a
+  >
 </div>
+
+<style>
+  .button {
+    outline: 1px solid black;
+
+    box-shadow:
+      0 2px 0 theme(colors.deepPink),
+      0 4px 0 theme(colors.deepPink);
+
+    &:hover {
+      translate: 0 -2px;
+      box-shadow:
+        0 2px 0 theme(colors.deepPink),
+        0 4px 0 theme(colors.deepPink),
+        0 6px 0 theme(colors.deepPink);
+    }
+
+    &:active {
+      translate: 0 1px;
+      box-shadow: 0 2px 0 theme(colors.deepPink);
+    }
+  }
+</style>
