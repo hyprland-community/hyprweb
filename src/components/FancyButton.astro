@@ -35,7 +35,7 @@ const [between1, between2, between3] = chroma
 <a
   href={href + ""}
   class="element relative inline-flex flex-row items-center justify-center gap-2 rounded-3xl px-6 py-3 text-center text-lg font-bold text-white transition-all hover:-translate-y-1 active:translate-y-1 active:duration-75"
-  class:list={Astro.props.class?.split("")}
+  class:list={Astro.props.class?.split(" ")}
   target={"newTab" in Astro.props && Astro.props.newTab ? "_blank" : ""}
   >{label}
   <slot />
