@@ -17,7 +17,6 @@ type CommunityRepo = {
   stars: number
   language: string | undefined
   stargazerUrl: string
-  updatedAt: string
   createdAt: string
   isNew: boolean
 }
@@ -50,7 +49,6 @@ export async function getCommunityRepos(): Promise<readonly CommunityRepo[]> {
       maintainers: getMaintainterFromRepoDescription(repo.description ?? ""),
       url: repo.html_url,
       stargazerUrl: repo.stargazers_url,
-      updatedAt: repo.updated_at,
       createdAt: repo.created_at,
       isNew:
         new Date(repo.created_at).getTime() > subDays(new Date(), 24).getTime(),

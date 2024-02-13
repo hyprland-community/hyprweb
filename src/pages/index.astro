@@ -7,6 +7,7 @@ import FancyTitle from "../components/FancyTitle.astro"
 import Layout from "#layouts/Layout.astro"
 import Logo from "#assets/logo.svg"
 import themeBanner from "#assets/images/hyprtheme_banner.webp"
+import projectsBanner from "#assets/images/projects_banner.webp"
 import bg from "#assets/images/bg.webp"
 import FancyButton from "#components/FancyButton.astro"
 import ThemeLogo from "#components/hyprtheme/Logo.astro"
@@ -63,8 +64,8 @@ import ThemeLogo from "#components/hyprtheme/Logo.astro"
         description="Browse through all our projects"
         url={projectsUrl}
       >
-        <ThemeLogo class="size-40" slot="logo" />
-        <Image src={themeBanner} alt="Hyprtheme banner" slot="banner" />
+        <!-- <ThemeLogo class="size-40" slot="logo" /> -->
+        <Image src={projectsBanner} alt="Hyprtheme banner" slot="banner" />
       </Card>
     </li>
   </ul>

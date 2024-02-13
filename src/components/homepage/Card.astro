@@ -18,15 +18,15 @@ const { url, title, description } = Astro.props
     href={url}
     class="group relative overflow-hidden rounded-3xl transition-all hover:-translate-y-1"
   >
-    <div
-      class="ease-elastic-out absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform delay-75 duration-700 group-hover:scale-[1.12]"
-    >
-      <div
-        class="ease-bounce-out size-40 transition-transform duration-500 hover:scale-[1.08]"
-      >
-        <slot name="logo" />
-      </div>
-    </div>
+    {
+      Astro.slots.logo && (
+        <div class="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform delay-75 duration-700 ease-elastic-out group-hover:scale-[1.12]">
+          <div class="size-40 transition-transform duration-500 ease-bounce-out hover:scale-[1.08]">
+            <slot name="logo" />
+          </div>
+        </div>
+      )
+    }
     <div
       class='class="transition-transform aspect-video overflow-hidden group-hover:scale-[1.01]'
     >
