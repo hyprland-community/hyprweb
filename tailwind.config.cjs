@@ -44,6 +44,7 @@ export default {
     },
   },
   plugins: [
+    require("@tailwindcss/container-queries"),
     require("tailwindcss-elastic-easings"),
     require("tailwindcss-animate"),
     require("@tailwindcss/typography"),

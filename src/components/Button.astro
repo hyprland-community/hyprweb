@@ -1,0 +1,37 @@
+---
+interface Props {
+  url: string
+  target?: string
+}
+const { url, target } = Astro.props
+---
+
+<a
+  href={url}
+  target={target ?? "_blank"}
+  class="button max-w-max rounded-xl bg-deepCyan px-5 py-2.5 text-base font-bold text-black shadow transition-all hover:scale-[1.02]"
+  ><slot /></a
+>
+
+<style>
+  .button {
+    /* outline: 1px solid theme(colors.deepPurple); */
+
+    box-shadow:
+      0 2px 0 theme(colors.deepPurple),
+      0 4px 0 theme(colors.deepPurple);
+
+    &:hover {
+      translate: 0 -2px;
+      box-shadow:
+        0 2px 0 theme(colors.deepPink),
+        0 4px 0 theme(colors.deepPink),
+        0 6px 0 theme(colors.deepPink);
+    }
+
+    &:active {
+      translate: 0 1px;
+      box-shadow: 0 2px 0 theme(colors.deepPink);
+    }
+  }
+</style>

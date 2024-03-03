@@ -17,6 +17,7 @@
     "@iconify/json": "^2.2.140",
     "@mobily/ts-belt": "4.0.0-rc.5",
     "@octokit/types": "^12.4.0",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.10",
     "@typescript-eslint/parser": "^6.19.1",
     "@vibrant/image": "3.2.1-alpha.1",

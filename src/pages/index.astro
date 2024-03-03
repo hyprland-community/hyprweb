@@ -1,9 +1,10 @@
 ---
-import Card from "../components/homepage/Card.astro"
-import Navbar from "#components/homepage/Navbar.astro"
+import Card from "#components/homepage/Card.astro"
 import { Image } from "astro:assets"
 import { discordUrl, hyprthemeUrl, projectsUrl } from "#lib/consts"
-import FancyTitle from "../components/FancyTitle.astro"
+import hyprthemeIcon from "#assets/icons/hyprtheme.svg"
+import FancyTitle from "#components/FancyTitle.astro"
+import Button from "#components/Button.astro"
 import Layout from "#layouts/Layout.astro"
 import Logo from "#assets/logo.svg"
 import themeBanner from "#assets/images/hyprtheme_banner.webp"
@@ -11,11 +12,12 @@ import projectsBanner from "#assets/images/projects_banner.webp"
 import bg from "#assets/images/bg.webp"
 import FancyButton from "#components/FancyButton.astro"
 import ThemeLogo from "#components/hyprtheme/Logo.astro"
+import ProjectCard from "#components/homepage/ProjectCard.astro"
 ---
 
 <Layout title="Welcome to the Hyprland Community.">
   <main
-    class="flex h-[calc(100vh-8rem)] min-h-max w-full min-w-0 flex-col items-center justify-center gap-8 p-4 md:gap-12 md:p-8"
+    class="flex min-h-[max(52rem,calc(100vh-8rem))] w-full min-w-0 flex-col items-center justify-center gap-8 p-4 md:gap-12 md:p-8"
   >
     <img src={Logo.src} alt="Hyprland Community Logo" class="size-80" />
 
@@ -47,28 +49,33 @@ import ThemeLogo from "#components/hyprtheme/Logo.astro"
   </main>
 
   <ul
-    class="z-20 mx-auto mb-24 grid w-full max-w-screen-3xl grid-cols-1 justify-center gap-4 px-8 lg:gap-5 lg:px-12 xl:grid-cols-2 xl:gap-8"
+    class="z-20 mx-auto mb-24 grid w-full max-w-screen-3xl grid-cols-1 justify-center gap-4 px-8 lg:gap-5 lg:px-12 xl:grid-cols-6 xl:gap-8"
   >
-    <li>
-      <Card
-        title="Hyprtheme"
-        description="Install themes easily"
-        url={hyprthemeUrl}
-        buttonLabel="Spice rice"
+    <li class="xl:col-span-4">
+      <ProjectCard
+        project={{
+          name: "Hyprtheme",
+          description: "Install themes easily",
+          url: hyprthemeUrl,
+          buttonLabel: "Spice rice",
+          logo: hyprthemeIcon.src,
+          banner: themeBanner.src,
+        }}
       >
-        <ThemeLogo class="size-40" slot="logo" />
-        <Image src={themeBanner} alt="Hyprtheme banner" slot="banner" />
-      </Card>
-    </li><li>
-      <Card
-        title="All projects"
-        description="Browse through all our projects"
-        url={projectsUrl}
-        buttonLabel="Explore all"
+        <Button url={hyprthemeUrl} slot="button">Cook rice</Button>
+      </ProjectCard>
+    </li>
+    <li class="col-span-2">
+      <ProjectCard
+        project={{
+          name: "All projects",
+          description: "Browse through all our projects",
+          url: projectsUrl,
+          banner: projectsBanner.src,
+        }}
       >
-        <!-- <ThemeLogo class="size-40" slot="logo" /> -->
-        <Image src={projectsBanner} alt="Hyprtheme banner" slot="banner" />
-      </Card>
+        <Button url={hyprthemeUrl} slot="button">Explore</Button>
+      </ProjectCard>
     </li>
   </ul>
 
