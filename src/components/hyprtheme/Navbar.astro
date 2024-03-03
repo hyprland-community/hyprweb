@@ -11,6 +11,8 @@ const { logoColors } = Astro.props
 ---
 
 <script>
+  // Only include one navbar per page! Or refactor this here
+
   const navDropdown = document.querySelector("#nav-dropdown")!
   const toggleButton = document.querySelector("#navToggle")!
 
@@ -64,12 +66,12 @@ const { logoColors } = Astro.props
         <ul class="flex h-full flex-col gap-8 md:flex-row md:gap-3">
           <li>
             <a target="_blank" href={githubUrl}
-              ><IconGithub class="size-8 md:size-6" /></a
+              ><IconGithub class="size-10 md:size-8" /></a
             >
           </li>
           <li>
             <a target="_blank" href={discordUrl}
-              ><IconDiscord class="size-8 md:size-6" /></a
+              ><IconDiscord class="size-10 md:size-8" /></a
             >
           </li>
         </ul>
