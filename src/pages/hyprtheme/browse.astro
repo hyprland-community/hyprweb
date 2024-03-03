@@ -1,8 +1,7 @@
 ---
-import Layout from "#layouts/Hyprtheme.astro"
+import Layout from "#layouts/HyprthemeLayout.astro"
 import { GET, type ProcessedTheme } from "#api/themes.json"
 import FancyTitle from "#components/FancyTitle.astro"
-import ThemeCard from "#components/ThemeCard.astro"
 import ThemesList from "#components/hyprtheme/ThemesList.astro"
 
 const themes: readonly ProcessedTheme[] = await GET(Astro).then((response) =>

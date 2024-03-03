@@ -1,0 +1,46 @@
+---
+import IconMenu from "~icons/mingcute/menu-line"
+---
+
+<script>
+  // Only include one navbar per page! Or refactor this here
+
+  const navDropdown = document.querySelector("#nav-dropdown")!
+  const toggleButton = document.querySelector("#navToggle")!
+
+  const hideClass = "hidden"
+
+  toggleButton.addEventListener("click", toggleDropdown)
+
+  function toggleDropdown() {
+    const classes = navDropdown.classList
+    const isHidden = classes.contains(hideClass)
+
+    isHidden ? classes.remove(hideClass) : classes.add(hideClass)
+  }
+</script>
+
+<header
+  class="mx-auto flex w-full max-w-screen-xl flex-wrap items-center justify-between px-4 py-4 text-lg font-medium md:px-8"
+>
+  <slot name="logo" />
+
+  <button class="md:hidden" id="navToggle">
+    <span class="sr-only">Open main menu</span>
+    <IconMenu class="open-menu" />
+  </button>
+
+  <nav class="hidden w-full md:flex md:w-auto" id="nav-dropdown">
+    <ul
+      class="flex h-[calc(100vh-2rem)] w-full flex-col items-center gap-10 py-8 font-bold md:relative md:flex md:h-auto md:flex-row md:gap-8 md:py-0"
+    >
+      <slot name="items" />
+    </ul>
+  </nav>
+</header>
+
+<style>
+  ul li a {
+    @apply h-full   transition-colors hover:text-slate-300;
+  }
+</style>
