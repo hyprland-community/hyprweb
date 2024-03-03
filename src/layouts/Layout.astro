@@ -1,6 +1,7 @@
 ---
 import "../global.css"
 import "@fontsource-variable/work-sans"
+import Footer from "#components/Footer.astro"
 import Logo from "#assets/logo.svg"
 
 interface Props {
@@ -29,6 +30,8 @@ const {
 
   <body class="absolute w-full">
     <slot />
+
+    <Footer />
   </body>
 </html>
 
