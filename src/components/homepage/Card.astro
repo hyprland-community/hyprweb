@@ -1,17 +1,11 @@
 ---
-import { Image } from "astro:assets"
-import themeBanner from "#assets/images/hyprtheme_banner.webp"
-import bg from "#assets/images/bg.webp"
-import FancyButton from "#components/FancyButton.astro"
-import ThemeLogo from "#components/hyprtheme/Logo.astro"
-import { hyprthemeUrl } from "#lib/consts"
-
 type Props = {
   url: string
   title: string
   description: string
   buttonLabel?: string
 }
+
 const { url, title, description, buttonLabel } = Astro.props
 ---
 

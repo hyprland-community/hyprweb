@@ -14,6 +14,7 @@ type Props = (
   class?: string
   colors?: { light: string; middle: string }
 }
+
 const {
   type,
   label,
@@ -28,8 +29,6 @@ const [between1, between2, between3] = chroma
   .mode("hsl")
   .correctLightness()
   .colors(3) as [string, string, string]
-
-// const between1 = gradientColors()
 ---
 
 <a

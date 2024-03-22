@@ -1708,7 +1708,7 @@ export const placeholderData = [
   {
     id: 590736298,
     node_id: "R_kgDOIzXrqg",
-    name: "hyprparse",
+    name: "_hyprparse",
     full_name: "hyprland-community/hyprparse",
     private: false,
     owner: {

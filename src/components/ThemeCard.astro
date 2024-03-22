@@ -1,14 +1,14 @@
 ---
-import type { ProcessedTheme } from "#api/themes.json"
 import { extractAuthorFromRepoUrl } from "#lib/helper"
 import { D } from "@mobily/ts-belt"
 import { hyprthemeUrl } from "#lib/consts"
+import type { ProcessedTheme } from "#api/themes.json"
 
 // Card element to display a Hyprtheme theme
 
 type Props = { theme: ProcessedTheme }
 
-const { name, repo, colors, images, desc } = Astro.props.theme
+const { name, repo, colors, images } = Astro.props.theme
 
 const author = extractAuthorFromRepoUrl(repo)
 ---
@@ -49,15 +49,3 @@ const author = extractAuthorFromRepoUrl(repo)
     }
   }
 </style>
-
-<!-- <div class="flex p-2 gap-2">
-    {
-      Object.entries(colors).map(([colorName, { hex, population }]) => (
-        <div class="flex flex-col gap-1">
-          <p class="text-sm opacity-80">{colorName}</p>
-          <div class="w-20 h-20 rounded-sm" style={"background-color:" + hex} />
-          <p class="text-xs opacity-80">{population}</p>
-        </div>
-      ))
-    }
-  </div> -->

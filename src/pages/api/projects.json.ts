@@ -21,7 +21,13 @@ type CommunityRepo = {
   isNew: boolean
 }
 
-const unwantedRepos = [".github", "hyprweb-old", "community", "submissions"]
+const unwantedRepos = [
+  startsWith("_"),
+  stringIs(".github"),
+  stringIs("hyprweb-old"),
+  stringIs("community"),
+  stringIs("submissions"),
+] as const
 
 export async function getCommunityRepos(): Promise<readonly CommunityRepo[]> {
   // dont ask me why Prettier wants this new line down there
@@ -39,7 +45,7 @@ export async function getCommunityRepos(): Promise<readonly CommunityRepo[]> {
           .then(({ data }) => data)
 
   return responseData
-    .filter(({ name }) => !unwantedRepos.includes(name))
+    .filter(({ name }) => unwantedRepos.every((test) => !test(name)))
     .map((repo) => ({
       name: repo.name,
       stars: repo.stargazers_count,
@@ -317,4 +323,11 @@ function getPlaceholderData(): readonly Endpoints["GET /repos/{owner}/{repo}"]["
       updatedAt: "2023-02-11T05:17:15Z",
     },
   ]
+}
+
+function startsWith(toStartWith: string) {
+  return (string: string) => string.startsWith(toStartWith)
+}
+function stringIs(is: string) {
+  return (string: string) => string === is
 }
