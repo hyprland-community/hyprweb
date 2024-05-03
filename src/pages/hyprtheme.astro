@@ -14,12 +14,21 @@ const maxThemesAmount = 24
   <main
     class="flex min-h-[95vh] w-full flex-col items-center justify-center gap-12 p-5 md:min-h-[calc(100vh-4rem)] md:p-8"
   >
-    <FancyTitle
-      label="Load themes with ease"
-      classes="text-center lg:text-9xl"
-    />
+    <FancyTitle label="Load themes with ease" classes="text-center lg:text-9xl">
+      <div class="absolute -top-20 right-[24%] -rotate-[14deg]">
+        <div
+          class="wip animate-bounce bg-gradient-to-l from-cyan-500 to-orange-500 bg-clip-text text-8xl font-bold text-transparent"
+        >
+          WIP
+        </div>
+      </div>
+    </FancyTitle>
     <p class="text-center text-xl font-bold text-slate-300 lg:text-2xl">
-      Easily install themes for Hyprland with a single command
+      Easily install themes for Hyprland with a single command. Work in
+      progress. Join our Discord to stay updated
+    </p>
+    <p class="text-center text-sm font-bold text-slate-300">
+      Work in progress. Join our Discord to stay updated
     </p>
 
     <FancyButton label="Browse Themes" type="link" href="/hyprtheme/browse" />
@@ -39,3 +48,10 @@ const maxThemesAmount = 24
     }
   </section>
 </Layout>
+
+<style>
+  .wip {
+    text-shadow: 0px 8px 0px theme(colors.red.500);
+    -webkit-text-stroke: 3px theme(colors.black);
+  }
+</style>
