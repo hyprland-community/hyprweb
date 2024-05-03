@@ -2,15 +2,63 @@
 import { Image } from "astro:assets"
 import { discordUrl, hyprthemeUrl, projectsUrl } from "#lib/consts"
 import hyprthemeIcon from "#assets/icons/hyprtheme.svg"
+import hyprRsBanner from "#assets/images/hyprland-rs_banner.webp"
+import pyprlandBanner from "#assets/images/pyprland-banner.webp"
 import FancyTitle from "#components/FancyTitle.astro"
 import Button from "#components/Button.astro"
 import Layout from "#layouts/HomeLayout.astro"
 import Logo from "#assets/logo.svg"
-import themeBanner from "#assets/images/hyprtheme_banner.webp"
+import hyprthemeBanner from "#assets/images/hyprtheme_banner.webp"
 import projectsBanner from "#assets/images/projects_banner.webp"
 import bg from "#assets/images/bg.webp"
 import FancyButton from "#components/FancyButton.astro"
 import ProjectCard from "#components/homepage/ProjectCard.astro"
+import ProjectContent from "#components/homepage/ProjectContent.astro"
+import ProjectBanner from "#components/homepage/ProjectBanner.astro"
+import ProjectLogo from "#components/homepage/ProjectLogo.astro"
+import ProjectBody from "#components/homepage/ProjectBody.astro"
+
+const projects: {
+  name: string
+  url: string
+  icon?: string
+  banner?: string
+  button: string
+  description: string
+  listClass?: string
+}[] = [
+  {
+    name: "Pyprland",
+    description: "Scratchpads & many goodies for Hyprland",
+    url: "https://github.com/hyprland-community/pyprland",
+    banner: pyprlandBanner.src,
+    button: "Python!",
+    listClass: "xl:col-span-4",
+  },
+  {
+    name: "hyprland-rs",
+    description: "Rust for Hyprland's IPC",
+    url: "https://github.com/hyprland-community/hyprland-rs",
+    banner: hyprRsBanner.src,
+    button: "Check out",
+  },
+  {
+    name: "Hyprtheme",
+    url: hyprthemeUrl,
+    icon: hyprthemeIcon.src,
+    banner: hyprthemeBanner.src,
+    button: "Cook rice",
+    description: "Install themes easily (WIP)",
+  },
+  {
+    name: "All projects",
+    description: "Browse through all our projects",
+    url: projectsUrl,
+    banner: projectsBanner.src,
+    button: "Explore",
+    listClass: "xl:col-span-4",
+  },
+]
 ---
 
 <Layout title="Welcome to the Hyprland Community.">
@@ -49,32 +97,36 @@ import ProjectCard from "#components/homepage/ProjectCard.astro"
   <ul
     class="z-20 mx-auto mb-24 grid w-full max-w-screen-3xl grid-cols-1 justify-center gap-4 px-8 lg:gap-5 lg:px-12 xl:grid-cols-6 xl:gap-8"
   >
-    <li class="xl:col-span-4">
-      <ProjectCard
-        project={{
-          name: "Hyprtheme",
-          description: "Install themes easily",
-          url: hyprthemeUrl,
-          buttonLabel: "Spice rice",
-          logo: hyprthemeIcon.src,
-          banner: themeBanner.src,
-        }}
-      >
-        <Button url={hyprthemeUrl} slot="button">Cook rice</Button>
-      </ProjectCard>
-    </li>
-    <li class="col-span-2">
-      <ProjectCard
-        project={{
-          name: "All projects",
-          description: "Browse through all our projects",
-          url: projectsUrl,
-          banner: projectsBanner.src,
-        }}
-      >
-        <Button url={projectsUrl} slot="button">Explore</Button>
-      </ProjectCard>
-    </li>
+    {
+      projects.map(
+        ({ button, listClass, description, name, url, banner, icon }) => (
+          <li class={listClass ?? "col-span-2"}>
+            <ProjectCard>
+              <ProjectBody>
+                <ProjectContent
+                  slot="content"
+                  name={name}
+                  description={description}
+                >
+                  <Button url={url} slot="button">
+                    {button}
+                  </Button>
+                </ProjectContent>
+                {icon && (
+                  <ProjectLogo
+                    name={name}
+                    src={icon}
+                    hasBanner={true}
+                    slot="logo"
+                  />
+                )}
+                {banner && <ProjectBanner slot="banner" src={banner} />}
+              </ProjectBody>
+            </ProjectCard>
+          </li>
+        ),
+      )
+    }
   </ul>
 
   <section

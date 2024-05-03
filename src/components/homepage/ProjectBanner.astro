@@ -1,0 +1,64 @@
+---
+interface Props {
+  /** The sauce for the banne */
+  src: string
+}
+const { src } = Astro.props
+---
+
+<script>
+  const cards = Array.from(
+    document.querySelectorAll("[data-project-banner]"),
+  ) as HTMLDivElement[]
+
+  for (const card of cards) {
+    const video = card.querySelector("video")
+    if (!video) continue
+
+    card.addEventListener("mouseenter", () => video.play().catch(console.error))
+    card.addEventListener("mouseleave", () => video.pause())
+  }
+</script>
+
+<!-- Banner -->
+<div data-project-banner class="banner-container">
+  {
+    src.split(".").at(-1) === "mp4" ?
+      <video
+        src={src}
+        class=" z-50 size-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+        playsinline
+        muted
+        loop
+      />
+    : <img
+        src={src}
+        class=" size-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+        alt=""
+      />
+  }
+</div>
+
+<style>
+  .banner-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 70%;
+    z-index: -20;
+    margin: 2px;
+    mask-image: linear-gradient(to top, transparent, black 70%);
+    @apply overflow-hidden rounded-3xl;
+
+    @container (min-width: theme(screens.md)) {
+      position: relative;
+      min-height: 100%;
+      height: 100%;
+      flex-grow: 1;
+      max-height: none;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 4rem 100%);
+      @apply rounded-l-none rounded-r-3xl;
+      flex-shrink: 9999;
+    }
+  }
+</style>

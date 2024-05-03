@@ -1,0 +1,32 @@
+---
+import { cn, trimText } from "#lib/helper"
+
+interface Props {
+  name: string
+  description: string
+  titleClass?: string[]
+  descriptionClass?: string[]
+}
+
+const { description, name, descriptionClass } = Astro.props
+---
+
+<div class="flex flex-col gap-4">
+  <h2
+    class={cn(
+      "min-w-[8ch] max-w-full text-pretty text-4xl font-bold text-white [overflow-wrap:break-word] md:text-6xl lg:text-7xl",
+      descriptionClass,
+    )}
+  >
+    {name}
+  </h2>
+
+  <p class="max-w-[60ch] text-pretty font-medium text-slate-300">
+    {trimText(description, 100)}
+  </p>
+
+  <slot name="button"
+    ><span class="text-8xl text-red-400">No button set!!!!!!!</span></slot
+  >
+  <slot />
+</div>

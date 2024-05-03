@@ -1,6 +1,8 @@
 import type { ProcessedTheme } from "#api/themes.json"
 import chroma from "chroma-js"
 import type { Jsonifiable } from "type-fest"
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 /**
  * Get the colors for the title.
@@ -66,4 +68,13 @@ export function setMinimumReadableLightness(color: string): string {
   const oklch = chroma.hex(color).oklch()
 
   return oklch[0] < 0.6 ? chroma.oklch(0.7, oklch[1], oklch[2]).hex() : color
+}
+
+/** Merge Tailwind classes */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+export function trimText(string: string, length: number) {
+  return string.length > length ? string.slice(0, length - 1) + "…" : string
 }

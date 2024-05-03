@@ -1,0 +1,50 @@
+---
+interface Props {
+  class?: string
+}
+---
+
+<div
+  class="relative flex size-full h-[26rem] items-stretch bg-black @container"
+  data-card
+  class={Astro.props.class}
+>
+  {
+    // Left side content
+  }
+  <div
+    class="flex min-w-0 shrink grow-[5] flex-col justify-end @4xl:min-w-20 sm:p-8 lg:p-8"
+  >
+    <slot name="logo" />
+
+    <slot name="content" />
+  </div>
+
+  <slot name="banner" />
+</div>
+
+<style lang="postcss">
+	._drop-shadow {
+		filter: drop-shadow(0px 16px 24px black);
+	}
+
+	.logo {
+		&::after {
+			content: ' ';
+			position: absolute;
+			left: 0%;
+			bottom: -2rem;
+			background-image: var(--background);
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 150%;
+			width: 120%;
+			translate: -12% 15%;
+			z-index: -1;
+			opacity: 80%;
+			/* filter: brightness(2); */
+			mask-image: radial-gradient(closest-side, black 0%, transparent 99%);
+		}
+	}
+
+</style>

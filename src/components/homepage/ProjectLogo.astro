@@ -1,0 +1,53 @@
+---
+interface Props {
+  hasBanner: boolean
+  /** The src for the logo */
+  src: string
+  name: string
+}
+const { hasBanner, src, name } = Astro.props
+---
+
+<div
+  class:list={[
+    "relative mb-4 ",
+    hasBanner &&
+      "flex h-full w-full grow items-center  justify-center max-2xl:@2xl:mx-0 max-2xl:@2xl:block max-2xl:@2xl:h-auto  max-2xl:@2xl:grow-0",
+  ]}
+>
+  <div
+    class:list={[
+      "logo relative mb-1 shadow-black   ",
+      hasBanner ? "size-32 max-2xl:@2xl:after:hidden" : "size-44",
+    ]}
+  >
+    <img class="size-full" {src} alt={"Logo of " + name} />
+    <slot name="atLogo" />
+  </div>
+  <slot name="inWrapper" />
+</div>
+
+<style>
+  .logo {
+    &::after {
+      content: " ";
+      position: absolute;
+      left: 0%;
+      bottom: -2rem;
+      background-image: var(--background);
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 150%;
+      width: 120%;
+      translate: -12% 15%;
+      z-index: -1;
+      opacity: 80%;
+      /* filter: brightness(2); */
+      mask-image: radial-gradient(closest-side, black 0%, transparent 99%);
+    }
+  }
+
+  .letter-logo {
+    text-shadow: 0 8px 24px theme(colors.deepPink / 60%);
+  }
+</style>
