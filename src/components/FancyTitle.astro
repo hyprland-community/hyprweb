@@ -95,8 +95,8 @@ const [top, middle, bottom] = colors
       console.log(mouseX, mouseY, distance)
 
       top.style.transform = `translate(${(Math.sin(mouseX / 60) * offset) / 2}px, ${(Math.sin(mouseY / 60) * offset) / 2}px)`
-      middle.style.transform = `translate(${Math.sin(mouseX / 50) * offset}px, ${Math.sin(mouseY / 50) * offset}px)`
-      bottom.style.transform = `translate(${Math.sin(mouseX / 40) * offset}px, ${Math.sin(mouseY / 40) * offset}px)`
+      middle.style.transform = `translate(${Math.sin(mouseX / 50) * offset + 8}px, ${Math.sin(mouseY / 50) * offset + 8}px)`
+      bottom.style.transform = `translate(${Math.sin(mouseX / 40) * offset + 16}px, ${Math.sin(mouseY / 40) * offset + 16}px)`
     }
   }
 
