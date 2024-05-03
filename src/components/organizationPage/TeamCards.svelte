@@ -12,7 +12,7 @@ import CardItem from "#components/3dCard/CardItem.svelte"
   <!-- RFC -->
   <CardContainer containerClass="mt-20">
     <CardBody
-      class="group/card relative  h-auto w-auto rounded-3xl border border-white/[0.2] bg-black p-6 hover:shadow-2xl hover:shadow-emerald-500/[0.1] sm:w-[22rem]"
+      class="group/card relative  h-auto w-auto rounded-3xl border border-white/[0.2] bg-black p-6 hover:shadow-2xl hover:shadow-cyan-500/[0.1] sm:w-[22rem]"
     >
       <CardItem class="w-full text-xl font-bold  text-white" translateZ={30}>
         <div class="mb-4 flex w-full items-center justify-center">
@@ -39,7 +39,7 @@ import CardItem from "#components/3dCard/CardItem.svelte"
   <!-- Uhay Web -->
   <CardContainer containerClass="mt-20">
     <CardBody
-      class="group/card relative  h-auto w-auto rounded-3xl border border-white/[0.2] bg-black p-6 hover:shadow-2xl hover:shadow-emerald-500/[0.1] sm:w-[22rem]"
+      class="group/card relative  h-auto w-auto rounded-3xl border border-white/[0.2] bg-black p-6 hover:shadow-2xl hover:shadow-cyan-500/[0.1] sm:w-[22rem]"
     >
       <CardItem class="w-full text-xl font-bold  text-white" translateZ={30}>
         <div class="mb-4 flex w-full items-center justify-center">
