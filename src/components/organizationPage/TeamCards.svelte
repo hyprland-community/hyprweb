@@ -51,7 +51,7 @@ import CardItem from "#components/3dCard/CardItem.svelte"
         </div>
       </CardItem>
       <CardItem class="mb-1 text-xl font-bold  text-white" translateZ={50}>
-        <h3 class="">Uuay</h3>
+        <h3 class="">Uhay</h3>
       </CardItem>
       <CardItem class="text-base  text-white" translateZ={90}>
         <p class="font-medium text-slate-400">Web. TS. Design.</p>
