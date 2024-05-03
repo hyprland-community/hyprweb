@@ -48,52 +48,72 @@ const [top, middle, bottom] = colors
 
 <script>
   const fancyTitles = Array.from(
-    document.querySelectorAll("[data-fancy-title] .interaction-zone"),
+    document.querySelectorAll("[data-fancy-title]"),
   ) as HTMLElement[]
 
   fancyTitles.forEach((element) => {
     // @ts-expect-error
-    element.addEventListener("mousemove", move)
-    // @ts-expect-error
-    element.addEventListener("mouseleave", end)
+    document.addEventListener("mousemove", move(element))
+    // element.addEventListener("mouseleave", end(element))
   })
 
-  function getElements({
-    currentTarget,
-  }: MouseEvent & { currentTarget: HTMLElement }) {
-    const parent = currentTarget.parentElement!
+  function move(
+    titleWrapper: HTMLElement,
+  ): (event: MouseEvent & { currentTarget: HTMLElement }) => void {
+    const { top, middle, bottom } = getElements(titleWrapper)
 
-    return {
-      top: parent.querySelector(".top") as HTMLElement,
-      middle: parent.querySelector(".middle") as HTMLElement,
-      bottom: parent.querySelector(".bottom") as HTMLElement,
+    return (event) => {
+      /* Max distance the mouse can be away for the title to react
+         Some squared thing, so the number has to be very high */
+      const maxDistance = 255550
+      const offsetMultiplier = 17
+
+      const mouseX = event.clientX
+      const mouseY = event.clientY
+      const {
+        bottom: rectBottom,
+        height,
+        right,
+        left,
+        top: rectTop,
+        width,
+        x: rectX,
+        y: rectY,
+      } = titleWrapper.getBoundingClientRect()
+      const center = [
+        left + titleWrapper.clientWidth / 2,
+        rectBottom + titleWrapper.clientHeight / 2,
+      ] as const
+      const dx = Math.max(Math.abs(mouseX - center[0]) - width / 2, 0)
+      const dy = Math.max(Math.abs(mouseY - center[1]) - height / 2, 0)
+      const distance = dx * dx + dy * dy
+
+      const fallof = 1 - Math.min(Math.abs(distance), maxDistance) / maxDistance
+      const offset = fallof * fallof * offsetMultiplier
+      console.log(mouseX, mouseY, distance)
+
+      top.style.transform = `translate(${(Math.sin(mouseX / 60) * offset) / 2}px, ${(Math.sin(mouseY / 60) * offset) / 2}px)`
+      middle.style.transform = `translate(${Math.sin(mouseX / 50) * offset}px, ${Math.sin(mouseY / 50) * offset}px)`
+      bottom.style.transform = `translate(${Math.sin(mouseX / 40) * offset}px, ${Math.sin(mouseY / 40) * offset}px)`
     }
   }
 
-  function move(event: MouseEvent & { currentTarget: HTMLElement }) {
-    const offset = 17
-    const center = [
-      event.currentTarget.clientWidth / 2,
-      event.currentTarget.clientHeight / 2,
-    ] as const
+  function end(element: HTMLElement): () => void {
+    const { top, middle, bottom } = getElements(element)
 
-    // @ts-ignore
-    const x = event.layerX - center[0]
-    // @ts-ignore
-    const y = event.layerY - center[1]
-    const { top, middle, bottom } = getElements(event)
-
-    top.style.transform = `translate(${(Math.sin(x / 60) * offset) / 2}px, ${(Math.sin(y / 60) * offset) / 2}px)`
-    middle.style.transform = `translate(${Math.sin(x / 50) * offset}px, ${Math.sin(y / 50) * offset}px)`
-    bottom.style.transform = `translate(${Math.sin(x / 40) * offset}px, ${Math.sin(y / 40) * offset}px)`
+    return () => {
+      top.style.transform = ""
+      middle.style.transform = ""
+      bottom.style.transform = ""
+    }
   }
 
-  function end(event: MouseEvent & { currentTarget: HTMLElement }) {
-    const { top, middle, bottom } = getElements(event)
-
-    top.style.transform = ""
-    middle.style.transform = ""
-    bottom.style.transform = ""
+  function getElements(wrapper: HTMLElement) {
+    return {
+      top: wrapper.querySelector(".top") as HTMLElement,
+      middle: wrapper.querySelector(".middle") as HTMLElement,
+      bottom: wrapper.querySelector(".bottom") as HTMLElement,
+    }
   }
 </script>
 
