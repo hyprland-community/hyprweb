@@ -8,20 +8,26 @@ interface Props {
   descriptionClass?: string[]
 }
 
-const { description, name, descriptionClass } = Astro.props
+const { description, name, descriptionClass, titleClass } = Astro.props
 ---
 
 <div class="flex flex-col gap-4">
   <h2
+    data-project-title
     class={cn(
-      "min-w-[8ch] max-w-full text-pretty text-4xl font-bold text-white [overflow-wrap:break-word] md:text-6xl lg:text-7xl",
-      descriptionClass,
+      "min-w-[8ch] max-w-full  text-pretty  text-4xl font-bold text-white [overflow-wrap:break-word] @md:text-5xl @lg:text-7xl",
+      titleClass,
     )}
   >
     {name}
   </h2>
 
-  <p class="max-w-[60ch] text-pretty font-medium text-slate-300">
+  <p
+    class={cn(
+      "max-w-[60ch] text-pretty font-medium text-slate-300",
+      descriptionClass,
+    )}
+  >
     {trimText(description, 100)}
   </p>
 
