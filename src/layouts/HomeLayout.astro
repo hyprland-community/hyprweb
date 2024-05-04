@@ -4,6 +4,7 @@ import Navbar from "#components/Navbar.astro"
 import hyrpthemeIcon from "#assets/icons/hyprtheme.svg"
 import IconGithub from "~icons/mdi/github"
 import IconDiscord from "~icons/ic/baseline-discord"
+import IconExternal from "~icons/mingcute/external-link-line"
 import Logo from "#assets/logo.svg"
 import { discordUrl, githubUrl, hyprthemeUrl } from "#lib/consts"
 
@@ -26,8 +27,10 @@ const {
     </Fragment>
 
     <Fragment slot="items">
-      <li>
-        <a target="_blank" href={hyprthemeUrl}>Hyprtheme</a>
+      <li class="flex gap-5 text-base font-bold">
+        <a target="_blank" href={hyprthemeUrl} class="flex items-center gap-1"
+          >Hyprtheme <IconExternal class="opacity-50" />
+        </a>
       </li>
 
       <li>

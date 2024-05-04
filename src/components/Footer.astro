@@ -1,5 +1,6 @@
 ---
 import IconDiscord from "~icons/ic/baseline-discord"
+import { Image } from "astro:assets"
 import Logo from "#assets/logo.svg"
 import IconGithub from "~icons/mdi/github"
 import { discordUrl, githubUrl, hyprthemeUrl } from "#lib/consts"
@@ -11,7 +12,7 @@ import { discordUrl, githubUrl, hyprthemeUrl } from "#lib/consts"
   >
     <div class="flex flex-col items-center gap-6">
       <a href="/">
-        <img src={Logo.src} class="size-48" />
+        <Image src={Logo} alt="hii" class="size-48" />
       </a>
       <a
         href="/"
