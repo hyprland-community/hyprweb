@@ -44,7 +44,7 @@ import CardItem from "#components/3dCard/CardItem.svelte"
       <CardItem class="w-full text-xl font-bold  text-white" translateZ={30}>
         <div class="mb-4 flex w-full items-center justify-center">
           <img
-            src="https://cdn.discordapp.com/attachments/1233710054729842729/1235516223819878420/visualdawg_logo_black_background_globe_minimalistic_illustratio_addd6568-b95f-40ec-8de6-e90366f66bea.png?ex=6634a7a6&is=66335626&hm=cff283d06b493c4b3e523134a9b4bea751524cf910cb7fb680a28ed71589034d&"
+            src="https://media.discordapp.net/attachments/1233710054729842729/1235516223819878420/visualdawg_logo_black_background_globe_minimalistic_illustratio_addd6568-b95f-40ec-8de6-e90366f66bea.png?ex=6636a1e6&is=66355066&hm=83c0f90353c3a748589b25ac919c3e1acd56029efbdc9c86b2f5a5427d12d563&=&format=webp&quality=lossless&width=560&height=560"
             class="-mt-20 size-64 rounded-xl shadow-2xl shadow-purple-500 outline outline-pink-500/20 group-hover/card:outline-pink-500/50"
             alt="RFC Team logo"
           />
