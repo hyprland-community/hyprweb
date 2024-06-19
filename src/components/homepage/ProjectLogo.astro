@@ -1,4 +1,6 @@
 ---
+import { cn } from "#lib/helper"
+
 interface Props {
   hasBanner: boolean
   /** The src for the logo */
@@ -9,17 +11,17 @@ const { hasBanner, src, name } = Astro.props
 ---
 
 <div
-  class:list={[
-    "relative mb-4 ",
+  class={cn([
+    "relative mb-4",
     hasBanner &&
-      "flex h-full w-full grow items-center  justify-center max-2xl:@2xl:mx-0 max-2xl:@2xl:block max-2xl:@2xl:h-auto  max-2xl:@2xl:grow-0",
-  ]}
+      "flex h-full w-full grow items-center  @xl:justify-start justify-center max-2xl:@2xl:mx-0 max-2xl:@2xl:block max-2xl:@2xl:h-auto max-2xl:@2xl:grow-0",
+  ])}
 >
   <div
-    class:list={[
-      "logo relative mb-1 shadow-black   ",
-      hasBanner ? "size-32 max-2xl:@2xl:after:hidden" : "size-44",
-    ]}
+    class={cn([
+      "logo relative mb-1 shadow-black size-44",
+      hasBanner && "size-32 max-2xl:@2xl:after:hidden",
+    ])}
   >
     <img class="size-full" {src} alt={"Logo of " + name} />
     <slot name="atLogo" />
