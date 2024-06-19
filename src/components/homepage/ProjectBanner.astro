@@ -26,14 +26,14 @@ const { src } = Astro.props
     src.split(".").at(-1) === "mp4" ?
       <video
         src={src}
-        class=" z-50 size-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+        class="z-50 size-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
         playsinline
         muted
         loop
       />
     : <img
         src={src}
-        class=" size-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+        class="size-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
         alt=""
       />
   }
@@ -56,6 +56,7 @@ const { src } = Astro.props
       height: 100%;
       flex-grow: 1;
       max-height: none;
+      width: 100%;
       clip-path: polygon(0 0, 100% 0, 100% 100%, 4rem 100%);
       @apply rounded-l-none rounded-r-3xl;
       flex-shrink: 9999;
