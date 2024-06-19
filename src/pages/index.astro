@@ -18,6 +18,7 @@ import ProjectContent from "#components/homepage/ProjectContent.astro"
 import ProjectBanner from "#components/homepage/ProjectBanner.astro"
 import ProjectLogo from "#components/homepage/ProjectLogo.astro"
 import ProjectBody from "#components/homepage/ProjectBody.astro"
+import IconOutlink from "~icons/mingcute/external-link-line"
 
 const projects: {
   name: string
@@ -112,6 +113,7 @@ const projects: {
                 >
                   <Button url={url} slot="button">
                     {button}
+                    {url.startsWith("http") && <IconOutlink class="size-6" />}
                   </Button>
                 </ProjectContent>
                 {icon && (

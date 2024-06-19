@@ -1,7 +1,10 @@
 ---
+import { cn } from "#lib/helper"
+
 interface Props {
   url: string
   target?: string
+  class?: string
 }
 
 const { url, target } = Astro.props
@@ -10,8 +13,10 @@ const { url, target } = Astro.props
 <a
   href={url}
   target={target ?? "_blank"}
-  class="button max-w-max rounded-xl bg-deepCyan px-5 py-2.5 text-base font-bold text-black shadow transition-all hover:scale-[1.02]"
-  ><slot /></a
+  class={cn(
+    "button flex max-w-max justify-center gap-1 rounded-xl bg-deepCyan px-5 py-2.5 align-middle text-base font-bold text-black shadow transition-all hover:scale-[1.02]",
+    Astro.props.class,
+  )}><slot /></a
 >
 
 <style>
