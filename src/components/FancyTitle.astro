@@ -92,7 +92,6 @@ const [top, middle, bottom] = colors
 
       const fallof = 1 - Math.min(Math.abs(distance), maxDistance) / maxDistance
       const offset = fallof * fallof * offsetMultiplier
-      console.log(mouseX, mouseY, distance)
 
       top.style.transform = `translate(${(Math.sin(mouseX / 60) * offset) / 2}px, ${(Math.sin(mouseY / 60) * offset) / 2}px)`
       middle.style.transform = `translate(${Math.sin(mouseX / 50) * offset + 8}px, ${Math.sin(mouseY / 50) * offset + 8}px)`
