@@ -1,12 +1,23 @@
 ---
+import { cn } from "#lib/helper"
 interface Props {
   class?: string
 }
 ---
 
 <div
-  class="relative flex size-full h-[26rem] items-stretch overflow-hidden rounded-3xl bg-black @container"
-  class={Astro.props.class}
+  class={cn(
+    "_shadow relative flex size-full h-[26rem] items-stretch overflow-hidden rounded-3xl  -outline-offset-2 outline outline-slate-500/20 @container",
+    Astro.props.class,
+  )}
 >
   <slot />
 </div>
+
+<style>
+  ._shadow {
+    box-shadow:
+      8px 8px theme(colors.slate.800),
+      4px 4px theme(colors.slate.800);
+  }
+</style>
