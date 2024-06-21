@@ -5,8 +5,7 @@
 html {
   color: theme(colors.white);
   background:
-    url("/grain.webp") repeat,
-    theme(colors.black);
+    /* url("/grain.webp") repeat, */ theme(colors.black);
   background-blend-mode: difference, normal;
   position: relative;
 }
