@@ -11,7 +11,7 @@ interface Props {
 const { description, name, descriptionClass, titleClass } = Astro.props
 ---
 
-<div class="flex max-w-max flex-col gap-4">
+<div class="flex max-w-max flex-col gap-4 py-4 pl-4 @md:py-6 @md:pl-6">
   <h2
     data-project-title
     class={cn(
@@ -24,7 +24,7 @@ const { description, name, descriptionClass, titleClass } = Astro.props
 
   <p
     class={cn(
-      "max-w-[60ch] text-pretty font-medium text-slate-300",
+      "max-w-[60ch] text-sm @sm:text-base text-pretty font-medium text-slate-300",
       descriptionClass,
     )}
   >
