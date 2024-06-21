@@ -10,9 +10,9 @@ import { discordUrl, githubUrl, hyprthemeUrl } from "#lib/consts"
   <div
     class="flex w-full max-w-screen-xl justify-between px-2 text-lg max-sm:flex-col max-sm:gap-8 sm:px-8"
   >
-    <div class="flex flex-col items-center gap-6">
+    <div class="flex flex-col items-center gap-3 md:gap-6">
       <a href="/">
-        <Image src={Logo} alt="hii" class="size-48" />
+        <Image src={Logo} alt="hii" class="size-20 md:size-48" />
       </a>
       <a
         href="/"
@@ -70,6 +70,6 @@ import { discordUrl, githubUrl, hyprthemeUrl } from "#lib/consts"
   }
 
   .item {
-    @apply block rounded-full px-4  py-2 outline-1 transition-all hover:-translate-y-1 hover:outline;
+    @apply block rounded-full px-4 py-2 outline-1 transition-all hover:-translate-y-1 hover:outline;
   }
 </style>
