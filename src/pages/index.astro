@@ -11,6 +11,7 @@ import Layout from "#layouts/HomeLayout.astro"
 import Logo from "#assets/logo.svg"
 import hyprthemeBanner from "#assets/images/hyprtheme_banner.webp"
 import projectsBanner from "#assets/images/projects_banner.webp"
+import awesomeBanner from "#assets/images/awesome_banner.webp"
 import bg from "#assets/images/bg.webp"
 import FancyButton from "#components/FancyButton.astro"
 import ProjectCard from "#components/homepage/ProjectCard.astro"
@@ -30,6 +31,14 @@ const projects: {
   listClass?: string
 }[] = [
   {
+    name: "Awesome Hyprland",
+    description: "Awesome list for Hyprland ",
+    url: "https://github.com/hyprland-community/awesome-hyprland",
+    banner: awesomeBanner.src,
+    button: "Nice 🕶️",
+    // icon: pyprlandIcon.src,
+  },
+  {
     name: "Pyprland",
     description: "Scratchpads & many goodies for Hyprland",
     url: "https://github.com/hyprland-community/pyprland",
@@ -44,6 +53,7 @@ const projects: {
     url: "https://github.com/hyprland-community/hyprland-rs",
     banner: hyprRsBanner.src,
     button: "Check out",
+    listClass: "xl:col-span-4",
   },
   {
     name: "Hyprtheme",
