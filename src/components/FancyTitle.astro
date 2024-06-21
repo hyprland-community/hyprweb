@@ -2,32 +2,25 @@
 interface Props {
   label: string
   Element?: "h1" | "h2" | "h3" | "h4"
-  classes?: string
+  class?: string
   colors?: readonly [top: string, middle: string, bottom: string]
   sizeClasses?: string
 }
 
 import { hyprThemeColors } from "#lib/consts"
-import { setMinimumReadableLightness } from "#lib/helper"
+import { cn, setMinimumReadableLightness } from "#lib/helper"
 
-const {
-  label,
-  colors = hyprThemeColors,
-  classes = "text-center",
-  sizeClasses,
-} = Astro.props
+const { label, colors = hyprThemeColors } = Astro.props
 
 const [top, middle, bottom] = colors
 ---
 
 <div
   data-fancy-title
-  class="relative"
-  class:list={[
-    "relative font-bold",
-    classes,
-    sizeClasses ?? "text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
-  ]}
+  class={cn([
+    "relative text-5xl text-center sm:text-6xl md:text-7xl lg:text-8xl font-bold",
+    Astro.props.class,
+  ])}
 >
   <!-- <h1 class="sr-only">{label}</h1> -->
   <div class="shadow_ flex" aria-hidden="true">
