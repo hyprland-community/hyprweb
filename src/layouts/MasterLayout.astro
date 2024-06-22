@@ -3,11 +3,13 @@ import "../global.css"
 import "@fontsource-variable/work-sans"
 import Footer from "#components/Footer.astro"
 import Logo from "#assets/logo.svg"
+import { cn } from "#lib/helper"
 
 interface Props {
   title: string
   icon?: string
   description?: string
+  class?: string
 }
 
 const {
@@ -28,7 +30,7 @@ const {
     <title>{title}</title>
   </head>
 
-  <body class="absolute w-full">
+  <body class={cn("absolute w-full", Astro.props.class)}>
     <slot />
 
     <Footer />
