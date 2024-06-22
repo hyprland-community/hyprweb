@@ -5,9 +5,10 @@ interface Props {
   url: string
   target?: string
   class?: string
+  type?: "default" | "outline"
 }
 
-const { url, target } = Astro.props
+const { url, target, type } = Astro.props
 ---
 
 <a
@@ -15,6 +16,8 @@ const { url, target } = Astro.props
   target={target ?? "_blank"}
   class={cn(
     "button flex max-w-max justify-center gap-1 rounded-xl bg-deepCyan px-5 py-2.5 align-middle text-base font-bold text-black shadow transition-all hover:scale-[1.02]",
+    type == "outline" &&
+      "bg-black text-white hover:border-deepPink border-deepPurple border",
     Astro.props.class,
   )}><slot /></a
 >
