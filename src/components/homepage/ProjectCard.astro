@@ -5,19 +5,19 @@ interface Props {
 }
 ---
 
-<div
-  class={cn(
-    "_shadow relative flex size-full h-[26rem] items-stretch overflow-hidden rounded-3xl  -outline-offset-2 outline outline-slate-500/20 @container",
-    Astro.props.class,
-  )}
->
-  <slot />
+<div class="group/project relative rounded-3xl">
+  <div
+    class={cn(
+      "_shadow relative flex size-full h-[26rem]  bg-black items-stretch  rounded-3xl  -outline-offset-2 group-hover/project:-translate-y-0.5 transition-transform z-20 outline outline-slate-500/20 group-hover/project:outline-blue-500 @container",
+      Astro.props.class,
+    )}
+  >
+    <slot />
+  </div>
+  <div
+    class="absolute -bottom-1 -right-1 z-10 size-full rounded-3xl bg-slate-800 bg-gradient-to-tr from-pink-500 to-violet-500 opacity-0 transition-all group-hover/project:opacity-100"
+  >
+  </div>
+  <div class="absolute -bottom-1 -right-1 size-full rounded-3xl bg-slate-800">
+  </div>
 </div>
-
-<style>
-  ._shadow {
-    box-shadow:
-      8px 8px theme(colors.slate.800),
-      4px 4px theme(colors.slate.800);
-  }
-</style>
