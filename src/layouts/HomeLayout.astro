@@ -18,12 +18,12 @@ const {
 <Layout {title} {description} icon={hyrpthemeIcon.src}>
   <Navbar {logoColors}>
     <Fragment slot="logo">
-      <div class="grow"></div>
-      {
-        // <a href={"/"} class="flex items-center gap-4">
-        //   <img src={Logo.src} alt="Hyprland Community logo" class="size-10" />
-        //   </a>
-      }
+      <div class="flex grow items-center gap-2">
+        <a href={"/"} class="flex items-center gap-4">
+          <img src={Logo.src} alt="Hyprland Community logo" class="size-10" />
+        </a>
+        <p class="text-lg font-bold">Hyprland Community</p>
+      </div>
     </Fragment>
 
     <Fragment slot="items">

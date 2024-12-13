@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets"
 import pyprlandIcon from "#assets/icons/pyprland.webp"
 import { discordUrl, hyprthemeUrl, projectsUrl } from "#lib/consts"
 import hyprthemeIcon from "#assets/icons/hyprtheme.svg"
@@ -76,45 +75,47 @@ const projects: {
 
 <Layout title="Welcome to the Hyprland Community.">
   <main
-    class="flex min-h-[max(52rem,calc(100vh-8rem))] w-full min-w-0 flex-col items-center justify-center gap-8 p-4 md:gap-12 md:p-8"
+    class="relative flex min-h-[max(38rem,calc(90vh-15rem))] w-full min-w-0 flex-col items-center justify-center gap-8 p-4 md:gap-12 md:p-8 lg:flex-row"
   >
-    <img src={Logo.src} alt="Hyprland Community Logo" class="size-80" />
+    <div class="flex max-w-[32rem] flex-col items-center">
+      <FancyTitle label="Create together" class="text-center" />
 
-    <FancyTitle
-      label="Hyprland Community"
-      colors={["#0ee7f6", "#00237a", "#00A2F8"]}
-    />
+      <p class="mb-6 text-center text-lg font-bold text-slate-300 lg:text-xl">
+        A place where people work together to create awesome things for Hyprland
+      </p>
 
-    <p
-      class="mb-6 text-center text-lg font-bold text-slate-300 lg:text-xl xl:text-2xl"
-    >
-      A place where people work together to create awesome things for Hyprland
-    </p>
+      <FancyButton
+        class="z-10 max-w-max"
+        label="Join our Discord"
+        href={discordUrl}
+        type="link"
+        newTab={true}
+      />
+    </div>
 
-    <FancyButton
-      class="z-10"
-      label="Join our Discord"
-      href={discordUrl}
-      type="link"
-      newTab={true}
-    />
-
-    <div
+    <!-- <div
       class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px] min-h-screen opacity-90 mix-blend-screen"
       aria-hidden="true"
     >
-      <Image src={bg} alt="" class="h-full w-full" />
+      <Image src={bg} alt="" loading="eager" class="h-full w-full" />
+    </div> -->
+    <div
+      class="absolute -bottom-96 -z-20 size-full min-h-screen bg-gradient-to-t"
+    >
     </div>
   </main>
 
-  <section class="mt-10 flex w-full flex-col gap-8">
-    <h2
-      class="-z-10 -mb-12 bg-gradient-to-t from-transparent to-white bg-clip-text text-center text-5xl font-bold tracking-tighter text-transparent opacity-50 md:text-7xl lg:text-8xl xl:text-9xl 2xl:[font-size:10rem]"
-    >
-      Some of our projects
-    </h2>
+  <section class="flex w-full flex-col gap-8">
+    <div class="relative">
+      <h2
+        class="_text-stroke -z-10 -mb-8 text-center text-5xl font-bold tracking-tight text-black sm:text-6xl md:text-7xl lg:-mb-11 lg:text-8xl xl:text-9xl 2xl:[font-size:10rem]"
+        data-text="Some of our projects"
+      >
+        Some of our projects
+      </h2>
+    </div>
     <ul
-      class="z-20 mx-auto mb-24 flex w-full max-w-screen-3xl flex-col justify-center gap-4 px-4 md:gap-5 md:px-8 lg:gap-6 lg:px-12 xl:grid xl:grid-cols-6 xl:gap-8"
+      class="z-20 mx-auto mb-24 flex w-full max-w-screen-3xl flex-col justify-center gap-4 px-4 md:gap-5 lg:gap-6 lg:px-6 xl:grid xl:grid-cols-6 xl:gap-8"
     >
       {
         projects.map(
@@ -172,3 +173,21 @@ const projects: {
     />
   </section>
 </Layout>
+
+<style>
+  ._text-stroke {
+    text-shadow: -4px -4px theme(colors.deepCyan);
+
+    @media (min-width: theme(screens.lg)) {
+      text-shadow: -6px -6px theme(colors.deepCyan);
+    }
+  }
+  ._text-stroke::before {
+    content: attr(data-text);
+    --middle: black;
+    -webkit-text-stroke: 8px theme(colors.deepPurple);
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
