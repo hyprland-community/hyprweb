@@ -4,6 +4,7 @@ import "@fontsource-variable/work-sans"
 import Footer from "#components/Footer.astro"
 import Logo from "#assets/logo.svg"
 import { cn } from "#lib/helper"
+import { baseUrl } from "#lib/consts"
 
 interface Props {
   title: string
@@ -30,7 +31,10 @@ const {
     <title>{title}</title>
   </head>
 
-  <body class={cn("absolute w-full", Astro.props.class)}>
+  <body
+    class={cn("absolute w-full", Astro.props.class)}
+    style={{ "--bg-image": `url( ${baseUrl}/tic-tac-toe.svg )` }}
+  >
     <slot />
 
     <Footer />
@@ -45,6 +49,6 @@ const {
     position: absolute;
     content: " ";
     z-index: -990;
-    background-image: url("/tic-tac-toe.svg");
+    background-image: var(--bg-image);
   }
 </style>

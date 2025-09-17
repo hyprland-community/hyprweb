@@ -11,7 +11,8 @@ const customCollections = {
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), svelte()],
-  site: 'https://hyprland-community.github.io/hyprweb/',
+  site: 'https://hyprland-community.github.io/',
+  base: '/hyprweb',
   vite: {
     plugins: [
       Icons({ compiler: "svelte", autoInstall: true, customCollections }),

@@ -1,17 +1,15 @@
 ---
 import pyprlandIcon from "#assets/icons/pyprland.webp"
-import { discordUrl, hyprthemeUrl, projectsUrl } from "#lib/consts"
+import { discordUrl, links } from "#lib/consts"
 import hyprthemeIcon from "#assets/icons/hyprtheme.svg"
 import hyprRsBanner from "#assets/images/hyprland-rs_banner.webp"
 import pyprlandBanner from "#assets/images/pyprland-banner.webp"
 import FancyTitle from "#components/FancyTitle.astro"
 import Button from "#components/Button.astro"
 import Layout from "#layouts/HomeLayout.astro"
-import Logo from "#assets/logo.svg"
 import hyprthemeBanner from "#assets/images/hyprtheme_banner.webp"
 import projectsBanner from "#assets/images/projects_banner.webp"
 import awesomeBanner from "#assets/images/awesome_banner.webp"
-import bg from "#assets/images/bg.webp"
 import FancyButton from "#components/FancyButton.astro"
 import ProjectCard from "#components/homepage/ProjectCard.astro"
 import ProjectContent from "#components/homepage/ProjectContent.astro"
@@ -56,7 +54,7 @@ const projects: {
   },
   {
     name: "Hyprtheme",
-    url: hyprthemeUrl,
+    url: links.hyprtheme,
     icon: hyprthemeIcon.src,
     banner: hyprthemeBanner.src,
     button: "Cook rice",
@@ -65,7 +63,7 @@ const projects: {
   {
     name: "All projects",
     description: "Browse through all our projects",
-    url: projectsUrl,
+    url: links.projects,
     banner: projectsBanner.src,
     button: "Explore",
     listClass: "xl:col-span-4",
