@@ -7,7 +7,7 @@ import type { Except } from "type-fest"
 import Logo, { type LogoColors } from "#components/hyprtheme/Logo.astro"
 import IconGithub from "~icons/mdi/github"
 import IconDiscord from "~icons/ic/baseline-discord"
-import { discordUrl, githubUrl, hyprthemeUrl } from "#lib/consts"
+import { discordUrl, githubUrl, links } from "#lib/consts"
 
 type Props = Except<ComponentProps<typeof Layout>, "icon"> & {
   logoColors?: LogoColors
@@ -23,7 +23,7 @@ const {
 <Layout {title} {description} icon={hyrpthemeIcon.src}>
   <Navbar {logoColors}>
     <Fragment slot="logo">
-      <a href={hyprthemeUrl} class="flex items-center gap-4"
+      <a href={links.hyprtheme} class="flex items-center gap-4"
         ><Logo colors={logoColors} class="size-8" />
         <div class="font-bold">Hyprtheme</div>
       </a>
@@ -38,7 +38,7 @@ const {
         >
       </li>
 
-      <li><a href={hyprthemeUrl + "/browse"}>Browse</a></li>
+      <li><a href={links.hyprtheme + "/browse"}>Browse</a></li>
 
       <li>
         <a

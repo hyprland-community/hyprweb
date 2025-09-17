@@ -74,7 +74,7 @@ function getMaintainterFromRepoDescription(description: string): string[] {
   )
 }
 
-function getPlaceholderData(): readonly Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"][] {
+/* function getPlaceholderData(): readonly Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"][] {
   return [
     {
       name: "PLACEHOLDER DEV DATA!",
@@ -323,7 +323,7 @@ function getPlaceholderData(): readonly Endpoints["GET /repos/{owner}/{repo}"]["
       updatedAt: "2023-02-11T05:17:15Z",
     },
   ]
-}
+} */
 
 function startsWith(toStartWith: string) {
   return (string: string) => string.startsWith(toStartWith)

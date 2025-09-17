@@ -25,48 +25,43 @@ export async function getThemes(): Promise<readonly ProcessedTheme[]> {
   // const response = fetch(themesFileUrl).then(
   //   (response) => response.json() as Promise<ThemesData>,
   // )
-  const response =
-    import.meta.env.DEV ?
-      getPlaceholderThemes()
-    : fetch(themesFileUrl).then(
-        (response) => response.json() as Promise<ThemesData>,
-      )
+  const { themes: data } = await (import.meta.env.DEV ?
+    getPlaceholderThemes()
+  : fetch(themesFileUrl).then(
+      (response) => response.json() as Promise<ThemesData>,
+    ))
 
   const themes = await Promise.all(
-    await response
-      .then((response) => response.themes)
-      .then(async (unprocessed) =>
-        unprocessed.map(async (theme) => {
-          const heroUrl = theme.images[0]
+    data.map(async (theme) => {
+      const heroUrl = theme.images[0]
 
-          if (!heroUrl) {
-            console.warn(`No image found for ${theme.name}`)
-            return
-          }
+      if (!heroUrl) {
+        console.warn(`No image found for ${theme.name}`)
+        return
+      }
 
-          const heroBuffer = await fetch(heroUrl).then((response) =>
-            response.arrayBuffer(),
-          )
+      const heroBuffer = await fetch(heroUrl).then((response) =>
+        response.arrayBuffer(),
+      )
 
-          // Typings of this lib are a bit broken, as the returned object is actually {default: ...}
-          const palettesBase = (
-            await new Vibrant(Buffer.from(heroBuffer), {
-              maxDimension: 1600,
-              ImageClass: SharpImage,
-            }).getPalettes()
-          ).default as any
+      // Typings of this lib are a bit broken, as the returned object is actually {default: ...}
+      const palettesBase = (
+        await new Vibrant(Buffer.from(heroBuffer), {
+          maxDimension: 1600,
+          ImageClass: SharpImage,
+        }).getPalettes()
+      ).default as any
 
-          const colors = pipe(
-            palettesBase,
-            D.map((swatch) => ({
-              hex: swatch!.hex,
-              population: swatch!.population,
-            })),
-          ) as ColorPalette
+      const colors = pipe(
+        palettesBase,
+        D.map((swatch) => ({
+          hex: swatch!.hex,
+          population: swatch!.population,
+        })),
+      ) as ColorPalette
 
-          return { ...theme, colors }
-        }),
-      ),
+      return { ...theme, colors }
+    }),
   )
 
   return themes.filter(G.isNotNullable)
@@ -109,12 +104,12 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       {
         name: "GG Retro",
         images: [
-          "http://localhost:4321/dev-placeholders/r2.webp",
-          "http://localhost:4321/dev-placeholders/r3.webp",
-          "http://localhost:4321/dev-placeholders/r1.webp",
-          "http://localhost:4321/dev-placeholders/c1.webp",
-          "http://localhost:4321/dev-placeholders/p1.webp",
-          "http://localhost:4321/dev-placeholders/r1.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/r2.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/r3.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/r1.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/c1.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/p1.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/r1.webp",
         ],
         branch: "main",
         config: "xxx",
@@ -124,8 +119,8 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       {
         name: "Pastel sunset",
         images: [
-          "http://localhost:4321/dev-placeholders/p1.webp",
-          "http://localhost:4321/dev-placeholders/c1.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/p1.webp",
+          "http://localhost:4321/hyprweb/dev-placeholders/c1.webp",
         ],
         branch: "main",
         config: "xxx",
@@ -134,7 +129,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Gruvvy",
-        images: ["http://localhost:4321/dev-placeholders/r1.webp"],
+        images: ["http://localhost:4321/hyprweb/dev-placeholders/r1.webp"],
         branch: "main",
         config: "xxx",
         desc: "Retro tech for your eyeholes",
@@ -142,7 +137,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Vibrant Vibes",
-        images: ["http://localhost:4321/dev-placeholders/c1.webp"],
+        images: ["http://localhost:4321/hyprweb/dev-placeholders/c1.webp"],
         branch: "main",
         config: "xxx",
         desc: "Strong colors for your mood",
@@ -150,7 +145,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Dark",
-        images: ["http://localhost:4321/dev-placeholders/d2.webp"],
+        images: ["http://localhost:4321/hyprweb/dev-placeholders/d2.webp"],
         branch: "main",
         config: "xxx",
         desc: "Dark, moody and calm. Like a good rainy day.",
@@ -158,7 +153,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "R37R0_4RCH",
-        images: ["http://localhost:4321/dev-placeholders/r3.webp"],
+        images: ["http://localhost:4321/hyprweb/dev-placeholders/r3.webp"],
         branch: "main",
         config: "xxx",
         desc: "1337 R37R0",
@@ -166,7 +161,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Sakura",
-        images: ["http://localhost:4321/dev-placeholders/p2.webp"],
+        images: ["http://localhost:4321/hyprweb/dev-placeholders/p2.webp"],
         branch: "main",
         config: "xxx",
         desc: "Memories from a trip Japan yet to be made",
@@ -174,7 +169,7 @@ async function getPlaceholderThemes(): Promise<ThemesData> {
       },
       {
         name: "Licht",
-        images: ["http://localhost:4321/dev-placeholders/l1.webp"],
+        images: ["http://localhost:4321/hyprweb/dev-placeholders/l1.webp"],
         branch: "main",
         config: "xxx",
         desc: "Light, minimal and colorful. Like a good day.",
